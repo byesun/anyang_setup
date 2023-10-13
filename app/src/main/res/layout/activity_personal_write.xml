@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".PersonalWriteActivity">
+    tools:context=".EmploymentDocuments.SubActivity.Personal.PersonalWriteActivity">
 
     <!-- 질문 선택을 위한 Spinner -->
     <Spinner

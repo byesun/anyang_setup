@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#E7E6E6"
-    tools:context=".SpecActivity">
+    tools:context=".EmploymentDocuments.SubActivity.Spec.SpecActivity">
 
     <!-- 스펙 양식 템플릿 추가 버튼 -->
     <Button
