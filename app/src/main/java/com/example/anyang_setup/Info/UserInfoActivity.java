@@ -22,7 +22,6 @@ import android.view.MenuItem;
 
 import com.example.anyang_setup.Chatting.ChatActivity;
 import com.example.anyang_setup.Setting.SettingActivity;
-import com.example.anyang_setup.EmploymentDocuments.SubActivity.SpecActivity;
 import com.google.android.material.navigation.NavigationBarView;
 
 

@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.anyang_setup.EmploymentDocuments.SubActivity.PersonalMainActivity;
-import com.example.anyang_setup.EmploymentDocuments.SubActivity.SpecActivity;
-import com.example.anyang_setup.EmploymentDocuments.SubActivity.ResumeMainActivity;
+import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalMainActivity;
+import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecActivity;
+import com.example.anyang_setup.EmploymentDocuments.SubActivity.Resume.ResumeMainActivity;
 import com.example.anyang_setup.R;
 
 public class EmploymentActivity extends AppCompatActivity {

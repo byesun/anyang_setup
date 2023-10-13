@@ -28,37 +28,37 @@
             android:name=".Chatting.SubActivity.ChatRoomActivity"
             android:exported="false" />
         <activity
-            android:name=".EmploymentDocuments.SubActivity.AwardsActivity"
+            android:name=".EmploymentDocuments.SubActivity.Spec.AwardsActivity"
             android:exported="false" />
         <activity
             android:name=".EmploymentDocuments.EmploymentActivity"
             android:exported="false" />
         <activity
-            android:name=".EmploymentDocuments.SubActivity.PersonalGptActivity"
+            android:name=".EmploymentDocuments.SubActivity.Personal.PersonalGptActivity"
             android:exported="false" />
         <activity
-            android:name=".EmploymentDocuments.SubActivity.PersonalLockerActivity"
+            android:name=".EmploymentDocuments.SubActivity.Personal.PersonalLockerActivity"
             android:exported="false" />
         <activity
-            android:name=".EmploymentDocuments.SubActivity.PersonalMainActivity"
+            android:name=".EmploymentDocuments.SubActivity.Personal.PersonalMainActivity"
             android:exported="false" />
         <activity
-            android:name=".EmploymentDocuments.SubActivity.PersonalWriteActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".EmploymentDocuments.SubActivity.ResumeMainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EmploymentDocuments.SubActivity.ResumeWriteActivity"
+            android:name=".EmploymentDocuments.SubActivity.Personal.PersonalWriteActivity"
             android:exported="false" />
 
-
         <activity
-            android:name=".EmploymentDocuments.SubActivity.ExternalActivitiesActivity"
+            android:name=".EmploymentDocuments.SubActivity.Resume.ResumeMainActivity"
             android:exported="false" />
         <activity
-            android:name=".EmploymentDocuments.SubActivity.CertificateActivity"
+            android:name=".EmploymentDocuments.SubActivity.Resume.ResumeWriteActivity"
+            android:exported="false" />
+
+
+        <activity
+            android:name=".EmploymentDocuments.SubActivity.Spec.ExternalActivitiesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmploymentDocuments.SubActivity.Spec.CertificateActivity"
             android:exported="false" />
         <activity
             android:name=".Info.SubActivity.DiagnosisActivity"
@@ -70,7 +70,7 @@
             android:name=".Chatting.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".EmploymentDocuments.SubActivity.SpecActivity"
+            android:name=".EmploymentDocuments.SubActivity.Spec.SpecActivity"
             android:exported="false" />
         <activity
             android:name=".Info.UserInfoActivity"

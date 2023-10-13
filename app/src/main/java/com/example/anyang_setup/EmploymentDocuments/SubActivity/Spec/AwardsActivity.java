@@ -1,4 +1,4 @@
-package com.example.anyang_setup.EmploymentDocuments.SubActivity;
+package com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,32 +10,32 @@ import android.widget.EditText;
 
 import com.example.anyang_setup.R;
 
-public class CertificateActivity extends AppCompatActivity {
+public class AwardsActivity extends AppCompatActivity {
 
-    private EditText certificateText;
+    private EditText awardsText;
     private Button saveButton;
     private Button resetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_certificate);
-        certificateText = findViewById(R.id.certificate_text);
-        saveButton = findViewById(R.id.certificate_write_save_button);
-        resetButton = findViewById(R.id.certificate_write_reset_button);
+        setContentView(R.layout.activity_awards);
+        awardsText = findViewById(R.id.awards_text);
+        saveButton = findViewById(R.id.awards_write_save_button);
+        resetButton = findViewById(R.id.awards_write_reset_button);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 사용자가 입력한 텍스트를 가져옵니다.
-                String certification = certificateText.getText().toString();
+                String awards = awardsText.getText().toString();
 
                 // 인텐트를 생성하여 데이터를 SpecActivity로 전달합니다.
                 Intent intent = new Intent();
-                intent.putExtra("certification", certification);
+                intent.putExtra("awards", awards);
                 setResult(RESULT_OK, intent);
 
-                // CertificateActivity를 종료합니다.
+                // AwardsActivity를 종료합니다.
                 finish();
             }
         });
@@ -44,7 +44,7 @@ public class CertificateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 입력한 텍스트를 초기화합니다.
-                certificateText.setText("");
+                awardsText.setText("");
             }
         });
     }

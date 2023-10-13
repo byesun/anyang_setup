@@ -1,4 +1,4 @@
-package com.example.anyang_setup.EmploymentDocuments.SubActivity;
+package com.example.anyang_setup.EmploymentDocuments.SubActivity.Chat_gpt;
 
 public class Chat_Message {
     public static String SENT_BY_ME = "me";

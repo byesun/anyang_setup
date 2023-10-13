@@ -16,7 +16,6 @@ import com.example.anyang_setup.EmploymentDocuments.EmploymentActivity;
 import com.example.anyang_setup.Info.SubActivity.DiagnosisActivity;
 import com.example.anyang_setup.Info.UserInfoActivity;
 import com.example.anyang_setup.Setting.SettingActivity;
-import com.example.anyang_setup.EmploymentDocuments.SubActivity.SpecActivity;
 import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONException;

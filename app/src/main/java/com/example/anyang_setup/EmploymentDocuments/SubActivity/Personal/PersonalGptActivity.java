@@ -1,4 +1,4 @@
-package com.example.anyang_setup.EmploymentDocuments.SubActivity;
+package com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.anyang_setup.EmploymentDocuments.SubActivity.Chat_gpt.Chat_Message;
+import com.example.anyang_setup.EmploymentDocuments.SubActivity.Chat_gpt.Chat_MessageAdapter;
 import com.example.anyang_setup.R;
 
 import org.json.JSONArray;
