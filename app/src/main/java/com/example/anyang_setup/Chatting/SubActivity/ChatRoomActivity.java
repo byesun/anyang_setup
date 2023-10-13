@@ -11,9 +11,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.anyang_setup.Chatting.ChatDTO;
+import com.example.anyang_setup.Chatting.SubActivity.chat_option.ChatAdapter;
 import com.example.anyang_setup.R;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -23,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ChatRoomActivity extends AppCompatActivity {
@@ -32,7 +35,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     private ListView chat_view;
     private EditText chat_edit;
-    private Button chat_send;
+    private ImageButton chat_send;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -45,7 +48,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         // 위젯 ID 참조
         chat_view = (ListView) findViewById(R.id.chat_view);
         chat_edit = (EditText) findViewById(R.id.chat_edit);
-        chat_send = (Button) findViewById(R.id.chat_sent);
+        chat_send = (ImageButton) findViewById(R.id.chat_sent);
         chat_view.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
 
         // 로그인 화면에서 받아온 채팅방 이름, 유저 이름 저장
@@ -74,27 +77,23 @@ public class ChatRoomActivity extends AppCompatActivity {
             }
         });
     }
-    private void addMessage(DataSnapshot dataSnapshot, ArrayAdapter<String> adapter) {
-
+    private void addMessage(DataSnapshot dataSnapshot, ChatAdapter adapter) {
         try {
             ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
-
-
-            adapter.add(chatDTO.getUserName() + " : " + chatDTO.getMessage() + "\n\n                                                        (" + chatDTO.getChatTime()+")");
-        }
-        catch (Exception e) {
-
+            adapter.add(chatDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void removeMessage(DataSnapshot dataSnapshot, ArrayAdapter<String> adapter) {
+    private void removeMessage(DataSnapshot dataSnapshot, ChatAdapter adapter) {
         ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
-        adapter.remove(chatDTO.getUserName() + " : " + chatDTO.getMessage());
+        adapter.remove(chatDTO);
     }
 
     private void openChat(String chatName) {
         // 리스트 어댑터 생성 및 세팅
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
+        final ChatAdapter adapter = new ChatAdapter(this, new ArrayList<ChatDTO>());
         chat_view.setAdapter(adapter);
 
         // 데이터 받아오기 및 어댑터 데이터 추가 및 삭제 등..리스너 관리
@@ -103,16 +102,12 @@ public class ChatRoomActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.e("Telechips", dataSnapshot.getKey());
 
-                if(dataSnapshot.getKey().contains("chatHello"))
-                {
+                if (dataSnapshot.getKey().contains("chatHello")) {
                     ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
-                    adapter.insert(chatDTO.getUserName() + " : " + chatDTO.getMessage(),0);
-                }
-                else if(dataSnapshot.getKey().contains("chatRef"))
-                {
+                    adapter.insert(chatDTO, 0);
+                } else if (dataSnapshot.getKey().contains("chatRef")) {
                     // do not work
-                }
-                else // Message
+                } else // Message
                 {
                     addMessage(dataSnapshot, adapter);
                 }
