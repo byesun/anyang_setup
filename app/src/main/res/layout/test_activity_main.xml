@@ -42,7 +42,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="50dp"
-                        android:drawableStart="@drawable/icons"
+
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:drawablePadding="15dp"
@@ -78,7 +78,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="50dp"
-                        android:drawableStart="@drawable/icon_phone"
+
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:drawablePadding="15dp"

@@ -78,8 +78,18 @@
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
+
+        <activity android:name=".test.BicyclesActivity"
+            android:exported="false"/>
+        <activity android:name=".test.GeneralPhotosActivity"
+            android:exported="false"/>
+        <activity android:name=".test.GenerateReportActivity"
+            android:exported="false"/>
+        <activity android:name=".test.HandleSnipersActivity"
+            android:exported="false"/>
+
         <activity
-            android:name=".MainActivity"
+            android:name="MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
