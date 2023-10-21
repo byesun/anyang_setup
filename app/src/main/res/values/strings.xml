@@ -3,6 +3,7 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
     <string-array name="spinner_items">
         <item>소프트웨어</item>
         <item>컴퓨터공학</item>
@@ -17,5 +18,12 @@
         <item>(+)</item>
         <!-- 다른 질문들을 필요한 만큼 추가하세요. -->
     </string-array>
+
+
+    <string name="generalphotosstring">Upload photos showing the general views of the obstruction or inconvenience caused</string>
+    <string name="bicyclestring">Upload photos showing the bicycles being moved to ease the obstruction or inconvenience caused</string>
+    <string name="generatereportstring">Upload photos showing the situation when returned 4 hours later</string>
+    <string name="title_storage_permission">Storage Access Required</string>
+    <string name="text_storage_permission">Storage access is required to proceed</string>
 
 </resources>

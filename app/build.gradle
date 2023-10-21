@@ -7,13 +7,15 @@ android {
     namespace 'com.example.anyang_setup'
     compileSdk 33
 
+
+
     defaultConfig {
         applicationId "com.example.anyang_setup"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -24,8 +26,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_16
+        targetCompatibility JavaVersion.VERSION_16
     }
 
 
@@ -47,6 +49,25 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation 'com.google.firebase:firebase-database:20.1.0'
     implementation 'com.google.firebase:firebase-auth:21.0.3'
+
+
+
+
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.android.support:multidex:1.0.2'
+    implementation files('libs/poishadow-all.jar')
+    implementation 'com.google.code.gson:gson:2.7'
+
+
+    implementation "androidx.cardview:cardview:1.0.0"
+
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'

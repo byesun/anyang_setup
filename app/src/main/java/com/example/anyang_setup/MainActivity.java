@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.fonts.Font;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -25,8 +26,11 @@ import com.google.firebase.FirebaseApp;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import javax.xml.parsers.DocumentBuilder;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginId = auto.getString("inputId",null);
         loginPwd = auto.getString("inputPwd",null);
+
 
         Callback updateUserInfoCallback = new Callback() {
             @Override
