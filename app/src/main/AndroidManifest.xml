@@ -81,6 +81,11 @@
 
         <activity android:name=".test.BicyclesActivity"
             android:exported="false"/>
+        <activity android:name=".test.MainActivity_start"
+            android:exported="false"/>
+
+
+
         <activity android:name=".test.GeneralPhotosActivity"
             android:exported="false"/>
         <activity android:name=".test.GenerateReportActivity"
