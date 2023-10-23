@@ -11,6 +11,9 @@ import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.LayoutInflater;
 
+import com.example.anyang_setup.test.MessageHelper;
+import com.example.anyang_setup.test.TinyDB;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.Borders;
@@ -20,8 +23,11 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTShd;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblGridCol;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STShd;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
@@ -43,6 +49,14 @@ import java.util.Random;
 public class DocumentContainer {
 
     private static DocumentContainer mDocumentContainer;
+
+    public static String phonenumber = null;
+    public static String email= null;
+    public static String address= null;
+    public static String highscholl= null;
+    public static String graduate_date= null;
+    public static String graduate_date_univ= null;
+
 
     public static String D_bicycleSn = null;
     public static String D_offenceD =null;
@@ -134,6 +148,14 @@ public class DocumentContainer {
                 InputstreamFourhoursPhotos2=null;
                 InputstreamFourhoursPhotos3=null;
                 InputstreamFourhoursPhotos4=null;
+
+                phonenumber = null;
+                email = null;
+                address = null;
+                highscholl = null;
+                graduate_date = null;
+                graduate_date_univ = null;
+
                 D_bicycleSn = null;
                 D_offenceD =null;
                 D_offenceT =null;
@@ -231,12 +253,16 @@ public class DocumentContainer {
             XWPFParagraph paragraph = DocumentContainer.get(context).getDocument().createParagraph();
 
             paragraph.setAlignment(ParagraphAlignment.CENTER);
-            XWPFRun run = paragraph.createRun();
-            run.setText("이력서");
-            run.setFontSize(16);
-            run.setFontFamily("Calibri (Body)");
-            run.setBold(true);
-            run.addBreak();
+            XWPFRun run1 = paragraph.createRun();
+            run1.setText("이력서");
+            run1.setFontSize(16);
+            run1.setFontFamily("Calibri (Body)");
+            run1.setBold(true);
+            run1.addBreak();
+
+            XWPFRun run2 = paragraph.createRun();
+
+
             return true;
         } catch (FileNotFoundException e) {
             MessageHelper.showCustomToastError(context,inflator,"Please Enable Permissions from settings");
@@ -291,19 +317,14 @@ public class DocumentContainer {
         try {
             XWPFParagraph paragraphPIC = DocumentContainer.get(context).getDocument().createParagraph();
             paragraphPIC.setBorderBottom(Borders.BASIC_BLACK_DASHES);
-/*
-            paragraphPIC.setBorderLeft(Borders.BASIC_BLACK_DASHES);
 
-            paragraphPIC.setBorderRight(Borders.BASIC_BLACK_DASHES);
-
-            paragraphPIC.setBorderTop(Borders.BASIC_BLACK_DASHES);*/
             paragraphPIC.setAlignment(ParagraphAlignment.CENTER);
             XWPFRun runPIC = paragraphPIC.createRun();
             int format = XWPFDocument.PICTURE_TYPE_JPEG;
             runPIC.setText(title);
             runPIC.setSubscript(VerticalAlign.BASELINE);
-            runPIC.addBreak();
-            runPIC.addPicture(imageFile, format, "logo.png", Units.toEMU(400), Units.toEMU(300)); // 200x200 pixels
+            //runPIC.addBreak();
+            runPIC.addPicture(imageFile, format, "logo.png", Units.toEMU(40), Units.toEMU(30)); // 200x200 pixels
             CTShd cTShd = runPIC.getCTR().addNewRPr().addNewShd();
             cTShd.setVal(STShd.CLEAR);
             cTShd.setColor("auto");
@@ -390,33 +411,130 @@ public class DocumentContainer {
         addRun.addBreak();
     }
 
-    /*public static void eoInformationTable(Context context) {//eoinformation table formating
+    public static void createPersonalInformationTable(Context context) {
+        XWPFTable table = DocumentContainer.get(context).getDocument().createTable(5, 2);
 
-        XWPFTable table = DocumentContainer.get(context).getDocument().createTable();
+        CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
+        width.setType(STTblWidth.DXA);
+        width.setW(BigInteger.valueOf(5000));
+
+        XWPFTableCell cell_0_0 = table.getRow(0).getCell(0);
+        cell_0_0.setText("성함");
+        XWPFTableCell cell_1_0 = table.getRow(1).getCell(0);
+        cell_1_0.setText("생년월일");
+        XWPFTableCell cell_2_0 = table.getRow(2).getCell(0);
+        cell_2_0.setText("전화번호");
+        XWPFTableCell cell_2_1 = table.getRow(2).getCell(1);
+        cell_2_1.setText(phonenumber);
+        XWPFTableCell cell_3_0 = table.getRow(3).getCell(0);
+        cell_3_0.setText("이메일");
+        XWPFTableCell cell_3_1 = table.getRow(3).getCell(1);
+        cell_3_1.setText(email);
+        XWPFTableCell cell_4_0 = table.getRow(4).getCell(0);
+        cell_4_0.setText("주소");
+        XWPFTableCell cell_4_1 = table.getRow(4).getCell(1);
+        cell_4_1.setText(address);
+
+
+        // Add a line break after the table
+        XWPFRun addRun = DocumentContainer.get(context).getDocument().createParagraph().createRun();
+        addRun.addBreak();
+    }
+
+    public static void createEducationInformationTable(Context context) {
+        XWPFTable table = DocumentContainer.get(context).getDocument().createTable(4, 3);
 
         CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
         width.setType(STTblWidth.DXA);
         width.setW(BigInteger.valueOf(10000));
-        //create first row
-        XWPFTableRow tableRowOne = table.getRow(0);
-        tableRowOne.getCell(0).setColor("deeaf6");
-        XWPFRun runRowOne = tableRowOne.getCell(0).addParagraph().createRun();
-        runRowOne.setBold(true);
-        runRowOne.setText("EO INFORMATION");
 
+        XWPFTableCell cell_0_0 = table.getRow(0).getCell(0);
+        cell_0_0.setText("졸업연도");
 
-        //create second row
-        XWPFTableRow tableRowTwo = table.createRow();
-        tableRowTwo.getCell(0).setText("EO Name: " + D_rooOff);
+        XWPFTableCell cell_1_0 = table.getRow(1).getCell(0);
+        cell_1_0.setText(graduate_date);
+        XWPFTableCell cell_2_0 = table.getRow(2).getCell(0);
+        cell_2_0.setText(graduate_date_univ);
 
+        XWPFTableCell cell_0_1 = table.getRow(0).getCell(1);
+        cell_0_1.setText("기관명 및 전공");
+        XWPFTableCell cell_1_1 = table.getRow(1).getCell(1);
+        cell_1_1.setText(highscholl);
+        XWPFTableCell cell_2_1 = table.getRow(2).getCell(1);
+        cell_2_1.setText("안양대학교");
 
-        //create third row
-        XWPFTableRow tableRowThree = table.createRow();
-        tableRowThree.getCell(0).setText("BSO Bicycle Number: " + D_bicycleSn);
+        XWPFTableCell cell_0_2 = table.getRow(0).getCell(2);
+        cell_0_2.setText("학점");
 
+        // Add a line break after the table
         XWPFRun addRun = DocumentContainer.get(context).getDocument().createParagraph().createRun();
         addRun.addBreak();
-    }*/
+    }
+
+    public static void createCareerInformationTable(Context context) {
+        XWPFTable table = DocumentContainer.get(context).getDocument().createTable(4, 4);
+
+        CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
+        width.setType(STTblWidth.DXA);
+        width.setW(BigInteger.valueOf(10000));
+
+        XWPFTableCell cell_0_0 = table.getRow(0).getCell(0);
+        cell_0_0.setText("근무기간");
+        XWPFTableCell cell_0_1 = table.getRow(0).getCell(1);
+        cell_0_1.setText("회사명 및 부서");
+        XWPFTableCell cell_0_2 = table.getRow(0).getCell(2);
+        cell_0_2.setText("직위");
+        XWPFTableCell cell_0_3 = table.getRow(0).getCell(3);
+        cell_0_3.setText("담당업무");
+
+        // Add a line break after the table
+        XWPFRun addRun = DocumentContainer.get(context).getDocument().createParagraph().createRun();
+        addRun.addBreak();
+    }
+
+    public static void createActivityTable(Context context) {
+        XWPFTable table = DocumentContainer.get(context).getDocument().createTable(4, 3);
+
+        CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
+        width.setType(STTblWidth.DXA);
+        width.setW(BigInteger.valueOf(10000));
+
+        XWPFTableCell cell_0_0 = table.getRow(0).getCell(0);
+        cell_0_0.setText("기간");
+        XWPFTableCell cell_0_1 = table.getRow(0).getCell(1);
+        cell_0_1.setText("활동내용");
+        XWPFTableCell cell_0_2 = table.getRow(0).getCell(2);
+        cell_0_2.setText("기관");
+
+        // Add a line break after the table
+        XWPFRun addRun = DocumentContainer.get(context).getDocument().createParagraph().createRun();
+        addRun.addBreak();
+    }
+
+    public static void createcertificateTable(Context context) {
+        XWPFTable table = DocumentContainer.get(context).getDocument().createTable(4, 2);
+
+        CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
+        width.setType(STTblWidth.DXA);
+        width.setW(BigInteger.valueOf(10000));
+
+        XWPFTableCell cell_0_0 = table.getRow(0).getCell(0);
+        cell_0_0.setText("자격증명");
+        XWPFTableCell cell_0_1 = table.getRow(0).getCell(1);
+        cell_0_1.setText("취득일");
+
+
+        // Add a line break after the table
+        XWPFRun addRun = DocumentContainer.get(context).getDocument().createParagraph().createRun();
+        addRun.addBreak();
+    }
+
+
+
+
+
+
+
 
     public static void offenceDetailsTable(Context context) {//offence table formating
         XWPFTable table = DocumentContainer.get(context).getDocument().createTable();

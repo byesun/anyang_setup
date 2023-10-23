@@ -1,5 +1,36 @@
 package com.example.anyang_setup.test;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.os.Bundle;
+
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFPictureData;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+
 import static com.example.anyang_setup.test.DocumentContainer.D_bicycleSn;
 import static com.example.anyang_setup.test.DocumentContainer.D_bike_info_1;
 import static com.example.anyang_setup.test.DocumentContainer.D_bike_info_2;
@@ -8,7 +39,6 @@ import static com.example.anyang_setup.test.DocumentContainer.D_bike_info_4;
 import static com.example.anyang_setup.test.DocumentContainer.D_comp;
 import static com.example.anyang_setup.test.DocumentContainer.D_loc;
 import static com.example.anyang_setup.test.DocumentContainer.D_offenceD;
-
 import static com.example.anyang_setup.test.DocumentContainer.D_offenceT;
 import static com.example.anyang_setup.test.DocumentContainer.D_remarks;
 import static com.example.anyang_setup.test.DocumentContainer.D_rnDate;
@@ -27,54 +57,39 @@ import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneral
 import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos4;
 import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos5;
 import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos6;
+
 import static com.example.anyang_setup.test.DocumentContainer.snprListCompnies;
 import static com.example.anyang_setup.test.DocumentContainer.snprListRnOfficers;
 import static com.example.anyang_setup.test.DocumentContainer.snprListRooOfficers;
 
 
-
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TimePicker;
+import static  com.example.anyang_setup.test.DocumentContainer.phonenumber;
+import static  com.example.anyang_setup.test.DocumentContainer.email;
+import static  com.example.anyang_setup.test.DocumentContainer.address;
+import static  com.example.anyang_setup.test.DocumentContainer.highscholl;
+import static  com.example.anyang_setup.test.DocumentContainer.graduate_date;
+import static com.example.anyang_setup.test.DocumentContainer.graduate_date_univ;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
-
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFPictureData;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
+import com.example.anyang_setup.test.DocumentContainer;
+import com.example.anyang_setup.test.GeneralPhotosActivity;
+import com.example.anyang_setup.test.HandleSnipersActivity;
+import com.example.anyang_setup.test.MessageHelper;
+import com.example.anyang_setup.test.PermissionsHelper;
 
 /**
- *
- * 워드파일만드는 예제코드의 시작액티비티
+ * Created by Muhammad Abubakar on 11/11/2017.
+ * This is the first activity where we select all the info and give all the info here
  *
  */
 
 public class MainActivity_start extends AppCompatActivity {
     TextView txt_bicycle,txt_location,txt_offence_date,txt_offence_time,txt_time,txt_rn_date;
+
+    TextView txt_PhoneNumber,txt_Email,txt_Address,txt_HighScholl,txt_graduate_date_univ,txt_graduate_date;
     Spinner snpr_roo,snpr_rn,snpr_compony;
     ProgressBar progressBar_main;
 
@@ -88,6 +103,14 @@ public class MainActivity_start extends AppCompatActivity {
         setContentView(R.layout.test_activity_main);
 
         progressBar_main= findViewById(R.id.progressBar_main);
+
+        txt_PhoneNumber = findViewById(R.id.txt_PhoneNumber);
+        txt_Email = findViewById(R.id.txt_Email);
+        txt_Address = findViewById(R.id.txt_Address);
+        txt_HighScholl = findViewById(R.id.txt_HighScholl);
+        txt_graduate_date = findViewById(R.id.txt_graduate_date);
+        txt_graduate_date_univ = findViewById(R.id.txt_graduate_date_univ);
+
 
         txt_bicycle = findViewById(R.id.txt_bicycle);
         txt_location = findViewById(R.id.txt_location);
@@ -195,6 +218,14 @@ public class MainActivity_start extends AppCompatActivity {
     }
 
     private void updateViews(){
+        txt_PhoneNumber.setText(phonenumber);
+        txt_Email.setText(email);
+        txt_Address.setText(address);
+        txt_HighScholl.setText(highscholl);
+        txt_graduate_date.setText(graduate_date);
+        txt_graduate_date_univ.setText(graduate_date_univ);
+
+
         txt_bicycle.setText(D_bicycleSn);
         txt_location.setText(D_loc);
         txt_offence_date.setText(D_offenceD);
@@ -232,6 +263,26 @@ public class MainActivity_start extends AppCompatActivity {
 
         progressBar_main.setVisibility(View.VISIBLE);
 
+        if (txt_PhoneNumber.getText().length()>0){
+            phonenumber = txt_PhoneNumber.getText().toString();
+        }
+        if (txt_Email.getText().length()>0){
+            email = txt_Email.getText().toString();
+        }
+        if (txt_Address.getText().length()>0){
+            address = txt_Address.getText().toString();
+        }
+        if (txt_HighScholl.getText().length()>0){
+            highscholl = txt_HighScholl.getText().toString();
+        }
+        if (txt_graduate_date.getText().length()>0){
+            graduate_date = txt_graduate_date.getText().toString();
+        }
+        if (txt_graduate_date_univ.getText().length()>0){
+            graduate_date_univ = txt_graduate_date_univ.getText().toString();
+        }
+
+
         if (txt_bicycle.getText().length()>0){
             D_bicycleSn = txt_bicycle.getText().toString();
         }
@@ -251,7 +302,7 @@ public class MainActivity_start extends AppCompatActivity {
             D_rnDate=txt_rn_date.getText().toString();
         }
 
-        Intent intent = new Intent(MainActivity_start.this,GeneralPhotosActivity.class);
+        Intent intent = new Intent(MainActivity_start.this, GeneralPhotosActivity.class);
         progressBar_main.setVisibility(View.GONE);
         startActivity(intent);
     }
@@ -262,7 +313,7 @@ public class MainActivity_start extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.handle_snipers:
                 //this is the action that is performed when box button is clicke to go to combo boxes activity
-                Intent intent = new Intent(this,HandleSnipersActivity.class);
+                Intent intent = new Intent(this, HandleSnipersActivity.class);
                 finish();
                 startActivity(intent);
                 return true;
@@ -430,14 +481,18 @@ public class MainActivity_start extends AppCompatActivity {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        txt_offence_date.setText(sdf.format(myCalendar.getTime()));
+        txt_graduate_date.setText(sdf.format(myCalendar.getTime()));
+
+
+
+        //txt_offence_date.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void updateLabe2() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        txt_rn_date.setText(sdf.format(myCalendar.getTime()));
+        txt_graduate_date_univ.setText(sdf.format(myCalendar.getTime()));
     }
 
     public void offenceTimePicker(View view) {
@@ -550,7 +605,7 @@ public class MainActivity_start extends AppCompatActivity {
                         break;
                 }
                 i++;
-        }
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
