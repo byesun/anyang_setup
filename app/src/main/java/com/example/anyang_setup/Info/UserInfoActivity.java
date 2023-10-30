@@ -1,5 +1,7 @@
 package com.example.anyang_setup.Info;
 
+import static com.example.anyang_setup.R.id.bottom_navigationview;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,7 +22,7 @@ import androidx.annotation.NonNull;
 import android.annotation.SuppressLint;
 import android.view.MenuItem;
 
-import com.example.anyang_setup.Chatting.ChatActivity;
+import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatActivity;
 import com.example.anyang_setup.Setting.SettingActivity;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -29,6 +31,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private Button button;
     private TextView getScoreText, remainScoreText, majorScoreText, generalScoreText;
     private TextView stdNameText, stdIdText, majorText;
+    private TextView asd;
     private String userInfoStr;
 
     //homeactivity.java
@@ -38,6 +41,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
     private JSONObject userInfoJson;
 
+    @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +74,11 @@ public class UserInfoActivity extends AppCompatActivity {
             stdNameText.setText(dataObj.getString("stdName"));
             stdIdText.setText(dataObj.getString("stdId"));
             majorText.setText(dataObj.getString("stdDepart"));
+            asd.setText(dataObj.getString("stdsigan"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        navigationBarView = findViewById(R.id.bottom_navigationview);
         userinfo = getIntent().getStringExtra("userinfo");
 
         try {
@@ -82,6 +86,10 @@ public class UserInfoActivity extends AppCompatActivity {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+
+        Log.d("rkdqudtjs", "userinfo: " + userinfo);
+
+        navigationBarView = findViewById(R.id.bottom_navigationview);
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener()
         {

@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.anyang_setup.HomeActivity;
 import com.example.anyang_setup.R;
 import com.example.anyang_setup.Setting.SettingActivity;
 

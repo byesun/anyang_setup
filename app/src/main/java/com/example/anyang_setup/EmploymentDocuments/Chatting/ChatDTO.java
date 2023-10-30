@@ -1,10 +1,11 @@
-package com.example.anyang_setup.Chatting;
+package com.example.anyang_setup.EmploymentDocuments.Chatting;
 
 public class ChatDTO {
 
     private String userName;
     private String message;
     private String chatTime;
+    private boolean isMine;
 
     public ChatDTO() {}
     public ChatDTO(String userName, String message, String chatTime) {
@@ -30,5 +31,13 @@ public class ChatDTO {
     }
     public String getChatTime() {
         return chatTime;
+    }
+
+    public boolean isMine() {
+        return isMine;
+    }
+
+    public void setMine(boolean mine) {
+        isMine = mine;
     }
 }

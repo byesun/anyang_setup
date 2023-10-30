@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Chatting;
+package com.example.anyang_setup.EmploymentDocuments.Chatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ public class ChatRef {
     private List<String> acceptUser;
     private String chatContext;
     private String chatOwner;
+    private boolean isSent;
 
     public ChatRef() {}
 
@@ -18,15 +19,19 @@ public class ChatRef {
         this.chatOwner = chatOwner;
         this.acceptUser.add(acceptUser);
     }
+
     public String getMaximumUser() {
         return MaximumUser;
     }
+
     public List<String> getAcceptUser() {
         return this.acceptUser;
     }
+
     public String getChatContext(){
         return this.chatContext;
     }
+
     public void setAcceptUser(String acceptUser){
         this.acceptUser.add(acceptUser);
     }

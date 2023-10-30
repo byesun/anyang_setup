@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Chatting.SubActivity;
+package com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,16 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.anyang_setup.Chatting.ChatDTO;
-import com.example.anyang_setup.Chatting.ChatRef;
+import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatDTO;
+import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatRef;
 import com.example.anyang_setup.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class CreateNewChatActivity extends AppCompatActivity implements View.OnClickListener {
 

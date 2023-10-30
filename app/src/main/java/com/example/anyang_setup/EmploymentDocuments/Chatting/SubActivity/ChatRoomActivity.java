@@ -1,23 +1,18 @@
-package com.example.anyang_setup.Chatting.SubActivity;
+package com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import com.example.anyang_setup.Chatting.ChatDTO;
-import com.example.anyang_setup.Chatting.SubActivity.chat_option.ChatAdapter;
+import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatDTO;
+import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.chat_option.ChatAdapter;
 import com.example.anyang_setup.R;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,6 +66,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 String getTime = sdf.format(date);
 
                 ChatDTO chat = new ChatDTO(USER_NAME, chat_edit.getText().toString(), getTime); //ChatDTO를 이용하여 데이터를 묶는다.
+                chat.setMine(true);// 이 메시지는 내가 보낸 것 true 설정
                 databaseReference.child("chat").child(CHAT_NAME).push().setValue(chat); // 데이터 푸쉬
                 chat_edit.setText(""); //입력창 초기화
 
@@ -80,6 +76,11 @@ public class ChatRoomActivity extends AppCompatActivity {
     private void addMessage(DataSnapshot dataSnapshot, ChatAdapter adapter) {
         try {
             ChatDTO chatDTO = dataSnapshot.getValue(ChatDTO.class);
+            if (chatDTO.getUserName().equals(USER_NAME)) {
+                chatDTO.setMine(true);
+            } else {
+                chatDTO.setMine(false);
+            } //좌우 설정 본인 오른쪽, 다른 왼쪽
             adapter.add(chatDTO);
         } catch (Exception e) {
             e.printStackTrace();

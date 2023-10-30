@@ -41,6 +41,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Muhammad Abubakar on 11/10/2017.
  * this is the class where all the document functionalities have been added here is doc formate is declared as well

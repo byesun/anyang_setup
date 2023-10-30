@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Chatting;
+package com.example.anyang_setup.EmploymentDocuments.Chatting;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,12 +18,8 @@ import android.app.AlertDialog;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.anyang_setup.Chatting.SubActivity.ChatRoomActivity;
-import com.example.anyang_setup.Chatting.SubActivity.ChatRoomInfoActivity;
-import com.example.anyang_setup.Chatting.SubActivity.CreateNewChatActivity;
-import com.example.anyang_setup.HomeActivity;
-import com.example.anyang_setup.Info.UserInfoActivity;
-import com.example.anyang_setup.MainActivity;
+import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.ChatRoomInfoActivity;
+import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.CreateNewChatActivity;
 import com.example.anyang_setup.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,13 +31,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
 

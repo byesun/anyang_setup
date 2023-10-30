@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Chatting.SubActivity;
+package com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.anyang_setup.Chatting.ChatActivity;
 import com.example.anyang_setup.R;
 
 public class ChatRoomInfoActivity extends AppCompatActivity implements View.OnClickListener{

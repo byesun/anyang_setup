@@ -1,3 +1,4 @@
+/*
 package com.example.anyang_setup;
 
 import androidx.annotation.NonNull;
@@ -134,4 +135,4 @@ public class HomeActivity extends AppCompatActivity{
         });
     }
 
-}
+}*/

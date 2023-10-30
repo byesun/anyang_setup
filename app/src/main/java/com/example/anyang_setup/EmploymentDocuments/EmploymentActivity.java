@@ -11,6 +11,7 @@ import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.Persona
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecActivity;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Resume.ResumeMainActivity;
 import com.example.anyang_setup.R;
+import com.example.anyang_setup.test.MainActivity_start;
 
 public class EmploymentActivity extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class EmploymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // ResumeMainActivity로 이동하는 코드를 추가합니다.
-                Intent intent = new Intent(EmploymentActivity.this, ResumeMainActivity.class);
+                Intent intent = new Intent(EmploymentActivity.this, MainActivity_start.class);
                 startActivity(intent);
             }
         });
