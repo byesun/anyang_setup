@@ -74,6 +74,7 @@ import static com.example.anyang_setup.test.DocumentContainer.graduate_date_univ
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.anyang_setup.EmploymentDocuments.EmploymentActivity;
 import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
 import com.example.anyang_setup.test.DocumentContainer;
@@ -246,7 +247,7 @@ public class MainActivity_start extends AppCompatActivity {
 
     }
     public void deleteReport(View view) {
-        openDocumentFromFileManager();
+        exit();
     }
 
     private void updateViews(){
@@ -365,9 +366,15 @@ public class MainActivity_start extends AppCompatActivity {
         }
     }
 
+    private void exit(){
+        Intent intent = new Intent(MainActivity_start.this, EmploymentActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
     private void openDocumentFromFileManager() {
         //this is the action to open doc file from file manager
-        Intent i = new Intent();
+        /*Intent i = new Intent();
         i.setType("application/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
 
@@ -376,7 +383,7 @@ public class MainActivity_start extends AppCompatActivity {
 
             startActivityForResult(Intent.createChooser(i, "Select Document"), 111);
 
-        }
+        }*/
     }
 
 

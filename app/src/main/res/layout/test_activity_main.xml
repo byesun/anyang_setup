@@ -399,7 +399,7 @@
                     android:background="@drawable/shadow_border"
                     android:drawableEnd="@drawable/icon_return"
                     android:paddingEnd="5dp"
-                    android:text="RETRIEVE FILE"
+                    android:text="나가기"
                     android:onClick="deleteReport"/>
 
                 <Button
