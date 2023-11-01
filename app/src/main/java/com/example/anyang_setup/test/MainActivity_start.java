@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -58,6 +59,7 @@ import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneral
 import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos5;
 import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos6;
 
+import static com.example.anyang_setup.test.DocumentContainer.birth_date;
 import static com.example.anyang_setup.test.DocumentContainer.snprListCompnies;
 import static com.example.anyang_setup.test.DocumentContainer.snprListRnOfficers;
 import static com.example.anyang_setup.test.DocumentContainer.snprListRooOfficers;
@@ -89,13 +91,15 @@ import com.example.anyang_setup.test.PermissionsHelper;
 public class MainActivity_start extends AppCompatActivity {
     TextView txt_bicycle,txt_location,txt_offence_date,txt_offence_time,txt_time,txt_rn_date;
 
-    TextView txt_PhoneNumber,txt_Email,txt_Address,txt_HighScholl,txt_graduate_date_univ,txt_graduate_date;
+    TextView txt_PhoneNumber,txt_Email,txt_Address,txt_HighScholl,txt_graduate_date_univ,txt_graduate_date,txt_birth_date;
     Spinner snpr_roo,snpr_rn,snpr_compony;
     ProgressBar progressBar_main;
 
+    Button Add_Basic_Info;
+
 
     Calendar myCalendar;
-    DatePickerDialog.OnDateSetListener date,rnDate;
+    DatePickerDialog.OnDateSetListener date,rnDate,birthdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,18 +114,30 @@ public class MainActivity_start extends AppCompatActivity {
         txt_HighScholl = findViewById(R.id.txt_HighScholl);
         txt_graduate_date = findViewById(R.id.txt_graduate_date);
         txt_graduate_date_univ = findViewById(R.id.txt_graduate_date_univ);
+        Add_Basic_Info = findViewById(R.id.Add_Basic_Info);
+        txt_birth_date = findViewById(R.id.txt_birth_date);
 
 
-        txt_bicycle = findViewById(R.id.txt_bicycle);
-        txt_location = findViewById(R.id.txt_location);
-        txt_offence_date = findViewById(R.id.txt_offence_date);
-        txt_offence_time = findViewById(R.id.txt_offence_time);
-        txt_time = findViewById(R.id.txt_time);
-        txt_rn_date= findViewById(R.id.txt_rn_date);
+        //txt_bicycle = findViewById(R.id.txt_bicycle);
+        //txt_location = findViewById(R.id.txt_location);
+        //txt_offence_date = findViewById(R.id.txt_offence_date);
+        //txt_offence_time = findViewById(R.id.txt_offence_time);
+        //txt_time = findViewById(R.id.txt_time);
+        //txt_rn_date= findViewById(R.id.txt_rn_date);
 
-        snpr_compony = findViewById(R.id.snpr_company);
-        snpr_rn = findViewById(R.id.spnr_rn_officer);
-        snpr_roo = findViewById(R.id.roo_snpr);
+        snpr_compony = findViewById(R.id.snpr_company); // 주소
+        snpr_rn = findViewById(R.id.spnr_rn_officer); // 이메일
+        snpr_roo = findViewById(R.id.roo_snpr); //전화번호
+
+        Add_Basic_Info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 두 번째 액티비티로 전환
+                Intent intent = new Intent(MainActivity_start.this, HandleSnipersActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
 
 
         myCalendar = Calendar.getInstance();
@@ -151,6 +167,22 @@ public class MainActivity_start extends AppCompatActivity {
             }
 
         };
+
+        birthdate = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // This is the date picker of rn date
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabe3();
+            }
+
+        };
+
+
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, DocumentContainer.get(this).getComponies());
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -224,14 +256,15 @@ public class MainActivity_start extends AppCompatActivity {
         txt_HighScholl.setText(highscholl);
         txt_graduate_date.setText(graduate_date);
         txt_graduate_date_univ.setText(graduate_date_univ);
+        txt_birth_date.setText(birth_date);
 
 
-        txt_bicycle.setText(D_bicycleSn);
-        txt_location.setText(D_loc);
-        txt_offence_date.setText(D_offenceD);
-        txt_offence_time.setText(D_offenceT);
-        txt_time.setText(D_rnTime);
-        txt_rn_date.setText(D_rnDate);
+        //txt_bicycle.setText(D_bicycleSn);
+        //txt_location.setText(D_loc);
+        //txt_offence_date.setText(D_offenceD);
+        //txt_offence_time.setText(D_offenceT);
+        //txt_time.setText(D_rnTime);
+        //txt_rn_date.setText(D_rnDate);
 
 
         for (int i=0;i<snprListCompnies.size();i++){
@@ -281,12 +314,16 @@ public class MainActivity_start extends AppCompatActivity {
         if (txt_graduate_date_univ.getText().length()>0){
             graduate_date_univ = txt_graduate_date_univ.getText().toString();
         }
-
-
-        if (txt_bicycle.getText().length()>0){
-            D_bicycleSn = txt_bicycle.getText().toString();
+        if (txt_birth_date.getText().length()>0){
+            birth_date = txt_birth_date.getText().toString();
         }
-        if (txt_location.getText().length()>0){
+
+
+
+        //if (txt_bicycle.getText().length()>0){
+        //D_bicycleSn = txt_bicycle.getText().toString();
+        //}
+        /*if (txt_location.getText().length()>0){
             D_loc = txt_location.getText().toString();
         }
         if (txt_offence_time.getText().length()>0){
@@ -294,18 +331,19 @@ public class MainActivity_start extends AppCompatActivity {
         }
         if (txt_offence_date.getText().length()>0){
             D_offenceD =txt_offence_date.getText().toString();
-        }
-        if (txt_time.getText().length()>0){
+        }*/
+        /*if (txt_time.getText().length()>0){
             D_rnTime =txt_time.getText().toString();
-        }
-        if (txt_rn_date.getText().length()>0){
-            D_rnDate=txt_rn_date.getText().toString();
-        }
+        }*/
+        //if (txt_rn_date.getText().length()>0){
+        //D_rnDate=txt_rn_date.getText().toString();
+        //}
 
-        Intent intent = new Intent(MainActivity_start.this, GeneralPhotosActivity.class);
+        Intent intent = new Intent(MainActivity_start.this,GenerateReportActivity.class);
         progressBar_main.setVisibility(View.GONE);
         startActivity(intent);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -313,7 +351,7 @@ public class MainActivity_start extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.handle_snipers:
                 //this is the action that is performed when box button is clicke to go to combo boxes activity
-                Intent intent = new Intent(this, HandleSnipersActivity.class);
+                Intent intent = new Intent(this,HandleSnipersActivity.class);
                 finish();
                 startActivity(intent);
                 return true;
@@ -495,56 +533,21 @@ public class MainActivity_start extends AppCompatActivity {
         txt_graduate_date_univ.setText(sdf.format(myCalendar.getTime()));
     }
 
-    public void offenceTimePicker(View view) {
-        //offence time picker
-        int mHour,mMinute;
-        final String myFormat = "hh:mm a"; //In which you need put here
-        final SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+    private void updateLabe3() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        final Calendar c = Calendar.getInstance();
-        mHour = c.get(Calendar.HOUR_OF_DAY);
-        mMinute = c.get(Calendar.MINUTE);
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                new TimePickerDialog.OnTimeSetListener() {
-
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                          int minute) {
-                        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        c.set(Calendar.MINUTE,minute);
-                        txt_offence_time.setText(sdf.format(c.getTime()));
-                    }
-                }, mHour, mMinute, false);
-        timePickerDialog.show();
-    }
-
-    public void rnTimerPicker(View view) {
-        //rn time picker action
-        final int mHour,mMinute;
-        final String myFormat = "hh:mm a"; //In which you need put here
-        final SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
-
-        final Calendar c = Calendar.getInstance();
-        mHour = c.get(Calendar.HOUR_OF_DAY);
-        mMinute = c.get(Calendar.MINUTE);
-
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                new TimePickerDialog.OnTimeSetListener() {
-
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                          int minute) {
-                        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        c.set(Calendar.MINUTE,minute);
-                        txt_time.setText(sdf.format(c.getTime()));
-
-                    }
-                }, mHour, mMinute, false);
-        timePickerDialog.show();
+        txt_birth_date.setText(sdf.format(myCalendar.getTime()));
     }
 
     public void rnDatePicker(View view) {
         new DatePickerDialog(MainActivity_start.this, rnDate, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    public void birthDatePicker(View view) {
+        new DatePickerDialog(MainActivity_start.this, birthdate, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }

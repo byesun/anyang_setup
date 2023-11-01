@@ -18,9 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:hint="Company Name"
-            android:inputType="textAutoComplete"/>
-
+            android:layout_marginStart="0dp"
+            android:hint="주소입력"
+            android:inputType="textAutoComplete" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:hint="Rn Officer Name"
+            android:hint="기본 이메일 추가"
             android:inputType="textAutoComplete"/>
 
 
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:hint="Roo Officer Name"
+            android:hint="기본 전화번호 추가"
             android:inputType="textAutoComplete"/>
 
         <LinearLayout

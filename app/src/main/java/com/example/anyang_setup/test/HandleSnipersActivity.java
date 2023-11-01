@@ -13,6 +13,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
 
 /**
@@ -54,11 +55,13 @@ public class HandleSnipersActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finishActivity();
+        Intent intent = new Intent(HandleSnipersActivity.this,MainActivity_start.class);
+        finish();
+        startActivity(intent);
     }
 
     private void finishActivity(){
-        Intent intent = new Intent(this, MainActivity_start.class);
+        Intent intent = new Intent(HandleSnipersActivity.this,MainActivity_start.class);
         tinydb.putListString("MyCompanies",DocumentContainer.get(this).getComponies());
         tinydb.putListString("MyRnOfficers",DocumentContainer.get(this).getRnOfficres());
         tinydb.putListString("MyRooOfficers",DocumentContainer.get(this).getRooOfficers());
@@ -74,7 +77,7 @@ public class HandleSnipersActivity extends AppCompatActivity implements View.OnC
                     MessageHelper.showCustomToastSuccess(this,getLayoutInflater(),txt_compony_name.getText().toString()+" added successfully");
                     txt_compony_name.setText("");
                 }else {
-                MessageHelper.showCustomToastError(this,getLayoutInflater(),"Please Enter company Name First");
+                    MessageHelper.showCustomToastError(this,getLayoutInflater(),"Please Enter company Name First");
                 }
                 break;
             case R.id.btn_delete_company:
@@ -83,10 +86,10 @@ public class HandleSnipersActivity extends AppCompatActivity implements View.OnC
                         MessageHelper.showCustomToastSuccess(this,getLayoutInflater(),txt_compony_name.getText().toString()+" deleted successfully");
                         txt_compony_name.setText("");
                     }else {
-                    MessageHelper.showCustomToastError(this,getLayoutInflater(),txt_compony_name.getText().toString()+" Does not exist");
+                        MessageHelper.showCustomToastError(this,getLayoutInflater(),txt_compony_name.getText().toString()+" Does not exist");
                     }
                 }else {
-                MessageHelper.showCustomToastError(this,getLayoutInflater(),"Please Enter company Name First");
+                    MessageHelper.showCustomToastError(this,getLayoutInflater(),"Please Enter company Name First");
                 }
                 break;
             case R.id.btn_add_rn:
@@ -104,10 +107,10 @@ public class HandleSnipersActivity extends AppCompatActivity implements View.OnC
                         MessageHelper.showCustomToastSuccess(this,getLayoutInflater(),txt_rn_officer_name.getText().toString()+" deleted successfully");
                         txt_rn_officer_name.setText("");
                     }else {
-                    MessageHelper.showCustomToastError(this,getLayoutInflater(),txt_rn_officer_name.getText().toString()+" does not exist");
+                        MessageHelper.showCustomToastError(this,getLayoutInflater(),txt_rn_officer_name.getText().toString()+" does not exist");
                     }
                 }else {
-                MessageHelper.showCustomToastError(this,getLayoutInflater(),"Please Enter Rn Officer Name First");
+                    MessageHelper.showCustomToastError(this,getLayoutInflater(),"Please Enter Rn Officer Name First");
                 }
                 break;
             case R.id.btn_add_roo:

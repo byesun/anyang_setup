@@ -59,15 +59,16 @@ public class DocumentContainer {
     public static String highscholl= null;
     public static String graduate_date= null;
     public static String graduate_date_univ= null;
+    public static String birth_date = null;
 
 
     public static String D_bicycleSn = null;
     public static String D_offenceD =null;
     public static String D_offenceT =null;
     public static String D_loc =null;
-    public static String D_comp;
-    public static String D_rooOff;
-    public static String D_rnOff;
+    public static String D_comp; //주소
+    public static String D_rooOff; //전화번호
+    public static String D_rnOff; //이메일
     public static String D_rnTime;
     public static String D_rnDate;
     public static String D_remarks="Remarks: Failure to comply with LTA’s notice to remove article or thing within such time as may be specified in the Notice of Removal";
@@ -237,7 +238,7 @@ public class DocumentContainer {
         document = new XWPFDocument();
 
 
-        fileName = D_bicycleSn;
+        fileName = "이력서";
         Random generator = new Random();
         int n = 10000;
         n = generator.nextInt(n);
@@ -319,15 +320,14 @@ public class DocumentContainer {
     public static void addPictureFirst(InputStream imageFile, Context context,String title) {//add first image with text paragrapth in the doc
         try {
             XWPFParagraph paragraphPIC = DocumentContainer.get(context).getDocument().createParagraph();
-            paragraphPIC.setBorderBottom(Borders.BASIC_BLACK_DASHES);
-
-            paragraphPIC.setAlignment(ParagraphAlignment.CENTER);
+            //paragraphPIC.setBorderBottom(Borders.BASIC_BLACK_DASHES);
+            paragraphPIC.setAlignment(ParagraphAlignment.LEFT);
             XWPFRun runPIC = paragraphPIC.createRun();
             int format = XWPFDocument.PICTURE_TYPE_JPEG;
-            runPIC.setText(title);
-            runPIC.setSubscript(VerticalAlign.BASELINE);
+            //runPIC.setText(title);
+            //runPIC.setSubscript(VerticalAlign.BASELINE);
             //runPIC.addBreak();
-            runPIC.addPicture(imageFile, format, "logo.png", Units.toEMU(40), Units.toEMU(30)); // 200x200 pixels
+            runPIC.addPicture(imageFile, format, "logo.png", Units.toEMU(100), Units.toEMU(120)); // 200x200 pixels
             CTShd cTShd = runPIC.getCTR().addNewRPr().addNewShd();
             cTShd.setVal(STShd.CLEAR);
             cTShd.setColor("auto");
@@ -362,58 +362,6 @@ public class DocumentContainer {
             e.printStackTrace();
         }
     }
-
-
-    public static void eoInformationTable(Context context) {
-        XWPFTable table = DocumentContainer.get(context).getDocument().createTable();
-
-        CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
-        width.setType(STTblWidth.DXA);
-        width.setW(BigInteger.valueOf(10000));
-
-        // Create the first row for the resume header
-        XWPFTableRow headerRow = table.getRow(0);
-        headerRow.getCell(0).setColor("deeaf6");
-        XWPFRun headerRun = headerRow.getCell(0).addParagraph().createRun();
-        headerRun.setBold(true);
-        headerRun.setText("이력서");
-
-        // Create a row for Name
-        XWPFTableRow nameRow = table.createRow();
-        nameRow.getCell(0).setText("이름: " + D_rooOff);
-
-        // Create a row for Contact Information
-        XWPFTableRow contactRow = table.createRow();
-        contactRow.getCell(0).setText("연락처: " + "전화번호 또는 이메일을 입력하세요");
-
-        // Create a row for Skills and Competencies
-        XWPFTableRow skillsRow = table.createRow();
-        skillsRow.getCell(0).setText("주요 기술 및 역량: " + "주요 기술과 역량을 나열하세요");
-
-        // Create a row for Education History
-        XWPFTableRow educationRow = table.createRow();
-        educationRow.getCell(0).setText("학력 경력: " + D_bicycleSn);
-
-        // Create a row for Work Experience
-        XWPFTableRow experienceRow = table.createRow();
-        experienceRow.getCell(0).setText("경력 사항: "+ D_bicycleSn);
-
-        // Create a row for Project Experience
-        XWPFTableRow projectRow = table.createRow();
-        projectRow.getCell(0).setText("프로젝트 경험: " + D_bicycleSn);
-
-        // Create a row for Languages and Certifications
-        XWPFTableRow languageRow = table.createRow();
-        languageRow.getCell(0).setText("언어 및 자격증: " + D_bicycleSn);
-
-        // Create a row for Additional Details
-        XWPFTableRow detailsRow = table.createRow();
-        detailsRow.getCell(0).setText("기타 세부 정보: " + "기타 세부 정보를 나열하세요");
-
-        XWPFRun addRun = DocumentContainer.get(context).getDocument().createParagraph().createRun();
-        addRun.addBreak();
-    }
-
     public static void createPersonalInformationTable(Context context) {
         XWPFTable table = DocumentContainer.get(context).getDocument().createTable(5, 2);
 
@@ -425,18 +373,21 @@ public class DocumentContainer {
         cell_0_0.setText("성함");
         XWPFTableCell cell_1_0 = table.getRow(1).getCell(0);
         cell_1_0.setText("생년월일");
+        XWPFTableCell cell_1_1 = table.getRow(1).getCell(1);
+        cell_1_1.setText(birth_date);
         XWPFTableCell cell_2_0 = table.getRow(2).getCell(0);
         cell_2_0.setText("전화번호");
         XWPFTableCell cell_2_1 = table.getRow(2).getCell(1);
-        cell_2_1.setText(phonenumber);
+        cell_2_1.setText(D_rooOff);
         XWPFTableCell cell_3_0 = table.getRow(3).getCell(0);
         cell_3_0.setText("이메일");
         XWPFTableCell cell_3_1 = table.getRow(3).getCell(1);
         cell_3_1.setText(email);
+        cell_3_1.setText(D_rnOff);
         XWPFTableCell cell_4_0 = table.getRow(4).getCell(0);
         cell_4_0.setText("주소");
         XWPFTableCell cell_4_1 = table.getRow(4).getCell(1);
-        cell_4_1.setText(address);
+        cell_4_1.setText(D_comp);
 
 
         // Add a line break after the table
@@ -493,6 +444,20 @@ public class DocumentContainer {
         // Add a line break after the table
         XWPFRun addRun = DocumentContainer.get(context).getDocument().createParagraph().createRun();
         addRun.addBreak();
+    }
+
+    public static void createAwardTable(Context context){
+        XWPFTable table = DocumentContainer.get(context).getDocument().createTable(4, 2);
+        CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
+        width.setType(STTblWidth.DXA);
+        width.setW(BigInteger.valueOf(10000));
+        XWPFTableCell cell_0_0 = table.getRow(0).getCell(0);
+        cell_0_0.setText("수상");
+        XWPFTableCell cell_0_1 = table.getRow(0).getCell(1);
+        cell_0_1.setText("수상일자");
+
+
+
     }
 
     public static void createActivityTable(Context context) {
