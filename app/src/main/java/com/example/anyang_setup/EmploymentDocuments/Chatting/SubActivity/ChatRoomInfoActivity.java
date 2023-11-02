@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.anyang_setup.R;
+import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatDTO;
 
 public class ChatRoomInfoActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -44,6 +45,8 @@ public class ChatRoomInfoActivity extends AppCompatActivity implements View.OnCl
         chatContextEditText.setText(chatContext);
         chatNameEditText.setText(chatName);
         maxChatEditText.setText(chatNowUser + "/" + maximumChatUser);
+
+
     }
 
     @Override
@@ -53,7 +56,7 @@ public class ChatRoomInfoActivity extends AppCompatActivity implements View.OnCl
             case R.id.joinButton :
             {
                 Intent intent = new Intent(ChatRoomInfoActivity.this, ChatRoomActivity.class);
-                intent.putExtra("userinfo", userName);
+                intent.putExtra("userinfo", userName); // 현재 로그인한 사용자 이름
                 intent.putExtra("chatRoom", chatName);
                 startActivity(intent);
                 finish();

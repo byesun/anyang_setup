@@ -9,13 +9,13 @@
         app:showAsAction="always"
         />
 
-    <item
+<!--    <item
         android:id="@+id/spec"
         android:enabled="true"
         android:icon="@drawable/ic_spec"
         android:title="스펙"
         app:showAsAction="always"
-        />
+        />-->
 
     <item
         android:id="@+id/info"

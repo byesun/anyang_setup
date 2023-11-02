@@ -19,31 +19,41 @@ public class ChatAdapter extends ArrayAdapter<ChatDTO> {
         super(context, 0, messages);
     }
 
-    @SuppressLint("ResourceType")
+    private static class ViewHolder {
+        public boolean isMine;
+        TextView nameText;
+        TextView messageText;
+        TextView subItemText;
+        ImageView pro;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ChatDTO message = getItem(position);
-        Log.d("ChatAdapter", "Position: " + position + ", isMine: " + message.isMine());
+        ViewHolder viewHolder;
 
-        if (convertView == null || !(convertView.getTag() instanceof Boolean) || (Boolean) convertView.getTag() != message.isMine()) {
+        if (convertView == null || !(convertView.getTag() instanceof ViewHolder) || ((ViewHolder) convertView.getTag()).isMine != message.isMine()) {
             convertView = LayoutInflater.from(getContext()).inflate(
                     message.isMine() ? R.layout.my_msgbox : R.layout.other_msgbox,
                     parent, false
             );
-            convertView.setTag(Boolean.valueOf(message.isMine()));
+            viewHolder = new ViewHolder();
+            viewHolder.nameText = convertView.findViewById(R.id.tv_name);
+            viewHolder.messageText = convertView.findViewById(R.id.tv_msg);
+            viewHolder.subItemText = convertView.findViewById(R.id.tv_time);
+            viewHolder.pro = convertView.findViewById(R.id.iv);
+            viewHolder.isMine = message.isMine();
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        TextView nameText = convertView.findViewById(R.id.tv_name);
-        TextView messageText = convertView.findViewById(R.id.tv_msg);
-        TextView subItemText = convertView.findViewById(R.id.tv_time);
-        ImageView pro = convertView.findViewById(R.id.iv);
+        viewHolder.nameText.setText(message.getUserName());
+        viewHolder.messageText.setText(message.getMessage());
+        viewHolder.subItemText.setText(message.getChatTime());
 
-        nameText.setText(message.getUserName());
-        messageText.setText(message.getMessage());
-        subItemText.setText(message.getChatTime());
-
-        // pro.setImageResource(R.id.ID_Picture);
-        // 주석 처리된 부분은 필요에 따라 수정하시면 됩니다.
+        // 이미지 설정 예시
+        // viewHolder.pro.setImageResource(R.drawable.image_resource_name);
 
         return convertView;
     }

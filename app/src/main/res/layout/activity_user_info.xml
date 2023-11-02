@@ -154,783 +154,158 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/relativeLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="250dp"
-                android:layout_marginBottom="10dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/shape_corners">
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="175dp"
+                android:id="@+id/row1"
+                android:orientation="horizontal"
+                android:layout_marginTop="240dp"
+                android:padding="10dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/clothingCard"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    app:cardElevation="20dp"
+                    app:cardCornerRadius="20dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/personal_button">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/clothingName"
+                            android:text="자기소개서"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+
+                            android:layout_marginTop="10dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/clothingImage"/>
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:id="@+id/clothingImage"
+
+                            android:layout_marginTop="15dp"
+                            android:layout_centerHorizontal="true"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    app:cardElevation="20dp"
+                    app:cardCornerRadius="20dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/spec_button">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/elecName"
+                            android:text="스펙 작성"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+
+                            android:layout_marginTop="10dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/elecImage"/>
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:id="@+id/elecImage"
+
+                            android:layout_marginTop="15dp"
+                            android:layout_centerHorizontal="true"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="175dp"
+                android:id="@+id/row2"
+                android:orientation="horizontal"
+                android:layout_marginTop="400dp"
+                android:padding="10dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/row1">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    app:cardElevation="20dp"
+                    app:cardCornerRadius="20dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/resume_button">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/homeName"
+                            android:text="이력서 제작"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+
+                            android:layout_marginTop="10dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/homeImage"/>
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:id="@+id/homeImage"
+
+                            android:layout_marginTop="15dp"
+                            android:layout_centerHorizontal="true"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    app:cardElevation="20dp"
+                    app:cardCornerRadius="20dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/employment_button">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/beautyName"
+                            android:text="채용정보"
+                            android:textSize="20sp"
+                            android:textColor="@color/lavender"
+
+                            android:layout_marginTop="10dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@+id/beautyImage"/>
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:id="@+id/beautyImage"
+
+                            android:layout_marginTop="15dp"
+                            android:layout_centerHorizontal="true"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:text="시간표" />
 
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:stretchColumns="*">
-
-                    <!-- 테이블 헤더 행 -->
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="월"
-                            android:gravity="center" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="화"
-                            android:gravity="center" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="수"
-                            android:gravity="center" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="목"
-                            android:gravity="center" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="금"
-                            android:gravity="center" />
-                    </TableRow>
-
-
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="30dp"
-                            android:text="1교시"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="2교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="3교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_3"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="4교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="5교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_5"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_5"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_5"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_5"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_5"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="6교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_6"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_6"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_6"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_6"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_6"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="7교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_7"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_7"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_7"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_7"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_7"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="8교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_8"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_8"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_8"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_8"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_8"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="9교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_9"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_9"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_9"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_9"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_9"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="10교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_10"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_10"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_10"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_10"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_10"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="11교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_11"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_11"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_11"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_11"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_11"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="12교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_12"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_12"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_12"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_12"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_12"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="13교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_13"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_13"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_13"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_13"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_13"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="14교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_14"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_14"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_14"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_14"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_14"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:text="15교시"
-                            android:layout_height="30dp"
-                            android:gravity="center" />
-                        <TextView
-                            android:id="@+id/mon_15"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/tues_15"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/wed_15"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/thu_15"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-
-                        <TextView
-                            android:id="@+id/fri_15"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text=""
-                            android:gravity="center" />
-                    </TableRow>
-                </TableLayout>
-
-            </RelativeLayout>
 
         </RelativeLayout>
 

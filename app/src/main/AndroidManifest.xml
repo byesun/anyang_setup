@@ -78,14 +78,18 @@
         <activity
             android:name=".Info.UserInfoActivity"
             android:exported="false" />
-        <activity
+        <!--<activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="false" />-->
 
         <activity android:name=".test.BicyclesActivity"
             android:exported="false"/>
         <activity android:name=".test.MainActivity_start"
             android:exported="false"/>
+
+        <activity android:name=".EmploymentDocuments.Chatting.Category.CategoryActivity">
+            <!-- 필요한 인텐트 필터 및 설정 추가 -->
+        </activity>
 
 
 

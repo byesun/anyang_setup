@@ -5,13 +5,18 @@ import static com.example.anyang_setup.R.id.bottom_navigationview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.anyang_setup.EmploymentDocuments.EmploymentActivity;
+import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalMainActivity;
+import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecActivity;
 import com.example.anyang_setup.Info.SubActivity.DiagnosisActivity;
+import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
 
 import org.json.JSONException;
@@ -24,6 +29,7 @@ import android.view.MenuItem;
 
 import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatActivity;
 import com.example.anyang_setup.Setting.SettingActivity;
+import com.example.anyang_setup.test.MainActivity_start;
 import com.google.android.material.navigation.NavigationBarView;
 
 
@@ -57,6 +63,12 @@ public class UserInfoActivity extends AppCompatActivity {
         stdIdText = findViewById(R.id.StudentID);
         majorText = findViewById(R.id.Major);
 
+        // 버튼을 찾아서 클릭 리스너를 설정합니다.
+        RelativeLayout button11 = findViewById(R.id.personal_button);// 자기소개서 버튼
+        RelativeLayout button12 = findViewById(R.id.spec_button);// 스펙 버튼
+        RelativeLayout button13 = findViewById(R.id.resume_button);// 이력서 버튼
+        RelativeLayout employmentButton = findViewById(R.id.employment_button);
+
         button.setOnClickListener(view -> {
             Intent intent = new Intent(UserInfoActivity.this, DiagnosisActivity.class);
             intent.putExtra("userinfo", userInfoStr);
@@ -88,6 +100,43 @@ public class UserInfoActivity extends AppCompatActivity {
         }
 
         Log.d("rkdqudtjs", "userinfo: " + userinfo);
+
+        button11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Personal Statement Activity로 이동하는 코드를 추가합니다.
+                Intent intent = new Intent(UserInfoActivity.this, PersonalMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // SpecActivity로 이동하는 코드를 추가합니다.
+                Intent intent = new Intent(UserInfoActivity.this, SpecActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ResumeMainActivity로 이동하는 코드를 추가합니다.
+                Intent intent = new Intent(UserInfoActivity.this, MainActivity_start.class);
+                startActivity(intent);
+            }
+        });
+
+        employmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent를 사용하여 브라우저 열기
+                String url = "https://www.jobkorea.co.kr/";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        });
 
         navigationBarView = findViewById(R.id.bottom_navigationview);
 
@@ -129,13 +178,6 @@ public class UserInfoActivity extends AppCompatActivity {
                             throw new RuntimeException(e);
                         }
 
-                        break;
-                    }
-                    case R.id.spec :
-                    {
-                        Intent intent = new Intent(UserInfoActivity.this, EmploymentActivity.class);
-                        intent.putExtra("userinfo", userinfo);
-                        startActivity(intent);
                         break;
                     }
                 }

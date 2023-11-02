@@ -19,6 +19,9 @@
         <!-- 다른 질문들을 필요한 만큼 추가하세요. -->
     </string-array>
 
+    <string name="create_chatroom">채팅방 생성</string>
+    <string name="my_chatlist">내 채팅방 목록</string>
+
 
     <string name="generalphotosstring">Upload photos showing the general views of the obstruction or inconvenience caused</string>
     <string name="bicyclestring">Upload photos showing the bicycles being moved to ease the obstruction or inconvenience caused</string>

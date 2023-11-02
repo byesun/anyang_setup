@@ -6,8 +6,19 @@ public class ChatDTO {
     private String message;
     private String chatTime;
     private boolean isMine;
+    private int iconResourceId; // 카테고리 아이콘의 리소스 ID
+    private String name; // 카테고리 이름
+    private String chatRoom; // 채팅방 이름 필드 추가
 
-    public ChatDTO() {}
+    // 인자 없는 생성자 추가
+    public ChatDTO() {
+    }
+
+    public ChatDTO(int iconResourceId, String name) {
+        //카테고리 변수
+        this.iconResourceId = iconResourceId;
+        this.name = name;
+    }
     public ChatDTO(String userName, String message, String chatTime) {
         this.userName = userName;
         this.message = message;
@@ -39,5 +50,17 @@ public class ChatDTO {
 
     public void setMine(boolean mine) {
         isMine = mine;
+    }
+
+    public int getIconResourceId() {
+        return iconResourceId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getChatRoom() {
+        return chatRoom;
     }
 }

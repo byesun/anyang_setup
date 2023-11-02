@@ -74,7 +74,7 @@ import static com.example.anyang_setup.test.DocumentContainer.graduate_date_univ
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.anyang_setup.EmploymentDocuments.EmploymentActivity;
+import com.example.anyang_setup.Info.UserInfoActivity;
 import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
 import com.example.anyang_setup.test.DocumentContainer;
@@ -82,6 +82,7 @@ import com.example.anyang_setup.test.GeneralPhotosActivity;
 import com.example.anyang_setup.test.HandleSnipersActivity;
 import com.example.anyang_setup.test.MessageHelper;
 import com.example.anyang_setup.test.PermissionsHelper;
+import com.google.firebase.auth.UserInfo;
 
 /**
  * Created by Muhammad Abubakar on 11/11/2017.
@@ -367,7 +368,7 @@ public class MainActivity_start extends AppCompatActivity {
     }
 
     private void exit(){
-        Intent intent = new Intent(MainActivity_start.this, EmploymentActivity.class);
+        Intent intent = new Intent(MainActivity_start.this, UserInfoActivity.class);
         finish();
         startActivity(intent);
     }
