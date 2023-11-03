@@ -25,7 +25,6 @@ public class StartActivity extends AppCompatActivity {
                 finish();
             }
         }, 2000); // 2초 후에 실행
-
     }
 }
 

@@ -19,7 +19,6 @@
         android:gravity="center"
         android:text="안양대학교 Setup"
         android:textColor="@color/white"
-
         android:textSize="20dp"/>
 
    </RelativeLayout>

@@ -359,9 +359,7 @@ public class MainActivity_start extends AppCompatActivity {
     }
 
     private void exit(){
-        Intent intent = new Intent(MainActivity_start.this, UserInfoActivity.class);
         finish();
-        startActivity(intent);
     }
 
     private void openDocumentFromFileManager() {
