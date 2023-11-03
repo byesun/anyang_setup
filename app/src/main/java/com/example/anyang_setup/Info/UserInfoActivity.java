@@ -64,7 +64,7 @@ public class UserInfoActivity extends AppCompatActivity {
         RelativeLayout button11 = findViewById(R.id.personal_button);// 자기소개서 버튼
         RelativeLayout button12 = findViewById(R.id.spec_button);// 스펙 버튼
         RelativeLayout button13 = findViewById(R.id.resume_button);// 이력서 버튼
-        RelativeLayout employmentButton = findViewById(R.id.employment_button);
+        RelativeLayout employmentButton = findViewById(R.id.employment_button);// 채용공고
 
         button.setOnClickListener(view -> {
             Intent intent = new Intent(UserInfoActivity.this, DiagnosisActivity.class);

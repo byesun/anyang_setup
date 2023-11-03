@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class CreateNewChatActivity extends AppCompatActivity implements View.OnClickListener {
+public class  CreateNewChatActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText chatContextEditText;
     private EditText maxChatEditText;

@@ -4,27 +4,40 @@
     android:padding="16dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv"
+        android:id="@+id/iv_profile"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@mipmap/ic_launcher"
         android:layout_alignParentRight="true"/>
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="name"
         android:textColor="#333333"
-        android:layout_toLeftOf="@+id/iv"
+        android:layout_toLeftOf="@id/iv_profile"
         android:layout_marginRight="16dp"/>
+
+    <ImageView
+        android:id="@+id/iv_message_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/tv_name"
+        android:layout_toLeftOf="@id/iv_profile"
+        android:layout_marginRight="16dp"
+        android:maxWidth="250dp"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="8dp"/>
 
     <TextView
         android:id="@+id/tv_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello android"
-        android:layout_below="@+id/tv_name"
-        android:layout_toLeftOf="@id/iv"
+        android:layout_below="@id/tv_name"
+        android:layout_toLeftOf="@id/iv_profile"
         android:layout_marginRight="16dp"
         android:padding="12dp"
         android:maxWidth="250dp"
@@ -37,7 +50,8 @@
         android:layout_height="wrap_content"
         android:text="13:35"
         android:textSize="12sp"
-        android:layout_toLeftOf="@+id/tv_msg"
-        android:layout_marginRight="8dp"
-        android:layout_alignBottom="@id/tv_msg"/>
+        android:layout_below="@+id/tv_msg"
+        android:layout_alignRight="@+id/tv_msg"
+        android:layout_marginTop="4dp"/>
+
 </RelativeLayout>

@@ -6,6 +6,7 @@ public class ChatDTO {
     private String message;
     private String chatTime;
     private boolean isMine;
+    private String fileUrl;
     private int iconResourceId; // 카테고리 아이콘의 리소스 ID
     private String name; // 카테고리 이름
     private String chatRoom; // 채팅방 이름 필드 추가
@@ -62,5 +63,13 @@ public class ChatDTO {
 
     public String getChatRoom() {
         return chatRoom;
+    }
+
+    // fileUrl에 대한 getter와 setter 메서드 추가
+    public String getFileUrl() {
+        return fileUrl;
+    }
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 }
