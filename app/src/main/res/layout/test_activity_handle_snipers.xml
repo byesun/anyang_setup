@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginStart="0dp"
-            android:hint="주소입력"
+            android:hint="기본 주소 입력"
             android:inputType="textAutoComplete" />
 
         <LinearLayout

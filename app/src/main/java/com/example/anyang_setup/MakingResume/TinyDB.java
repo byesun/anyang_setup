@@ -19,7 +19,7 @@
  *  and unicode 2017 that are used for separating the items in a list.
  */
 
-package com.example.anyang_setup.test;
+package com.example.anyang_setup.MakingResume;
 
 import android.content.Context;
 import android.content.SharedPreferences;

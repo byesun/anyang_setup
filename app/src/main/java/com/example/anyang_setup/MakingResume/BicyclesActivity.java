@@ -1,7 +1,7 @@
-package com.example.anyang_setup.test;
+package com.example.anyang_setup.MakingResume;
 
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamBicyclePhotos1;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamBicyclePhotos2;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamBicyclePhotos1;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamBicyclePhotos2;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

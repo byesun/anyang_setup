@@ -1,4 +1,4 @@
-package com.example.anyang_setup.test;
+package com.example.anyang_setup.MakingResume;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,43 +13,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
-import static com.example.anyang_setup.test.DocumentContainer.D_comp;
-import static com.example.anyang_setup.test.DocumentContainer.D_offenceD;
-import static com.example.anyang_setup.test.DocumentContainer.D_offenceT;
-import static com.example.anyang_setup.test.DocumentContainer.D_rnDate;
-import static com.example.anyang_setup.test.DocumentContainer.D_rnTime;
-import static com.example.anyang_setup.test.DocumentContainer.D_rooOff;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamFourhoursPhotos1;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamFourhoursPhotos2;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamFourhoursPhotos3;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamFourhoursPhotos4;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos1;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos2;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos3;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos4;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos5;
-import static com.example.anyang_setup.test.DocumentContainer.clearDocument;
-import static com.example.anyang_setup.test.DocumentContainer.file;
-import static com.example.anyang_setup.test.DocumentContainer.fileName;
-import static com.example.anyang_setup.test.DocumentContainer.get;
-import static com.example.anyang_setup.test.DocumentContainer.out;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_comp;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_rooOff;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamFourhoursPhotos1;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.anyang_setup.MainActivity;
-import com.example.anyang_setup.test.MainActivity_start;
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.test.DocumentContainer;
-import com.example.anyang_setup.test.MessageHelper;
-import com.example.anyang_setup.test.PermissionsHelper;
 
 /**
  * Created by Muhammad Abubakar on 11/11/2017.
@@ -95,7 +71,6 @@ public class GenerateReportActivity extends AppCompatActivity implements View.On
         //img_fourhoursPhotos4 = findViewById(R.id.img_fourhoursPhotos4);
 
         initViews();
-
     }
 
     @Override
@@ -130,6 +105,8 @@ public class GenerateReportActivity extends AppCompatActivity implements View.On
         button = findViewById(id);
         button.setOnClickListener(this);
     }
+
+
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();

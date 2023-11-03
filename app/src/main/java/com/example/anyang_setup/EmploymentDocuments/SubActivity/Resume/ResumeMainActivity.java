@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.test.MainActivity_start;
+import com.example.anyang_setup.MakingResume.MainActivity_start;
 
 public class ResumeMainActivity extends AppCompatActivity {
     @Override

@@ -1,7 +1,6 @@
-package com.example.anyang_setup.test;
+package com.example.anyang_setup.MakingResume;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,7 +15,6 @@ import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -32,57 +30,50 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import static com.example.anyang_setup.test.DocumentContainer.D_bicycleSn;
-import static com.example.anyang_setup.test.DocumentContainer.D_bike_info_1;
-import static com.example.anyang_setup.test.DocumentContainer.D_bike_info_2;
-import static com.example.anyang_setup.test.DocumentContainer.D_bike_info_3;
-import static com.example.anyang_setup.test.DocumentContainer.D_bike_info_4;
-import static com.example.anyang_setup.test.DocumentContainer.D_comp;
-import static com.example.anyang_setup.test.DocumentContainer.D_loc;
-import static com.example.anyang_setup.test.DocumentContainer.D_offenceD;
-import static com.example.anyang_setup.test.DocumentContainer.D_offenceT;
-import static com.example.anyang_setup.test.DocumentContainer.D_remarks;
-import static com.example.anyang_setup.test.DocumentContainer.D_rnDate;
-import static com.example.anyang_setup.test.DocumentContainer.D_rnOff;
-import static com.example.anyang_setup.test.DocumentContainer.D_rnTime;
-import static com.example.anyang_setup.test.DocumentContainer.D_rooOff;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamBicyclePhotos1;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamBicyclePhotos2;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamFourhoursPhotos1;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamFourhoursPhotos2;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamFourhoursPhotos3;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamFourhoursPhotos4;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos1;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos2;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos3;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos4;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos5;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos6;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bicycleSn;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bike_info_1;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bike_info_2;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bike_info_3;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bike_info_4;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_comp;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_loc;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_offenceD;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_offenceT;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_remarks;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_rnDate;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_rnOff;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_rnTime;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_rooOff;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamBicyclePhotos1;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamBicyclePhotos2;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamFourhoursPhotos1;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamFourhoursPhotos2;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamFourhoursPhotos3;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamFourhoursPhotos4;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos1;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos2;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos3;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos4;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos5;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos6;
 
-import static com.example.anyang_setup.test.DocumentContainer.birth_date;
-import static com.example.anyang_setup.test.DocumentContainer.snprListCompnies;
-import static com.example.anyang_setup.test.DocumentContainer.snprListRnOfficers;
-import static com.example.anyang_setup.test.DocumentContainer.snprListRooOfficers;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.birth_date;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.snprListCompnies;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.snprListRnOfficers;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.snprListRooOfficers;
 
 
-import static  com.example.anyang_setup.test.DocumentContainer.phonenumber;
-import static  com.example.anyang_setup.test.DocumentContainer.email;
-import static  com.example.anyang_setup.test.DocumentContainer.address;
-import static  com.example.anyang_setup.test.DocumentContainer.highscholl;
-import static  com.example.anyang_setup.test.DocumentContainer.graduate_date;
-import static com.example.anyang_setup.test.DocumentContainer.graduate_date_univ;
+import static  com.example.anyang_setup.MakingResume.DocumentContainer.phonenumber;
+import static  com.example.anyang_setup.MakingResume.DocumentContainer.email;
+import static  com.example.anyang_setup.MakingResume.DocumentContainer.address;
+import static  com.example.anyang_setup.MakingResume.DocumentContainer.highscholl;
+import static  com.example.anyang_setup.MakingResume.DocumentContainer.graduate_date;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.graduate_date_univ;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.anyang_setup.Info.UserInfoActivity;
-import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.test.DocumentContainer;
-import com.example.anyang_setup.test.GeneralPhotosActivity;
-import com.example.anyang_setup.test.HandleSnipersActivity;
-import com.example.anyang_setup.test.MessageHelper;
-import com.example.anyang_setup.test.PermissionsHelper;
-import com.google.firebase.auth.UserInfo;
 
 /**
  * Created by Muhammad Abubakar on 11/11/2017.

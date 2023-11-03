@@ -1,6 +1,6 @@
-package com.example.anyang_setup.test;
+package com.example.anyang_setup.MakingResume;
 
-import static com.example.anyang_setup.test.DocumentContainer.tinydb;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.tinydb;
 
 
 import android.content.Intent;
@@ -13,7 +13,6 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
 
 /**

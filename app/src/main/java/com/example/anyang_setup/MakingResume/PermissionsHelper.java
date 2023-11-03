@@ -1,4 +1,4 @@
-package com.example.anyang_setup.test;
+package com.example.anyang_setup.MakingResume;
 
 import android.app.Activity;
 import android.content.DialogInterface;

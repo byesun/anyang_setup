@@ -1,13 +1,13 @@
-package com.example.anyang_setup.test;
+package com.example.anyang_setup.MakingResume;
 
 
 
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos1;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos2;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos3;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos4;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos5;
-import static com.example.anyang_setup.test.DocumentContainer.InputstreamGeneralPhotos6;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos1;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos2;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos3;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos4;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos5;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamGeneralPhotos6;
 
 
 import android.content.Intent;

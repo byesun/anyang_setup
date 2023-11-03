@@ -411,7 +411,7 @@
                     android:background="@drawable/shadow_border"
                     android:drawableEnd="@drawable/icon_forward"
                     android:paddingEnd="5dp"
-                    android:text="NEXT"
+                    android:text="다음"
                     android:onClick="generalPhotos"/>
             </LinearLayout>
 

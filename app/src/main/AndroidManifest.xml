@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="false"
         android:fullBackupContent="false"
@@ -48,15 +47,12 @@
         <activity
             android:name=".EmploymentDocuments.SubActivity.Personal.PersonalWriteActivity"
             android:exported="false" />
-
         <activity
             android:name=".EmploymentDocuments.SubActivity.Resume.ResumeMainActivity"
             android:exported="false" />
         <activity
             android:name=".EmploymentDocuments.SubActivity.Resume.ResumeWriteActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".EmploymentDocuments.SubActivity.Spec.ExternalActivitiesActivity"
             android:exported="false" />
@@ -78,30 +74,32 @@
         <activity
             android:name=".Info.UserInfoActivity"
             android:exported="false" />
-        <!--<activity
+        <!--
+<activity
             android:name=".HomeActivity"
-            android:exported="false" />-->
-
-        <activity android:name=".test.BicyclesActivity"
-            android:exported="false"/>
-        <activity android:name=".test.MainActivity_start"
-            android:exported="false"/>
-
+            android:exported="false" />
+        -->
+        <activity
+            android:name=".MakingResume.BicyclesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MakingResume.MainActivity_start"
+            android:exported="false" />
         <activity android:name=".EmploymentDocuments.Chatting.Category.CategoryActivity">
+
             <!-- 필요한 인텐트 필터 및 설정 추가 -->
         </activity>
-
-
-
-        <activity android:name=".test.GeneralPhotosActivity"
-            android:exported="false"/>
-        <activity android:name=".test.GenerateReportActivity"
-            android:exported="false"/>
-        <activity android:name=".test.HandleSnipersActivity"
-            android:exported="false"/>
-
         <activity
-            android:name=".MainActivity"
+            android:name=".MakingResume.GeneralPhotosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MakingResume.GenerateReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MakingResume.HandleSnipersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StartActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -110,6 +108,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
