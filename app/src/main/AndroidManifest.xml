@@ -32,9 +32,9 @@
         <activity
             android:name=".EmploymentDocuments.SubActivity.Spec.AwardsActivity"
             android:exported="false" />
-        <activity
+        <!--<activity
             android:name=".EmploymentDocuments.EmploymentActivity"
-            android:exported="false" />
+            android:exported="false" />-->
         <activity
             android:name=".EmploymentDocuments.SubActivity.Personal.PersonalGptActivity"
             android:exported="false" />
@@ -85,10 +85,7 @@
         <activity
             android:name=".MakingResume.MainActivity_start"
             android:exported="false" />
-        <activity android:name=".EmploymentDocuments.Chatting.Category.CategoryActivity">
 
-            <!-- 필요한 인텐트 필터 및 설정 추가 -->
-        </activity>
         <activity
             android:name=".MakingResume.GeneralPhotosActivity"
             android:exported="false" />

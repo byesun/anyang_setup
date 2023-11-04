@@ -121,8 +121,17 @@ public class SpecActivity extends AppCompatActivity {
         for (String award : awardsDataList) {
             addAwardsRow(award);
         }
+
+
         executeServerSelectRequest(ID);
+
+
     }
+
+
+
+
+
     private void addCertificationRow(String text) {
         // TableRow를 생성합니다.
         TableRow newRow = new TableRow(this);
@@ -197,6 +206,80 @@ public class SpecActivity extends AppCompatActivity {
         executeServerInsertRequest(awards);
     }
 
+    private void updateCertificationRow(String text) {
+        // TableRow를 생성합니다.
+        TableRow newRow = new TableRow(this);
+
+        // 새로운 TextView를 생성하고 텍스트를 설정합니다.
+        TextView newCertificationTextView = new TextView(this);
+        newCertificationTextView.setText(text);
+        newCertificationTextView.setTextSize(20);
+
+        // TextView의 텍스트를 가운데 정렬합니다.
+        newCertificationTextView.setGravity(Gravity.CENTER); // 가운데 정렬
+
+        // TextView를 TableRow에 추가합니다.
+        TableRow.LayoutParams params = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT
+        );
+        newRow.addView(newCertificationTextView, params);
+
+        // TableRow를 certificationTable에 추가합니다.
+        certificationTable.addView(newRow);
+
+    }
+
+    private void updateExternalActivitiesRow(String text) {
+        // TableRow를 생성합니다.
+        TableRow newRow = new TableRow(this);
+
+        // 새로운 TextView를 생성하고 텍스트를 설정합니다.
+        TextView newExternalActivitiesTextView = new TextView(this);
+        newExternalActivitiesTextView.setText(text);
+        newExternalActivitiesTextView.setTextSize(20);
+
+        // TextView의 텍스트를 가운데 정렬합니다.
+        newExternalActivitiesTextView.setGravity(Gravity.CENTER); // 가운데 정렬
+
+        // TextView를 TableRow에 추가합니다.
+        TableRow.LayoutParams params = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT
+        );
+        newRow.addView(newExternalActivitiesTextView, params);
+        // TableRow를 externalActivitiesTable에 추가합니다.
+        externalActivitiesTable.addView(newRow);
+
+
+    }
+
+
+
+    private void updateAwardsRow(String text) {
+        // TableRow를 생성합니다.
+        TableRow newRow = new TableRow(this);
+
+        // 새로운 TextView를 생성하고 텍스트를 설정합니다.
+        TextView newAwardsTextView = new TextView(this);
+        newAwardsTextView.setText(text);
+        newAwardsTextView.setTextSize(20);
+
+        // TextView의 텍스트를 가운데 정렬합니다.
+        newAwardsTextView.setGravity(Gravity.CENTER); // 가운데 정렬
+
+        // TextView를 TableRow에 추가합니다.
+        TableRow.LayoutParams params = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT
+        );
+        newRow.addView(newAwardsTextView, params);
+
+        // TableRow를 awardsTable에 추가합니다.
+        awardsTable.addView(newRow);
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -262,6 +345,7 @@ public class SpecActivity extends AppCompatActivity {
     }
 
 
+
     private void executeServerSelectRequest(String ID) {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -279,17 +363,17 @@ public class SpecActivity extends AppCompatActivity {
                         // awardsDataList, certificationDataList, externalActivitiesDataList에 데이터 추가
                         if (!TextUtils.isEmpty(awards)) {
                             awardsDataList.add(awards);
-                            addAwardsRow(awards);
+                            updateAwardsRow(awards);
                         }
 
                         if (!TextUtils.isEmpty(certificate)) {
                             certificationDataList.add(certificate);
-                            addCertificationRow(certificate);
+                            updateCertificationRow(certificate);
                         }
 
                         if (!TextUtils.isEmpty(externalActivities)) {
                             externalActivitiesDataList.add(externalActivities);
-                            addExternalActivitiesRow(externalActivities);
+                            updateExternalActivitiesRow(externalActivities);
                         }
 
                         Toast.makeText(getApplicationContext(), "데이터 가져오기 성공", Toast.LENGTH_SHORT).show();

@@ -59,6 +59,23 @@ public class UserInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
 
+        userInfoStr = getIntent().getStringExtra("userinfo");
+        button = findViewById(R.id.diagnosis);
+        getScoreText = findViewById(R.id.Earned_Credits);
+        remainScoreText = findViewById(R.id.Remaining_Credits);
+        majorScoreText = findViewById(R.id.major_Credits);
+        generalScoreText = findViewById(R.id.Liberal_Arts_Credits);
+        stdNameText = findViewById(R.id.Name);
+        stdIdText = findViewById(R.id.StudentID);
+        majorText = findViewById(R.id.Major);
+
+        // 버튼을 찾아서 클릭 리스너를 설정합니다.
+        RelativeLayout button11 = findViewById(R.id.personal_button);// 자기소개서 버튼
+        RelativeLayout button12 = findViewById(R.id.spec_button);// 스펙 버튼
+        RelativeLayout button13 = findViewById(R.id.resume_button);// 이력서 버튼
+        RelativeLayout employmentButton = findViewById(R.id.employment_button);
+
+
         try{
             JSONObject jsonObject = new JSONObject(userInfoStr);
             JSONObject dataObj = jsonObject.getJSONObject("data");
@@ -97,23 +114,7 @@ public class UserInfoActivity extends AppCompatActivity {
         catch (JSONException e) {
             e.printStackTrace();
         }
-        
 
-        userInfoStr = getIntent().getStringExtra("userinfo");
-        button = findViewById(R.id.diagnosis);
-        getScoreText = findViewById(R.id.Earned_Credits);
-        remainScoreText = findViewById(R.id.Remaining_Credits);
-        majorScoreText = findViewById(R.id.major_Credits);
-        generalScoreText = findViewById(R.id.Liberal_Arts_Credits);
-        stdNameText = findViewById(R.id.Name);
-        stdIdText = findViewById(R.id.StudentID);
-        majorText = findViewById(R.id.Major);
-
-        // 버튼을 찾아서 클릭 리스너를 설정합니다.
-        RelativeLayout button11 = findViewById(R.id.personal_button);// 자기소개서 버튼
-        RelativeLayout button12 = findViewById(R.id.spec_button);// 스펙 버튼
-        RelativeLayout button13 = findViewById(R.id.resume_button);// 이력서 버튼
-        RelativeLayout employmentButton = findViewById(R.id.employment_button);
 
         button.setOnClickListener(view -> {
             Intent intent = new Intent(UserInfoActivity.this, DiagnosisActivity.class);
