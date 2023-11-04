@@ -1,5 +1,7 @@
 package com.example.anyang_setup.Info;
 
+import static com.example.anyang_setup.R.id.bottom_navigationview;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalMainActivity;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecActivity;
 import com.example.anyang_setup.Info.SubActivity.DiagnosisActivity;
+import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
 
 import org.json.JSONException;
@@ -26,7 +29,7 @@ import android.view.MenuItem;
 
 import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatActivity;
 import com.example.anyang_setup.Setting.SettingActivity;
-import com.example.anyang_setup.MakingResume.MainActivity_start;
+import com.example.anyang_setup.test.MainActivity_start;
 import com.google.android.material.navigation.NavigationBarView;
 
 
@@ -64,7 +67,7 @@ public class UserInfoActivity extends AppCompatActivity {
         RelativeLayout button11 = findViewById(R.id.personal_button);// 자기소개서 버튼
         RelativeLayout button12 = findViewById(R.id.spec_button);// 스펙 버튼
         RelativeLayout button13 = findViewById(R.id.resume_button);// 이력서 버튼
-        RelativeLayout employmentButton = findViewById(R.id.employment_button);// 채용공고
+        RelativeLayout employmentButton = findViewById(R.id.employment_button);
 
         button.setOnClickListener(view -> {
             Intent intent = new Intent(UserInfoActivity.this, DiagnosisActivity.class);
