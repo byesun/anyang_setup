@@ -13,9 +13,13 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalMainActivity;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecActivity;
 import com.example.anyang_setup.Info.SubActivity.DiagnosisActivity;
+import com.example.anyang_setup.LoginDB.LoginRequest;
 import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
 
@@ -47,11 +51,53 @@ public class UserInfoActivity extends AppCompatActivity {
 
     private JSONObject userInfoJson;
 
+    private String ID; // 학번
+    private String NAME; //이름
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
+
+        try{
+            JSONObject jsonObject = new JSONObject(userInfoStr);
+            JSONObject dataObj = jsonObject.getJSONObject("data");
+            ID = dataObj.getString("stdId");
+            NAME = dataObj.getString("stdName");
+
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject( response );
+                        boolean success = jsonObject.getBoolean( "success" );
+
+                        if(success) {//로그인 성공시
+
+                            //Toast.makeText( getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT ).show();
+                            //Intent intent = new Intent( LoginActivity.this, UserInfoActivity.class );
+                            //startActivity(intent);
+
+
+                        } else {//로그인 실패시
+                            // Toast.makeText( getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT ).show();
+                            //return;
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            LoginRequest loginRequest = new LoginRequest(ID,NAME, responseListener);
+            RequestQueue queue = Volley.newRequestQueue( UserInfoActivity.this );
+            queue.add( loginRequest );
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        
 
         userInfoStr = getIntent().getStringExtra("userinfo");
         button = findViewById(R.id.diagnosis);
@@ -115,6 +161,7 @@ public class UserInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // SpecActivity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(UserInfoActivity.this, SpecActivity.class);
+                intent.putExtra("userinfo", userInfoStr);
                 startActivity(intent);
             }
         });
