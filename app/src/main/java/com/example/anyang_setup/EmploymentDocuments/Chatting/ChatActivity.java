@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.app.AlertDialog;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +56,10 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     ChildEventListener defaultEventListener;
     ChildEventListener myChatEventListener;
+
+    private SearchView searchView;
+    private List<String> chatList; // 원래 채팅 목록이라고 가정
+    private List<String> filteredChatList; // 필터링된 채팅 목록을 담을 리스트
 
 
     @Override
@@ -195,6 +201,35 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         });
         setEventListener();
         showChatList();
+
+        searchView = (SearchView) findViewById(R.id.searchView);
+        chatList = new ArrayList<>(); // 채팅 목록 초기화
+        filteredChatList = new ArrayList<>();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false; // 검색 쿼리를 제출할 때 처리하려면 여기에 로직을 구현하세요.
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filteredChatList.clear();
+                if (newText.isEmpty()) {
+                    filteredChatList.addAll(chatList);
+                } else {
+                    for (String chatTitle : chatList) {
+                        if (chatTitle.toLowerCase().contains(newText.toLowerCase())) {
+                            filteredChatList.add(chatTitle);
+                        }
+                    }
+                }
+                adapter.clear();
+                adapter.addAll(filteredChatList);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
     }
 
     public void setEventListener()
@@ -361,5 +396,23 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         // 리스트 어댑터 생성 및 세팅
         // 데이터 받아오기 및 어댑터 데이터 추가 및 삭제 등..리스너 관리
         databaseReference.child("chat").addChildEventListener(defaultEventListener);
+
+        databaseReference.child("chat").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                chatList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String chatRoomTitle = snapshot.getKey();
+                    chatList.add(chatRoomTitle);
+                }
+                filteredChatList.clear();
+                filteredChatList.addAll(chatList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // ... 에러 처리
+            }
+        });
     }
 }

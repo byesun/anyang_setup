@@ -4,7 +4,6 @@
     android:height="108dp"
     android:viewportWidth="288"
     android:viewportHeight="191.53125">
-<<<<<<< HEAD
   <group android:scaleX="0.46"
       android:scaleY="0.30591798"
       android:translateX="77.76"
@@ -16,8 +15,6 @@
           android:fillColor="#FFFFFF"/>
     </group>
   </group>
-</vector>
-=======
     <group android:scaleX="0.46"
         android:scaleY="0.30591798"
         android:translateX="77.76"
@@ -30,4 +27,3 @@
         </group>
     </group>
 </vector>
->>>>>>> 963158b (1)
