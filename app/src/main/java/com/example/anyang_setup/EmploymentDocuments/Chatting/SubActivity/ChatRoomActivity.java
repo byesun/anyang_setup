@@ -41,7 +41,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     private ListView chat_view;
     private EditText chat_edit;
     private ImageButton chat_send;
-    private Button file_send; // Add a button for sending files
+    private ImageButton file_send; // Add a button for sending files
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();

@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#6a1b9a</color>
     <color name="colorAccent">#ee6a60</color>
 
+    <color name="backgroundColor">#FFFFFF</color>
+    <color name="dividerColor">#DDDDDD</color>
+    <color name="fabColor">#FF4081</color>
+
     <color name="red_50">#fde0dc</color>
     <color name="red_100">#f9bdbb</color>
     <color name="red_200">#f69988</color>

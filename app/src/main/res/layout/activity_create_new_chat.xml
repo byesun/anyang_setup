@@ -1,77 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmploymentDocuments.Chatting.SubActivity.CreateNewChatActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-
+    <!-- 채팅방 이름 입력 부분 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="채팅방 이름 : "
-            android:textSize="30dp"/>
+            android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/chatNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="채팅방 이름을 입력해주세요"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background" />
 
     </LinearLayout>
 
+    <!-- 채팅방 인원 입력 부분 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="채팅방 인원 : "
-            android:textSize="30dp"/>
+            android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/maxChatEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="최대 인원 수를 입력해주세요"
+            android:inputType="number"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_background" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <!-- 채팅방 설명 입력 부분 -->
+    <TextView
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_marginTop="80dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="채팅방 설명"
-            android:textSize="30dp"
-            android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:text="채팅방 설명"
+        android:gravity="center"
+        android:textSize="18sp"/>
 
-        <EditText
-            android:id="@+id/chatContextEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="start|top"
-            android:hint="여기에 글을 작성하세요."
-            android:inputType="textMultiLine"
-            android:minLines="20" />
+    <EditText
+        android:id="@+id/chatContextEditText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:hint="채팅방에 대한 설명을 작성해주세요."
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_background"
+        android:minLines="6" />
 
-        <Button
-            android:id="@+id/createChatButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="생성하기"
-            />
-
-    </LinearLayout>
-
+    <!-- 채팅방 생성 버튼 -->
+    <Button
+        android:id="@+id/createChatButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="생성하기"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

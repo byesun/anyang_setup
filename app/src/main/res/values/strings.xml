@@ -29,4 +29,7 @@
     <string name="title_storage_permission">Storage Access Required</string>
     <string name="text_storage_permission">Storage access is required to proceed</string>
 
+    <string name="attach_file">Attach file</string>
+    <string name="send_message">Send message</string>
+
 </resources>
