@@ -13,6 +13,16 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+        <!-- Toolbar 추가 -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_my_chat_room"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
@@ -46,13 +56,12 @@
                     android:text="현재 개설된 채팅방"
                     android:gravity="center" />
                 </com.google.android.material.card.MaterialCardView>
-
             <ListView
                 android:id="@+id/chat_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@color/dividerColor"
-                android:dividerHeight="1dp"/>
+                android:dividerHeight="5dp"/>
             </LinearLayout>
     </LinearLayout>
 

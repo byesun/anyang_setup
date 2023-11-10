@@ -96,6 +96,8 @@
         <activity
             android:name=".MakingResume.HandleSnipersActivity"
             android:exported="false" />
+        <activity android:name=".EmploymentDocuments.Chatting.SubActivity.ChatMyActivity">
+        </activity>
         <activity
             android:name=".StartActivity"
             android:exported="true"

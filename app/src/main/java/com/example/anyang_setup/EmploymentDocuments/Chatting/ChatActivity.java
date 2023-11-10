@@ -1,14 +1,21 @@
 package com.example.anyang_setup.EmploymentDocuments.Chatting;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,7 +25,9 @@ import android.app.AlertDialog;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
+import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.ChatMyActivity;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.ChatRoomActivity;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.ChatRoomInfoActivity;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.CreateNewChatActivity;
@@ -35,6 +44,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -46,6 +57,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     private ListView chat_list;
     private String userName;
+    private String chatRoom;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -61,7 +73,12 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private List<String> chatList; // 원래 채팅 목록이라고 가정
     private List<String> filteredChatList; // 필터링된 채팅 목록을 담을 리스트
 
+    private ArrayList<String> myChatRooms = new ArrayList<>();
+    private String userId = "user_id"; // 실제 사용자 ID로 대체
 
+
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,12 +93,34 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         chattingStatusLabel = findViewById(R.id.chattingStatusLabel);
         FloatingActionButton myButton = (FloatingActionButton) findViewById(R.id.addChatRoomButton);
 
-
         myButton.setOnClickListener(this);
         chattingStatusLabel.setOnClickListener(this);
         userName = getIntent().getStringExtra("name");
+        chatRoom = getIntent().getStringExtra("chatRoom");
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
         chat_list.setAdapter(adapter);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar_my_chat_room);
+        setSupportActionBar(toolbar);
+
+
+        // 채팅방 검색 기능 설정 (옵션)
+        SearchView searchView = findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // 검색 실행
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // 실시간 검색 필터링
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         chat_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
@@ -387,7 +426,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                     databaseReference.child("chat").removeEventListener(myChatEventListener);
                     databaseReference.child("chat").addChildEventListener(defaultEventListener);
                 }
-
                 break;
             }
         }
@@ -414,5 +452,24 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 // ... 에러 처리
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_my_chat_room, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mo_chat_option:
+                // 채팅방 편집 관련 로직
+                Intent editIntent = new Intent(this, ChatMyActivity.class);
+                editIntent.putExtra("userName", userName);
+                startActivity(editIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

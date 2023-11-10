@@ -6,18 +6,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatDTO;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.chat_option.ChatAdapter;
 import com.example.anyang_setup.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChatRoomActivity extends AppCompatActivity {
@@ -42,6 +48,9 @@ public class ChatRoomActivity extends AppCompatActivity {
     private EditText chat_edit;
     private ImageButton chat_send;
     private ImageButton file_send; // Add a button for sending files
+
+    private String userName;  // 사용자 이름
+    private String chatRoom;  // 채팅방 이름
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -62,6 +71,16 @@ public class ChatRoomActivity extends AppCompatActivity {
         USER_NAME = intent.getStringExtra("userinfo");
 
         openChat(CHAT_NAME);
+
+        // androidx.appcompat.widget.Toolbar로 import 확인
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar_chat_room);
+        setSupportActionBar(toolbar);
+
+        chat_view = findViewById(R.id.chat_view);
+
+        // 인텐트에서 채팅방 정보와 사용자 정보를 가져옵니다.
+        userName = intent.getStringExtra("userinfo"); // 현재 로그인한 사용자 이름
+        chatRoom = intent.getStringExtra("chatRoom"); // 채팅방 이름
 
         chat_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,5 +234,80 @@ public class ChatRoomActivity extends AppCompatActivity {
         chat.setMine(true);
 
         databaseReference.child("chat").child(CHAT_NAME).push().setValue(chat);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_chat_room, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String chatRoomId = chatRoom; // 적절한 방법으로 채팅방 ID를 가져옵니다.
+        String userId = userName; // 적절한 방법으로 사용자 ID를 가져옵니다.
+
+        switch (item.getItemId()) {
+            case R.id.action_leave:
+                leaveChatRoom(chatRoomId, userId);
+                return true;
+            case R.id.action_edit:
+                // editChatRoom(); // 채팅방 편집 관련 로직
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void leaveChatRoom(String chatRoomId, String userId) {
+        DatabaseReference chatRef = databaseReference.child("chat").child(chatRoomId).child("chatRef");
+
+        // 채팅방 참여자 목록을 가져와서 현재 사용자를 제거합니다.
+        chatRef.child("acceptUser").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DataSnapshot dataSnapshot = task.getResult();
+                    if (dataSnapshot.exists()) {
+                        List<String> acceptUserList = new ArrayList<>();
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                            String user = userSnapshot.getValue(String.class);
+                            if (user != null && !user.equals(userId)) {
+                                acceptUserList.add(user);
+                            }
+                        }
+                        // 변경된 목록을 다시 Firebase에 업데이트합니다.
+                        chatRef.child("acceptUser").setValue(acceptUserList).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // UI 업데이트 또는 액티비티 종료 로직
+                                Toast.makeText(ChatRoomActivity.this, "채팅방에서 나왔습니다.", Toast.LENGTH_SHORT).show();
+                                finish(); // 채팅방 액티비티를 종료합니다.
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ChatRoomActivity.this, "채팅방을 나가는데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(ChatRoomActivity.this, "이미 채팅방이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(ChatRoomActivity.this, "채팅방 정보를 가져오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void editChatRoom() {
+        // 채팅방 설정 변경 로직
+        Toast.makeText(this, "채팅방을 수정합니다.", Toast.LENGTH_SHORT).show();
+
+        // 채팅방을 수정하는 화면으로 이동하는 코드를 구현해야 합니다.
+        // 예를 들어, 채팅방 설정 액티비티로 이동하는 인텐트를 시작할 수 있습니다.
+        Intent intent = new Intent(ChatRoomActivity.this, ChatRoomInfoActivity.class);
+        intent.putExtra("chatRoom", CHAT_NAME);
+        startActivity(intent);
     }
 }

@@ -2,6 +2,8 @@ package com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.chat_o
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,9 @@ public class ChatAdapter extends ArrayAdapter<ChatDTO> {
 
     private UserInfoActivity profileImageView;
 
+    private String CHAT_NAME;
+    private String USER_NAME;
+
     private static class ViewHolder {
         boolean isMine;
         TextView nameText;
@@ -27,6 +32,8 @@ public class ChatAdapter extends ArrayAdapter<ChatDTO> {
         TextView subItemText;
         ImageView profileImage;
         ImageView messageImage; // 추가된 이미지 뷰
+
+
     }
 
     public ChatAdapter(Context context, List<ChatDTO> messages) {
@@ -77,7 +84,6 @@ public class ChatAdapter extends ArrayAdapter<ChatDTO> {
                     .into(viewHolder.profileImage);
         }
 
-        // 메시지 이미지 로직
         if (message.getFileUrl() != null && !message.getFileUrl().isEmpty()) {
             Glide.with(getContext())
                     .load(message.getFileUrl())
@@ -89,5 +95,15 @@ public class ChatAdapter extends ArrayAdapter<ChatDTO> {
             viewHolder.messageText.setVisibility(View.VISIBLE); // 텍스트 뷰를 보이게
         }
         return convertView;
+    }
+    public void addUserExitMessage(String userName){
+        ChatDTO exitMessage = new ChatDTO();
+        exitMessage.setMessage(userName + "님이 나가셨습니다.");
+        Log.e("exitMessage", userName);
+        exitMessage.setUserName("SYSTEM");
+        exitMessage.setMine(false);
+
+        add(exitMessage);
+        notifyDataSetChanged();
     }
 }

@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mo_chat_option"
+        android:icon="@drawable/baseline_chat_bubble_outline_24"
+        android:title="나의 채팅방"
+        android:orderInCategory="100"/>
+</menu>
