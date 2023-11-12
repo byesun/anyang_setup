@@ -26,10 +26,10 @@ public class PersonalEditActivity extends AppCompatActivity {
 
     private String selectedText;
     private String ID;
-    private String personal;
+
     private EditText personal_edit;
     private EditText title;
-    private TextView testtest;
+
 
 
     private String userInfoStr;
