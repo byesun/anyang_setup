@@ -190,6 +190,7 @@ public class UserInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Personal Statement Activity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(UserInfoActivity.this, PersonalMainActivity.class);
+                intent.putExtra("userinfo", userInfoStr);
                 startActivity(intent);
             }
         });

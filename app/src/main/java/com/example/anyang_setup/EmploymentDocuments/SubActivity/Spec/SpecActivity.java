@@ -22,6 +22,7 @@ import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecDB.Cert
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecDB.ExternalInsertRequest;
 import com.example.anyang_setup.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -52,6 +53,10 @@ public class SpecActivity extends AppCompatActivity {
     private String awards; //수상경력
     private String ID; //학번
     private String userInfoStr;
+    private String certificateSelect;
+    private String externalSelect;
+    private String awardsSelect;
+
 
 
 
@@ -125,9 +130,14 @@ public class SpecActivity extends AppCompatActivity {
             addAwardsRow(award);
         }
 
-        new UpdateSpec_ExternalActivity().execute(ID);
-        new UpdateSpec_certificate().execute(ID);
-        new UpdateSpec_awards().execute(ID);
+        Update_certificate certificateTask = new Update_certificate();
+        certificateTask.execute(ID);
+
+        Update_externalActivities externalTask = new Update_externalActivities();
+        externalTask.execute(ID);
+
+        Update_awards awardsTask = new Update_awards();
+        awardsTask.execute(ID);
 
     }
 
@@ -347,118 +357,130 @@ public class SpecActivity extends AppCompatActivity {
 
 
 
-    private class UpdateSpec_ExternalActivity extends AsyncTask<String, Void, List<String>> {
+
+    private class Update_certificate extends AsyncTask<String, Void, String> {
         @Override
-        protected List<String> doInBackground(String... arg0) {
-            List<String> resultList = new ArrayList<String>();
-            try {
-                String id = arg0[0];
-
-                OkHttpClient client = new OkHttpClient();
-                String link = "http://qkrwodbs.dothome.co.kr/Select_externalActivities.php";
-                Request request = new Request.Builder()
-                        .url(link + "?ID=" + id)
-                        .build();
-                okhttp3.Response response = client.newCall(request).execute();
-
-                if (response.isSuccessful()) {
-                    String responseString = response.body().string();
-                    // 여러 결과 행을 처리하는 방법에 따라서 responseString을 파싱하여 resultList에 추가합니다.
-                    // 예를 들어, 각 행이 콤마로 구분된 경우:
-                    String[] rows = responseString.split(";");
-                    resultList.addAll(Arrays.asList(rows));
-                }
-            } catch (IOException e) {
-                // 예외 처리
-                e.printStackTrace();
-            }
-            return resultList;
-        }
-
-        @Override
-        protected void onPostExecute(List<String> result) {
-            // result에는 여러 결과 행이 포함됩니다.
-            for (String row : result) {
-                updateExternalActivitiesRow(row);
-            }
-        }
-    }
-
-
-
-
-    private class UpdateSpec_certificate extends AsyncTask<String, Void, List<String>> {
-        @Override
-        protected List<String> doInBackground(String... arg0) {
-            List<String> resultList = new ArrayList<String>();
+        protected String doInBackground(String... arg0) {
             try {
                 String id = arg0[0];
 
                 OkHttpClient client = new OkHttpClient();
                 String link = "http://qkrwodbs.dothome.co.kr/Select_certificate.php";
                 Request request = new Request.Builder()
-                        .url(link + "?ID=" + id)
+                        .url(link + "?ID=" + ID)
                         .build();
                 okhttp3.Response response = client.newCall(request).execute();
 
                 if (response.isSuccessful()) {
-                    String responseString = response.body().string();
-                    // 여러 결과 행을 처리하는 방법에 따라서 responseString을 파싱하여 resultList에 추가합니다.
-                    // 예를 들어, 각 행이 콤마로 구분된 경우:
-                    String[] rows = responseString.split(";");
-                    resultList.addAll(Arrays.asList(rows));
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
                 }
             } catch (IOException e) {
-                // 예외 처리
+                return "예외 발생: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    certificateSelect = jsonArray.getString(i);
+
+                    // Adding each certificate as a row to the table
+                    updateCertificationRow(certificateSelect);
+                }
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return resultList;
         }
 
-        @Override
-        protected void onPostExecute(List<String> result) {
-            // result에는 여러 결과 행이 포함됩니다.
-            for (String row : result) {
-                updateCertificationRow(row);
-            }
-        }
     }
 
-    private class UpdateSpec_awards extends AsyncTask<String, Void, List<String>> {
+
+    private class Update_externalActivities extends AsyncTask<String, Void, String> {
         @Override
-        protected List<String> doInBackground(String... arg0) {
-            List<String> resultList = new ArrayList<String>();
+        protected String doInBackground(String... arg0) {
+            try {
+                String id = arg0[0];
+
+                OkHttpClient client = new OkHttpClient();
+                String link = "http://qkrwodbs.dothome.co.kr/Select_externalActivities.php";
+                Request request = new Request.Builder()
+                        .url(link + "?ID=" + ID)
+                        .build();
+                okhttp3.Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
+                }
+            } catch (IOException e) {
+                return "예외 발생: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    externalSelect = jsonArray.getString(i);
+
+                    // Adding each certificate as a row to the table
+                    updateExternalActivitiesRow(externalSelect);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+    private class Update_awards extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... arg0) {
             try {
                 String id = arg0[0];
 
                 OkHttpClient client = new OkHttpClient();
                 String link = "http://qkrwodbs.dothome.co.kr/Select_awards.php";
                 Request request = new Request.Builder()
-                        .url(link + "?ID=" + id)
+                        .url(link + "?ID=" + ID)
                         .build();
                 okhttp3.Response response = client.newCall(request).execute();
 
                 if (response.isSuccessful()) {
-                    String responseString = response.body().string();
-                    // 여러 결과 행을 처리하는 방법에 따라서 responseString을 파싱하여 resultList에 추가합니다.
-                    // 예를 들어, 각 행이 콤마로 구분된 경우:
-                    String[] rows = responseString.split(";");
-                    resultList.addAll(Arrays.asList(rows));
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
                 }
             } catch (IOException e) {
-                // 예외 처리
-                e.printStackTrace();
+                return "예외 발생: " + e.getMessage();
             }
-            return resultList;
         }
 
         @Override
-        protected void onPostExecute(List<String> result) {
-            // result에는 여러 결과 행이 포함됩니다.
-            for (String row : result) {
-                updateAwardsRow(row);
+        protected void onPostExecute(String result) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    awardsSelect = jsonArray.getString(i);
+
+                    // Adding each certificate as a row to the table
+                    updateAwardsRow(awardsSelect);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
+
     }
 
 }

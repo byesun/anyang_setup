@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".EmploymentDocuments.SubActivity.Personal.PersonalWriteActivity">
+    tools:context=".EmploymentDocuments.SubActivity.Personal.IntroductionAdapter$PersonalEditActivity">
 
-    <!-- 질문 선택을 위한 Spinner -->
     <EditText
-        android:id="@+id/personal_title"
+        android:id="@+id/personal_edit"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:gravity="start|top"
-        android:hint="제목"
-        android:inputType="textMultiLine"
-        android:minLines="5" />
-
-    <!-- 글을 입력하는 EditText -->
-    <EditText
-        android:id="@+id/personal_text"
-        android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="598dp"
         android:layout_marginTop="16dp"
         android:gravity="start|top"
         android:hint="여기에 글을 작성하세요."
@@ -38,19 +27,18 @@
         android:orientation="horizontal"
         android:gravity="end">
 
-        <!-- 다시 작성 버튼 -->
+        <!-- 나가기 버튼 -->
         <Button
-            android:id="@+id/personal_write_reset_button"
+            android:id="@+id/personal_out_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="다시 작성" />
+            android:text="나가기" />
 
         <!-- 저장하기 버튼 -->
         <Button
-            android:id="@+id/personal_write_save_button"
+            android:id="@+id/personal_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="저장하기" />
     </LinearLayout>
-
 </LinearLayout>
