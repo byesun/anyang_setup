@@ -112,7 +112,7 @@ public class CreateNewChatActivity extends AppCompatActivity implements View.OnC
                     Toast.makeText(getApplicationContext(), "채팅방 인원이 잘못되었습니다. 1 ~ 4 까지 입력 가능합니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(selectedCategory.equals(getString(R.string.category_prompt)))
+                if(selectedCategory.equals(getString(R.string.category_prompt)) || selectedCategory.equals("- 전체 -"))
                 {
                     Toast.makeText(this,"카테고리를 선택해주세요.",Toast.LENGTH_SHORT).show();
                     return;

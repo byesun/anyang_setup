@@ -78,7 +78,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private String userId = "user_id"; // 실제 사용자 ID로 대체
 
     private Spinner spinnerCategoriesFilter;
-    private String selectedCategoryFilter = "  ";
+    private String selectedCategoryFilter = "- 전체 -"; // 기본 값을 채팅방 전체 보여주기
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -112,7 +112,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoriesFilter.setAdapter(adapter);
         spinnerCategoriesFilter.setOnItemSelectedListener(this);
-
 
         // 채팅방 검색 기능 설정 (옵션)
         SearchView searchView = findViewById(R.id.searchView);
@@ -492,13 +491,13 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        selectedCategoryFilter = "  ";
+        selectedCategoryFilter = "- 전체 -";
         filterChatList(selectedCategoryFilter);
     }
 
     private void filterChatList(String category) {
-        if (category.equals(getString(R.string.category_prompt))) {
-            // "카테고리 선택"이 선택된 경우 모든 채팅방 표시
+        if (category.equals("- 전체 -")) {
+            // "- 전체 -"이 선택된 경우 모든 채팅방 표시
             adapter.clear();
             adapter.addAll(chatList);
         } else {
@@ -514,5 +513,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         }
         adapter.notifyDataSetChanged();
     }
+
 
 }

@@ -14,7 +14,7 @@
 
     <string name="category_prompt">카테고리 선택</string>
     <string-array name="spinner_categories">
-        <item>카테고리 선택(-전체-)</item>
+        <item>- 전체 -</item>
         <item>-캡스톤 디자인-</item>
         <item>-경진대회-</item>
         <item>-팀 프로젝트-</item>

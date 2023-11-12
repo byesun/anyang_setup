@@ -235,7 +235,7 @@
                 android:id="@+id/row2"
                 android:orientation="horizontal"
                 android:layout_marginTop="420dp"
-                android:padding="10dp"
+                android:padding="0dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
