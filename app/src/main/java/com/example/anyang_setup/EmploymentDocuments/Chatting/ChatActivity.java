@@ -99,7 +99,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         chattingStatusLabel.setOnClickListener(this);
         userName = getIntent().getStringExtra("name");
         chatRoom = getIntent().getStringExtra("chatRoom");
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
+        List<String> dataList = new ArrayList<>();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,android.R.id.text1,dataList);
         chat_list.setAdapter(adapter);
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar_my_chat_room);
@@ -257,23 +258,21 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false; // 검색 쿼리를 제출할 때 처리하려면 여기에 로직을 구현하세요.
+                return false; // 검색 쿼리를 제출할 때 처리하려면 여기에 로직을 구현
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filteredChatList.clear();
+                dataList.clear();
                 if (newText.isEmpty()) {
-                    filteredChatList.addAll(chatList);
+                    dataList.addAll(chatList);
                 } else {
                     for (String chatTitle : chatList) {
                         if (chatTitle.toLowerCase().contains(newText.toLowerCase())) {
-                            filteredChatList.add(chatTitle);
+                            dataList.add(chatTitle);
                         }
                     }
                 }
-                adapter.clear();
-                adapter.addAll(filteredChatList);
                 adapter.notifyDataSetChanged();
                 return true;
             }
