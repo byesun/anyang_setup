@@ -67,7 +67,7 @@ public class PersonalMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // PersonalWriteActivity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(PersonalMainActivity.this, PersonalLockerActivity.class);
-                intent.putExtra("userinfo", userinfo);
+                intent.putExtra("userinfo", userInfoStr);
                 intent.putExtra("personalTitle", personalTitle);
                 intent.putExtra("personalText", personalText);
                 startActivity(intent);

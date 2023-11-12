@@ -78,7 +78,6 @@ public class PersonalWriteActivity extends AppCompatActivity {
 
                 // Intent를 생성하여 PersonalLockerActivity로 전달
                 Intent intent = new Intent(PersonalWriteActivity.this, PersonalMainActivity.class);
-
                 // 데이터를 intent에 담아 전달
                 intent.putExtra("personalTitle", personalTitle);
                 intent.putExtra("personalText", personalText);

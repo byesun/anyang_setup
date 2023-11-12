@@ -7,15 +7,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".EmploymentDocuments.SubActivity.Personal.IntroductionAdapter$PersonalEditActivity">
+    tools:context=".EmploymentDocuments.SubActivity.Personal.PersonalEditActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="title"
+        android:id="@+id/title_edit"/>
 
     <EditText
         android:id="@+id/personal_edit"
         android:layout_width="match_parent"
-        android:layout_height="598dp"
+        android:layout_height="560dp"
         android:layout_marginTop="16dp"
         android:gravity="start|top"
-        android:hint="여기에 글을 작성하세요."
+        android:hint="main text"
         android:inputType="textMultiLine"
         android:minLines="5" />
 
@@ -40,5 +46,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="저장하기" />
+
     </LinearLayout>
 </LinearLayout>
