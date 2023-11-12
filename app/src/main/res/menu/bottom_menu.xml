@@ -4,7 +4,7 @@
     <item
         android:id="@+id/home"
         android:enabled="true"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/home_icon"
         android:title="홈"
         app:showAsAction="always"
         />
@@ -20,7 +20,7 @@
     <item
         android:id="@+id/info"
         android:enabled="true"
-        android:icon="@drawable/ic_info"
+        android:icon="@drawable/chat_icon"
         android:title="커뮤니티"
         app:showAsAction="always"
         />
@@ -28,7 +28,7 @@
     <item
         android:id="@+id/setting"
         android:enabled="true"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/set_icon"
         android:title="설정"
         app:showAsAction="always"
         />

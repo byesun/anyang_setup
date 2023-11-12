@@ -21,7 +21,7 @@
                 android:layout_height="100dp"
                 android:layout_marginLeft="60dp"
                 android:layout_marginTop="41dp"
-                app:srcCompat="@drawable/ic_profile" />
+                app:srcCompat="@drawable/profile_icon" />
 
 
             <TextView
@@ -184,16 +184,15 @@
                             android:text="자기소개서"
                             android:textSize="20sp"
                             android:textColor="@color/lavender"
-
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="15dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/clothingImage"/>
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
                             android:id="@+id/clothingImage"
-
-                            android:layout_marginTop="15dp"
+                            android:background="@drawable/personal_icon"
+                            android:layout_marginTop="20dp"
                             android:layout_centerHorizontal="true"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
@@ -215,16 +214,16 @@
                             android:text="스펙 작성"
                             android:textSize="20sp"
                             android:textColor="@color/lavender"
-
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="15dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/elecImage"/>
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:id="@+id/elecImage"
+                            android:background="@drawable/spec_icon"
 
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="20dp"
                             android:layout_centerHorizontal="true"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
@@ -235,7 +234,7 @@
                 android:layout_height="175dp"
                 android:id="@+id/row2"
                 android:orientation="horizontal"
-                android:layout_marginTop="400dp"
+                android:layout_marginTop="420dp"
                 android:padding="10dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -259,16 +258,15 @@
                             android:text="이력서 제작"
                             android:textSize="20sp"
                             android:textColor="@color/lavender"
-
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="15dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/homeImage"/>
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
                             android:id="@+id/homeImage"
-
-                            android:layout_marginTop="15dp"
+                            android:background="@drawable/resume_icon"
+                            android:layout_marginTop="20dp"
                             android:layout_centerHorizontal="true"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
@@ -290,16 +288,15 @@
                             android:text="채용정보"
                             android:textSize="20sp"
                             android:textColor="@color/lavender"
-
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="15dp"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/beautyImage"/>
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
                             android:id="@+id/beautyImage"
-
-                            android:layout_marginTop="15dp"
+                            android:background="@drawable/jobkorea_icon"
+                            android:layout_marginTop="20dp"
                             android:layout_centerHorizontal="true"/>
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>

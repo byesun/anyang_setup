@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.app.AlertDialog;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -53,7 +54,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChatActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChatActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private ListView chat_list;
     private String userName;
@@ -76,7 +77,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<String> myChatRooms = new ArrayList<>();
     private String userId = "user_id"; // 실제 사용자 ID로 대체
 
-
+    private Spinner spinnerCategoriesFilter;
+    private String selectedCategoryFilter = "  ";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -102,6 +104,14 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar_my_chat_room);
         setSupportActionBar(toolbar);
+
+        //스피너 설정
+        spinnerCategoriesFilter = findViewById(R.id.spinner_categories_filter);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.spinner_categories, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategoriesFilter.setAdapter(adapter);
+        spinnerCategoriesFilter.setOnItemSelectedListener(this);
 
 
         // 채팅방 검색 기능 설정 (옵션)
@@ -472,4 +482,37 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    // 스피너 아이템 처리
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedCategoryFilter = parent.getItemAtPosition(position).toString();
+        filterChatList(selectedCategoryFilter);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        selectedCategoryFilter = "  ";
+        filterChatList(selectedCategoryFilter);
+    }
+
+    private void filterChatList(String category) {
+        if (category.equals(getString(R.string.category_prompt))) {
+            // "카테고리 선택"이 선택된 경우 모든 채팅방 표시
+            adapter.clear();
+            adapter.addAll(chatList);
+        } else {
+            // 특정 카테고리에 맞는 채팅방만 필터링하여 표시
+            List<String> filteredList = new ArrayList<>();
+            for (String chatRoom : chatList) {
+                if (chatRoom.startsWith(category)) {
+                    filteredList.add(chatRoom);
+                }
+            }
+            adapter.clear();
+            adapter.addAll(filteredList);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
 }

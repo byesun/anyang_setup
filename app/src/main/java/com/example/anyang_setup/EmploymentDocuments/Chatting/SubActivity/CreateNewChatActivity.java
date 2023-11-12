@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatDTO;
@@ -17,7 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class  CreateNewChatActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateNewChatActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private EditText chatContextEditText;
     private EditText maxChatEditText;
@@ -26,21 +29,33 @@ public class  CreateNewChatActivity extends AppCompatActivity implements View.On
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
+    private Spinner spinnerCategories;
+    private String selectedCategory = null;
+
     private String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_chat);
         userName = getIntent().getStringExtra("userinfo");
+
         chatContextEditText = findViewById(R.id.chatContextEditText);
         maxChatEditText = findViewById(R.id.maxChatEditText);
         chatNameEditText = findViewById(R.id.chatNameEditText);
         createChatButton = findViewById(R.id.createChatButton);
 
         createChatButton.setOnClickListener(this);
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+
+        // 스피너 설정
+        spinnerCategories = findViewById(R.id.spinner_categories);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.spinner_categories, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategories.setAdapter(adapter);
+        spinnerCategories.setOnItemSelectedListener(this);
     }
     public boolean isInteger(String strValue) {
         try {
@@ -50,6 +65,17 @@ public class  CreateNewChatActivity extends AppCompatActivity implements View.On
             return false;
         }
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedCategory = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        selectedCategory = null;
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -86,17 +112,23 @@ public class  CreateNewChatActivity extends AppCompatActivity implements View.On
                     Toast.makeText(getApplicationContext(), "채팅방 인원이 잘못되었습니다. 1 ~ 4 까지 입력 가능합니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(selectedCategory.equals(getString(R.string.category_prompt)))
+                {
+                    Toast.makeText(this,"카테고리를 선택해주세요.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                String chatRoomName = selectedCategory + " " + chatNameEditText.getText().toString().trim();
 
                 ChatRef chatRef = new ChatRef(maxChatEditText.getText().toString(), userName, chatContextEditText.getText().toString(), userName);
 
-                databaseReference.child("chat").child(chatNameEditText.getText().toString()).child("chatRef").setValue(chatRef)
+                databaseReference.child("chat").child(selectedCategory + "  " + chatNameEditText.getText().toString()).child("chatRef").setValue(chatRef)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 ChatDTO chat = new ChatDTO("Notice", "어서오세요. "+userName+"님이 생성한 채팅방 입니다.", ""); //ChatDTO를 이용하여 데이터를 묶는다.
 
-                                databaseReference.child("chat").child(chatNameEditText.getText().toString()).child("chatHello").setValue(chat)
+                                databaseReference.child("chat").child(selectedCategory + "  " +chatNameEditText.getText().toString()).child("chatHello").setValue(chat)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {

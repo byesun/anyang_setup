@@ -12,6 +12,15 @@
         <item>유아교육</item>
     </string-array>
 
+    <string name="category_prompt">카테고리 선택</string>
+    <string-array name="spinner_categories">
+        <item>카테고리 선택(-전체-)</item>
+        <item>-캡스톤 디자인-</item>
+        <item>-경진대회-</item>
+        <item>-팀 프로젝트-</item>
+        <item>-스터디-</item>
+    </string-array>
+
     <string-array name="personal_question_set">
         <item>지원 동기</item>
         <item>자신의 장점고 단점</item>
