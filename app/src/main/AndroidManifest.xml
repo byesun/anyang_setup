@@ -45,6 +45,9 @@
             android:name=".EmploymentDocuments.SubActivity.Personal.PersonalLockerActivity"
             android:exported="false" />
         <activity
+            android:name=".EmploymentDocuments.SubActivity.Personal.PersonalEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".EmploymentDocuments.SubActivity.Personal.PersonalMainActivity"
             android:exported="false" />
         <activity

@@ -14,7 +14,7 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        // 2초 후에 다른 액티비티로 자동으로 넘어가게 하는 코드
+        // 1.5초 후에 다른 액티비티로 자동으로 넘어가게 하는 코드
         Handler handler = new Handler();
 
         handler.postDelayed(new Runnable() {
@@ -24,7 +24,7 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 2000); // 2초 후에 실행
+        }, 1500); // 1.5초 후에 실행
     }
 }
 
