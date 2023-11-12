@@ -139,7 +139,7 @@ public class PersonalLockerActivity extends Activity {
     private void GoToEdit() {
         if (selectedItem != -1) {
             selectedText = personalList.getItemAtPosition(selectedItem).toString();
-            Intent intent = new Intent(PersonalLockerActivity.this, IntroductionAdapter.PersonalEditActivity.class);
+            Intent intent = new Intent(PersonalLockerActivity.this, PersonalEditActivity.class);
             intent.putExtra("userinfo", userInfoStr);
             intent.putExtra("selectedText", selectedText);
             startActivity(intent);
