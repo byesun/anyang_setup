@@ -56,6 +56,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private TextView getScoreText, remainScoreText, majorScoreText, generalScoreText;
     private TextView stdNameText, stdIdText, majorText;
     private TextView asd;
+    private String STID;
     private String userInfoStr;
 
     //homeactivity.java
@@ -97,6 +98,9 @@ public class UserInfoActivity extends AppCompatActivity {
         RelativeLayout button13 = findViewById(R.id.resume_button);// 이력서 버튼
         RelativeLayout employmentButton = findViewById(R.id.employment_button);
 
+
+        Intent intent_STID = getIntent();
+        STID = intent_STID.getStringExtra("STID");
 
         try{
             JSONObject jsonObject = new JSONObject(userInfoStr);
@@ -190,6 +194,7 @@ public class UserInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Personal Statement Activity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(UserInfoActivity.this, PersonalMainActivity.class);
+                intent.putExtra("STID",STID);
                 intent.putExtra("userinfo", userInfoStr);
                 startActivity(intent);
             }

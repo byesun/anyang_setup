@@ -15,13 +15,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.anyang_setup.MainActivity;
+import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.StartActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,29 +31,15 @@ public class PersonalLockerActivity extends Activity {
     private ListView personalList;
     private int selectedItem = -1;
     private ArrayAdapter<String> adapter;
-    private String ID;
+    private String id;
     private String personalTitle;
 
     private String personalText;
-
-    private String userInfoStr;
-    private String selectedText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_locker);
-
-        userInfoStr = getIntent().getStringExtra("userinfo");
-
-        try{
-            JSONObject jsonObject = new JSONObject(userInfoStr);
-            JSONObject dataObj = jsonObject.getJSONObject("data");
-            ID = dataObj.getString("stdId");
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         // ListView 설정
         personalList = findViewById(R.id.personal_list);
@@ -64,21 +48,10 @@ public class PersonalLockerActivity extends Activity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         personalList.setAdapter(adapter);
 
-        Intent intent = getIntent();
-        if (intent.hasExtra("personalTitle") && intent.hasExtra("personalText")) {
-            personalTitle = intent.getStringExtra("personalTitle");
-            personalText = intent.getStringExtra("personalText");
-
-            // 데이터를 리스트에 추가
-            adapter.add(personalTitle);
-
-            // UI 갱신
-            adapter.notifyDataSetChanged();
-        }
-
+        id = GlobalVariables.getGlobalVariable_id();
 
         // 리스트에 자기소개서(제목) 가져오기
-        new updatelist().execute(ID);
+        new updatelist().execute(id);
 
 
 
@@ -133,17 +106,16 @@ public class PersonalLockerActivity extends Activity {
         });
     }
 
-
-
-
     private void GoToEdit() {
-        if (selectedItem != -1) {
-            selectedText = personalList.getItemAtPosition(selectedItem).toString();
-            Intent intent = new Intent(PersonalLockerActivity.this, PersonalEditActivity.class);
-            intent.putExtra("userinfo", userInfoStr);
-            intent.putExtra("selectedText", selectedText);
-            startActivity(intent);
-            finish();
+        if (selectedItem != -1 && selectedItem < adapter.getCount()) {
+            String selectedText = adapter.getItem(selectedItem);
+            if (selectedText != null) {
+                Intent intent = new Intent(PersonalLockerActivity.this, PersonalEditActivity.class);
+                intent.putExtra("STID",id);
+                intent.putExtra("selectedText", selectedText);
+                startActivity(intent);
+                finish();
+            }
         } else {
             Toast.makeText(this, "리스트를 선택해주세요", Toast.LENGTH_SHORT).show();
         }
@@ -156,7 +128,7 @@ public class PersonalLockerActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String selectedText = adapter.getItem(selectedItem);
-                            new delete_personal().execute(ID,selectedText);
+                            new delete_personal().execute(id,selectedText);
                             adapter.remove(selectedText);
                             selectedItem = -1;
                         }
@@ -182,7 +154,7 @@ public class PersonalLockerActivity extends Activity {
                 OkHttpClient client = new OkHttpClient();
                 String link = "http://qkrwodbs.dothome.co.kr/Select_personal_title.php";
                 Request request = new Request.Builder()
-                        .url(link + "?ID=" + ID)
+                        .url(link + "?ID=" + id)
                         .build();
                 okhttp3.Response response = client.newCall(request).execute();
 
@@ -199,16 +171,21 @@ public class PersonalLockerActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             try {
-                JSONArray jsonArray = new JSONArray(result);
-
-                ArrayList<String> List = new ArrayList<>();
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    String certificate = jsonArray.getString(i);
-                    List.add(certificate);
+                // 결과가 비어있는지 확인
+                if (result == null || result.isEmpty()) {
+                    Toast.makeText(PersonalLockerActivity.this, "데이터가 없습니다", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
-                // UI 갱신은 메인 스레드에서 진행되어야 합니다.
+                JSONArray jsonArray = new JSONArray(result);
+                ArrayList<String> List = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    String certificate = jsonArray.getString(i);
+                    if (certificate != null) {
+                        List.add(certificate);
+                    }
+                }
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -219,6 +196,7 @@ public class PersonalLockerActivity extends Activity {
                 });
             } catch (JSONException e) {
                 e.printStackTrace();
+                Toast.makeText(PersonalLockerActivity.this, "JSON 파싱 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -233,7 +211,7 @@ public class PersonalLockerActivity extends Activity {
                 OkHttpClient client = new OkHttpClient();
                 String link = "http://qkrwodbs.dothome.co.kr/Delete_personal.php";
                 Request request = new Request.Builder()
-                        .url(link + "?ID=" + ID + "&TITLE=" + title)
+                        .url(link + "?ID=" + id + "&TITLE=" + title)
                         .build();
                 okhttp3.Response response = client.newCall(request).execute();
 

@@ -4,24 +4,18 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.fonts.Font;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.anyang_setup.Info.UserInfoActivity;
-import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.FirebaseApp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,8 +23,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
-import javax.xml.parsers.DocumentBuilder;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -49,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox autoLoginCheckBox;
 
     String loginId, loginPwd;
+
+    String STID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +85,10 @@ public class MainActivity extends AppCompatActivity {
                             autoLogin.putString("inputPwd", mPasswordEditText.getText().toString());
                             autoLogin.commit();
                         }
-
                         Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
+                        STID = mUsernameEditText.getText().toString();
+                        GlobalVariables.setGlobalVariable_id(STID);
+                        intent.putExtra("STID",STID);
                         intent.putExtra("userinfo", jsonObject.toString());
                         startActivity(intent);
 

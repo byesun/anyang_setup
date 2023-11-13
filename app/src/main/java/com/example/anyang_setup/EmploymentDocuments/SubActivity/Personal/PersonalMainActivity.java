@@ -18,6 +18,8 @@ public class PersonalMainActivity extends AppCompatActivity {
 
     private String ID;
 
+    private String STID;
+
     private String personalTitle; // 자기소개서 제목
     private String personalText; //자기소개서 내용
     @Override
@@ -26,21 +28,11 @@ public class PersonalMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_main);
 
-        userInfoStr = getIntent().getStringExtra("userinfo");
 
         //자기소개서
         Intent intent = getIntent();
-        personalTitle = intent.getStringExtra("personalTitle");
-        personalText = intent.getStringExtra("personalText");
+        STID = intent.getStringExtra("STID");
 
-        try{
-            JSONObject jsonObject = new JSONObject(userInfoStr);
-            JSONObject dataObj = jsonObject.getJSONObject("data");
-            ID = dataObj.getString("stdId");
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         // personal_write_button에 대한 클릭 리스너를 설정합니다.
         findViewById(R.id.personal_write_button).setOnClickListener(new View.OnClickListener() {
@@ -48,6 +40,9 @@ public class PersonalMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // PersonalWriteActivity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(PersonalMainActivity.this, PersonalWriteActivity.class);
+
+                intent.putExtra("STID",STID);
+
                 intent.putExtra("userinfo", userInfoStr);
                 startActivity(intent);
             }
@@ -67,6 +62,9 @@ public class PersonalMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // PersonalWriteActivity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(PersonalMainActivity.this, PersonalLockerActivity.class);
+
+                intent.putExtra("STID",STID);
+
                 intent.putExtra("userinfo", userInfoStr);
                 intent.putExtra("personalTitle", personalTitle);
                 intent.putExtra("personalText", personalText);

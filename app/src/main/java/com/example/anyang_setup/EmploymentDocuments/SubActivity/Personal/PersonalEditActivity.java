@@ -9,13 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -39,22 +36,9 @@ public class PersonalEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal_edit);
 
         Intent intent = getIntent();
-        if (intent != null) {
-            selectedText = intent.getStringExtra("selectedText");
-        }
-        userInfoStr = getIntent().getStringExtra("userinfo");
 
-        try{
-            JSONObject jsonObject = new JSONObject(userInfoStr);
-            JSONObject dataObj = jsonObject.getJSONObject("data");
-            ID = dataObj.getString("stdId");
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-
+        ID = GlobalVariables.getGlobalVariable_id();
+        selectedText = intent.getStringExtra("selectedText");
 
 
         //edit텍스트에 저장되어있던 자소서 본문을 넣어주는코드
@@ -89,6 +73,7 @@ public class PersonalEditActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(PersonalEditActivity.this, PersonalLockerActivity.class);
+                        intent.putExtra("STID",ID);
                         startActivity(intent);
                         finish();
                     }
@@ -111,6 +96,7 @@ public class PersonalEditActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(PersonalEditActivity.this, PersonalLockerActivity.class);
+                        intent.putExtra("STID",ID);
                         startActivity(intent);
                         finish();
                     }
@@ -173,6 +159,7 @@ public class PersonalEditActivity extends AppCompatActivity {
                         new save_personal().execute(ID, selectedText, save, title_save);
                         Toast.makeText(PersonalEditActivity.this, "수정한 내용이 저장되었습니다", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(PersonalEditActivity.this, PersonalLockerActivity.class);
+                        intent.putExtra("STID",ID);
                         startActivity(intent);
                         finish();
                     }
