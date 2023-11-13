@@ -2,6 +2,7 @@ package com.example.anyang_setup.MakingResume;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.view.Menu;
@@ -12,20 +13,25 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFPictureData;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -72,8 +78,13 @@ import static com.example.anyang_setup.MakingResume.DocumentContainer.graduate_d
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalLockerActivity;
+import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.Info.UserInfoActivity;
 import com.example.anyang_setup.R;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 /**
  * Created by Muhammad Abubakar on 11/11/2017.
@@ -89,6 +100,15 @@ public class MainActivity_start extends AppCompatActivity {
     ProgressBar progressBar_main;
 
     Button Add_Basic_Info;
+
+    ListView awards_list;
+    ListView certificate_list;
+    ListView external_activities_list;
+    ArrayAdapter<String> adapter1;
+    ArrayAdapter<String> adapter2;
+    ArrayAdapter<String> adapter3;
+
+    String ID;
 
 
     Calendar myCalendar;
@@ -110,6 +130,25 @@ public class MainActivity_start extends AppCompatActivity {
         Add_Basic_Info = findViewById(R.id.Add_Basic_Info);
         txt_birth_date = findViewById(R.id.txt_birth_date);
 
+        awards_list = findViewById(R.id.awards_list);
+        certificate_list = findViewById(R.id.certificate_list);
+        external_activities_list = findViewById(R.id.external_activities_list);
+
+        adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        awards_list.setAdapter(adapter1);
+
+        adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        certificate_list.setAdapter(adapter2);
+
+        adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        external_activities_list.setAdapter(adapter3);
+
+        ID = GlobalVariables.getGlobalVariable_id();
+
+        //스펙리스트 띄우기
+        new update_awardslist().execute(ID);
+        new update_certificatelist().execute(ID);
+        new update_external_activitieslist().execute(ID);
 
         //txt_bicycle = findViewById(R.id.txt_bicycle);
         //txt_location = findViewById(R.id.txt_location);
@@ -240,6 +279,177 @@ public class MainActivity_start extends AppCompatActivity {
     }
     public void deleteReport(View view) {
         exit();
+    }
+
+    private class update_awardslist extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... arg0) {
+            try {
+                String id = arg0[0];
+
+                OkHttpClient client = new OkHttpClient();
+                String link = "http://qkrwodbs.dothome.co.kr/Select_awards_resume.php";
+                Request request = new Request.Builder()
+                        .url(link + "?ID=" + id)
+                        .build();
+                okhttp3.Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
+                }
+            } catch (IOException e) {
+                return "예외 발생: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                // 결과가 비어있는지 확인
+                if (result == null || result.isEmpty()) {
+                    Toast.makeText(MainActivity_start.this, "데이터가 없습니다", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                JSONArray jsonArray = new JSONArray(result);
+                ArrayList<String> List = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    String certificate = jsonArray.getString(i);
+                    if (certificate != null) {
+                        List.add(certificate);
+                    }
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter1.clear();
+                        adapter1.addAll(List);
+                        adapter1.notifyDataSetChanged();
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(MainActivity_start.this, "JSON 파싱 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private class update_certificatelist extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... arg0) {
+            try {
+                String id = arg0[0];
+
+                OkHttpClient client = new OkHttpClient();
+                String link = "http://qkrwodbs.dothome.co.kr/Select_certificate_resume.php";
+                Request request = new Request.Builder()
+                        .url(link + "?ID=" + id)
+                        .build();
+                okhttp3.Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
+                }
+            } catch (IOException e) {
+                return "예외 발생: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                // 결과가 비어있는지 확인
+                if (result == null || result.isEmpty()) {
+                    Toast.makeText(MainActivity_start.this, "데이터가 없습니다", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                JSONArray jsonArray = new JSONArray(result);
+                ArrayList<String> List = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    String certificate = jsonArray.getString(i);
+                    if (certificate != null) {
+                        List.add(certificate);
+                    }
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter2.clear();
+                        adapter2.addAll(List);
+                        adapter2.notifyDataSetChanged();
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(MainActivity_start.this, "JSON 파싱 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private class update_external_activitieslist extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... arg0) {
+            try {
+                String id = arg0[0];
+
+                OkHttpClient client = new OkHttpClient();
+                String link = "http://qkrwodbs.dothome.co.kr/Select_external_activities_resume.php";
+                Request request = new Request.Builder()
+                        .url(link + "?ID=" + id)
+                        .build();
+                okhttp3.Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
+                }
+            } catch (IOException e) {
+                return "예외 발생: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                // 결과가 비어있는지 확인
+                if (result == null || result.isEmpty()) {
+                    Toast.makeText(MainActivity_start.this, "데이터가 없습니다", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                JSONArray jsonArray = new JSONArray(result);
+                ArrayList<String> List = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    String certificate = jsonArray.getString(i);
+                    if (certificate != null) {
+                        List.add(certificate);
+                    }
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter3.clear();
+                        adapter3.addAll(List);
+                        adapter3.notifyDataSetChanged();
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(MainActivity_start.this, "JSON 파싱 오류: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
     private void updateViews(){
