@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="계정 설정">
+        <Preference
+            android:key="logout"
+            android:title="로그아웃"
+            android:summary="로그아웃 하려면 여기를 탭하세요" />
+    </PreferenceCategory>
+
+    <!-- 기타 설정 옵션들 추가 가능 -->
+
+    <PreferenceCategory android:title="게시판">
+        <Preference
+            android:key="asd"
+            android:title="공지사항"
+            android:summary="공지사항을 확인하세요"/>
+        <Preference
+            android:key="qwe"
+            android:title="문의사항"
+            android:summary="앱 내의 오류 사항을 제공해주세요"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="개발자">
+        <Preference
+            android:key="zxc"
+            android:title="개발자 정보"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
