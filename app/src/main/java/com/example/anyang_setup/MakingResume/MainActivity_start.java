@@ -110,6 +110,9 @@ public class MainActivity_start extends AppCompatActivity {
 
     String ID;
 
+    String Name;
+    String Major;
+
 
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date,rnDate,birthdate;
@@ -144,6 +147,9 @@ public class MainActivity_start extends AppCompatActivity {
         external_activities_list.setAdapter(adapter3);
 
         ID = GlobalVariables.getGlobalVariable_id();
+
+        Name = GlobalVariables.getGlobalVariable_Name();
+        Major = GlobalVariables.getGlobalVariable_Major();
 
         //스펙리스트 띄우기
         new update_awardslist().execute(ID);

@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalMainActivity;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecActivity;
+import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.Info.SubActivity.DiagnosisActivity;
 import com.example.anyang_setup.LoginDB.LoginRequest;
 import com.example.anyang_setup.R;
@@ -160,6 +161,10 @@ public class UserInfoActivity extends AppCompatActivity {
             stdIdText.setText(dataObj.getString("stdId"));
             majorText.setText(dataObj.getString("stdDepart"));
             asd.setText(dataObj.getString("stdsigan"));
+            String name = stdNameText.getText().toString();
+            String major = majorText.getText().toString();
+            GlobalVariables.setGlobalVariable_Name(name);
+            GlobalVariables.setGlobalVariable_Major(major);
         } catch (JSONException e) {
             e.printStackTrace();
         }
