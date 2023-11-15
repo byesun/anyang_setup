@@ -6,7 +6,6 @@ public class GlobalVariables {
     private static String Student_Name; //이름
     private static String Student_Id; //학번
     private static String Grade_Point; //학점(xx/4.5)
-    private static String Major;
 
     public static String getGlobalVariable_id() {
         return Student_Id;
@@ -27,11 +26,8 @@ public class GlobalVariables {
     public static String getGlobalVariable_Grade_Point() {
         return Grade_Point;
     }
+
     public static void setGlobalVariable_Grade_Point(String value) {
         Grade_Point = value;
     }
-    public static String getGlobalVariable_Major() {
-        return Major;
-    }
-    public static void setGlobalVariable_Major(String value) { Major= value;}
 }
