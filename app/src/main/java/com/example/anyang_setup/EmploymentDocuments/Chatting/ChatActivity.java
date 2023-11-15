@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.app.AlertDialog;
 import android.widget.SearchView;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.ChatMyActivity;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.ChatRoomActivity;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.ChatRoomInfoActivity;

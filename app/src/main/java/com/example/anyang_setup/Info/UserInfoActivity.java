@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalMainActivity;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecActivity;
+import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.Info.SubActivity.DiagnosisActivity;
 import com.example.anyang_setup.LoginDB.LoginRequest;
 import com.example.anyang_setup.R;
@@ -160,6 +161,10 @@ public class UserInfoActivity extends AppCompatActivity {
             stdIdText.setText(dataObj.getString("stdId"));
             majorText.setText(dataObj.getString("stdDepart"));
             asd.setText(dataObj.getString("stdsigan"));
+            String name = stdNameText.getText().toString();
+            String major = majorText.getText().toString();
+            GlobalVariables.setGlobalVariable_Name(name);
+            GlobalVariables.setGlobalVariable_Major(major);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -304,7 +309,8 @@ public class UserInfoActivity extends AppCompatActivity {
     private void openGallery() {
         // 권한 확인
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, GALLERY_REQUEST_CODE);
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, GALLERY_REQUEST_CODE);
         } else {
             // 권한이 있을 경우 갤러리를 바로 연다.
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

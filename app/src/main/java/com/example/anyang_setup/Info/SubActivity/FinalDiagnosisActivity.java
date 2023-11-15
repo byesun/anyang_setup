@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.anyang_setup.R;
 
 import org.json.JSONArray;
@@ -49,10 +50,11 @@ public class FinalDiagnosisActivity extends AppCompatActivity {
             JSONObject userData = jsonObject.getJSONObject("data");
 
 
-            // 졸업을 통과하지 못한 경우
+            // 졸업을 통과하지 못한 경우 userData.getString("graduateResult").compareTo("미통과") == 0
             if(userData.getString("graduateResult").compareTo("미통과") == 0)
             {
-                imageView.setVisibility(View.INVISIBLE);
+                imageView = (ImageView)findViewById(R.id.imageView); //GIF ImageView연결
+                Glide.with(this).load(R.raw.loading).into(imageView); //R.raw.loading GIF파일 load
                 homeButton.setVisibility(View.INVISIBLE);
 
                 // 1. 부족 학점
@@ -101,6 +103,8 @@ public class FinalDiagnosisActivity extends AppCompatActivity {
             // 졸업인 경우
             else
             {
+                imageView = (ImageView)findViewById(R.id.imageView); //GIF ImageView연결
+                Glide.with(this).load(R.raw.loading2).into(imageView); //R.raw.loading GIF파일 load
                 curriculumButton.setVisibility(View.INVISIBLE);
                 resultTitleView.setVisibility(View.INVISIBLE);
                 resultText.setText("졸업을 진심으로 축하드립니다!");

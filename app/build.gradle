@@ -80,6 +80,11 @@ dependencies {
 
     // db불러올때쓰는 라이브러리
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
+    //gif 영상 이미지 lib
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

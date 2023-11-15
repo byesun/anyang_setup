@@ -14,4 +14,54 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@color/colorPrimaryDark</item>
     </style>
+
+    <!-- Heading Text Style -->
+    <style name="HeadingTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <!-- Content Text Style -->
+    <style name="ContentTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <!-- Panel Style -->
+    <style name="PanelStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/panel_background</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <!-- Table Style -->
+    <style name="TableStyle">
+        <item name="android:stretchColumns">*</item>
+        <item name="android:layout_margin">20dp</item>
+    </style>
+
+    <!-- Table Header Style -->
+    <style name="TableHeaderStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">@color/table_header</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Button Style -->
+    <style name="ButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/button_color</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
 </resources>

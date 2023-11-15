@@ -251,9 +251,6 @@ public class ChatRoomActivity extends AppCompatActivity {
             case R.id.action_leave:
                 leaveChatRoom(chatRoomId, userId);
                 return true;
-            case R.id.action_edit:
-                // editChatRoom(); // 채팅방 편집 관련 로직
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
