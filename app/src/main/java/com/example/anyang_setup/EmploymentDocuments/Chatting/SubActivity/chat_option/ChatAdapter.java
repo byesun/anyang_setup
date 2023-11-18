@@ -72,14 +72,14 @@ public class ChatAdapter extends ArrayAdapter<ChatDTO> {
         if (message.getProfileImageUrl() != null && !message.getProfileImageUrl().isEmpty()) {
             Glide.with(getContext())
                     .load(message.getProfileImageUrl())
-                    .placeholder(R.drawable.ic_home) // 기본 이미지 설정
-                    .error(R.drawable.ic_home) // 로딩 실패시 기본 이미지
+                    .placeholder(R.drawable.profile_icon) // 기본 이미지 설정
+                    .error(R.drawable.profile_icon) // 로딩 실패시 기본 이미지
                     .circleCrop() // 원형으로 크롭
                     .into(viewHolder.profileImage);
         } else {
             // 프로필 이미지가 없을 경우 기본 이미지 설정
             Glide.with(getContext())
-                    .load(R.drawable.ic_home)
+                    .load(R.drawable.profile_icon)
                     .circleCrop()
                     .into(viewHolder.profileImage);
         }

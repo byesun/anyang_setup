@@ -77,5 +77,6 @@ public class ChatMyActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }

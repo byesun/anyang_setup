@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.anyang_setup.Chatting.ChatActivity;
+import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatActivity;
 import com.example.anyang_setup.EmploymentDocuments.EmploymentActivity;
 import com.example.anyang_setup.Info.SubActivity.DiagnosisActivity;
 import com.example.anyang_setup.Info.UserInfoActivity;
@@ -121,13 +122,6 @@ public class HomeActivity extends AppCompatActivity{
 
                         break;
                     }
-                    case R.id.spec :
-                    {
-                        Intent intent = new Intent(HomeActivity.this, EmploymentActivity.class);
-                        intent.putExtra("userinfo", userinfo);
-                        startActivity(intent);
-                        break;
-                    }
                 }
 
                 return true;
@@ -135,4 +129,5 @@ public class HomeActivity extends AppCompatActivity{
         });
     }
 
-}*/
+}
+*/

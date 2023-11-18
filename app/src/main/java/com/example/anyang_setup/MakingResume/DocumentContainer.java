@@ -229,7 +229,7 @@ public class DocumentContainer {
         document = new XWPFDocument();
 
 
-        fileName = "이력서";
+        fileName = "test_word_file";
         Random generator = new Random();
         int n = 10000;
         n = generator.nextInt(n);

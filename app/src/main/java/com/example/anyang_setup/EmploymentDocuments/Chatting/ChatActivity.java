@@ -35,12 +35,16 @@ import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.ChatRoo
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.ChatRoomInfoActivity;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.CreateNewChatActivity;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.SubActivity.chat_option.ChatAdapter;
+import com.example.anyang_setup.Info.SubActivity.DiagnosisActivity;
+import com.example.anyang_setup.Info.UserInfoActivity;
 import com.example.anyang_setup.R;
+import com.example.anyang_setup.Setting.SettingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +54,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;

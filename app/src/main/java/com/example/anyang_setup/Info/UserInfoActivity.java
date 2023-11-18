@@ -236,6 +236,8 @@ public class UserInfoActivity extends AppCompatActivity {
 
         navigationBarView = findViewById(R.id.bottom_navigationview);
 
+        navigationBarView.setItemIconTintList(null);
+
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener()
         {
             @SuppressLint("NonConstantResourceId")

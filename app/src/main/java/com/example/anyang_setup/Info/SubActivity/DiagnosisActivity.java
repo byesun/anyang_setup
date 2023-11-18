@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class DiagnosisActivity extends AppCompatActivity {
     private TextView averageCreditResultText, requiredSubjectText, generalSubjectResult, chapelResultText, graduateResultText;
     private Button finalDiagnosisButton;
     private String userinfoStr;
+    private LinearLayout diagnosisResultSection, diagnosisResultSection1, diagnosisResultSection2, diagnosisResultSection3;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -175,5 +177,26 @@ public class DiagnosisActivity extends AppCompatActivity {
         }
     }
 
+    /*// 진단 결과 타이틀 클릭 시 호출되는 함수
+    public void onDiagnosisResultClick(View view) {
+        toggleVisibility(diagnosisResultSection);
+    }
+    public void onDiagnosisResultClick1(View vuiw){
+        toggleVisibility(diagnosisResultSection1);
+    }
+    public void onDiagnosisResultClick2(View vuiw){
+        toggleVisibility(diagnosisResultSection2);
+    }
+    public void onDiagnosisResultClick3(View vuiw){
+        toggleVisibility(diagnosisResultSection3);
+    }
 
+    // 추가된 가시성 토글 함수
+    private void toggleVisibility(LinearLayout section) {
+        if (section.getVisibility() == View.GONE) {
+            section.setVisibility(View.VISIBLE);
+        } else {
+            section.setVisibility(View.GONE);
+        }
+    }*/
 }
