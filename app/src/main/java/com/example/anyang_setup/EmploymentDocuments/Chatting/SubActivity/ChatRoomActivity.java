@@ -296,15 +296,4 @@ public class ChatRoomActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void editChatRoom() {
-        // 채팅방 설정 변경 로직
-        Toast.makeText(this, "채팅방을 수정합니다.", Toast.LENGTH_SHORT).show();
-
-        // 채팅방을 수정하는 화면으로 이동하는 코드를 구현해야 합니다.
-        // 예를 들어, 채팅방 설정 액티비티로 이동하는 인텐트를 시작할 수 있습니다.
-        Intent intent = new Intent(ChatRoomActivity.this, ChatRoomInfoActivity.class);
-        intent.putExtra("chatRoom", CHAT_NAME);
-        startActivity(intent);
-    }
 }
