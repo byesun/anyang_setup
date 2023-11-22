@@ -217,7 +217,7 @@ public class GenerateReportActivity extends AppCompatActivity implements View.On
                 if (DocumentContainer.openDocument(GenerateReportActivity.this,getLayoutInflater())){//create doc in file manager and open document first
 
                     uploadAllPhotos();//add all the images that youhave selected before
-                    DocumentContainer.createPersonalInformationTable(GenerateReportActivity.this);
+                    //DocumentContainer.createPersonalInformationTable(GenerateReportActivity.this);
                     DocumentContainer.createEducationInformationTable(GenerateReportActivity.this);
                     DocumentContainer.createcertificateTable(GenerateReportActivity.this);
                     DocumentContainer.createActivityTable(GenerateReportActivity.this);
@@ -264,6 +264,9 @@ public class GenerateReportActivity extends AppCompatActivity implements View.On
 
     private void uploadAllPhotos(){
 
+        if (DocumentContainer.InputstreamGeneralPhotos1 != null){
+            DocumentContainer.createPersonalInformationTable(DocumentContainer.InputstreamGeneralPhotos1,GenerateReportActivity.this);
+        }
         if (DocumentContainer.InputstreamGeneralPhotos1 != null){
             DocumentContainer.addPictureFirst(DocumentContainer.InputstreamGeneralPhotos1,GenerateReportActivity.this,"증명사진");
         }

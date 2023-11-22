@@ -12,13 +12,14 @@ public class CertificateInsertRequest extends StringRequest {
     final static private String URL = "http://qkrwodbs.dothome.co.kr/certificate.php";
     private Map<String, String> map;
 
-    public CertificateInsertRequest(String ID, String certificate, Response.Listener<String> listener) {
+    public CertificateInsertRequest(String ID, String certificate,String acquisitionDate,  Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         // awards, certificate, externalActivities가 null이면 빈 문자열로 대체
         map.put("ID", ID);
         map.put("certificate", certificate);
+        map.put("acquisitionDate", acquisitionDate);
 
     }
 

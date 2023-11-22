@@ -1,12 +1,44 @@
 package com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal;
 
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bicycleSn;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bike_info_1;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bike_info_2;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bike_info_3;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_bike_info_4;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_comp;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_loc;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_offenceD;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_offenceT;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_remarks;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_rnDate;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_rnOff;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_rnTime;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.D_rooOff;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.address;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.birth_date;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.email;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.graduate_date;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.graduate_date_univ;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.highscholl;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.phonenumber;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.snprListCompnies;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.snprListRnOfficers;
+import static com.example.anyang_setup.MakingResume.DocumentContainer.snprListRooOfficers;
+import static com.example.anyang_setup.MakingResume.MainActivity_start.extractImages;
+
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.Person;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -17,10 +49,23 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalDB.PersonalInsertRequest;
 import com.example.anyang_setup.GlobalVariables;
+import com.example.anyang_setup.MakingResume.MainActivity_start;
+import com.example.anyang_setup.MakingResume.MessageHelper;
 import com.example.anyang_setup.R;
 
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 
 public class PersonalWriteActivity extends AppCompatActivity {
@@ -37,6 +82,8 @@ public class PersonalWriteActivity extends AppCompatActivity {
     private Button resetButton;
     private Button saveButton;
 
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +96,10 @@ public class PersonalWriteActivity extends AppCompatActivity {
         resetButton = findViewById(R.id.personal_write_reset_button);
         saveButton = findViewById(R.id.personal_write_save_button);
 
-        Intent intent_STID = getIntent();
 
         ID = GlobalVariables.getGlobalVariable_id();
+
+
 
 
 
@@ -79,12 +127,13 @@ public class PersonalWriteActivity extends AppCompatActivity {
                 .setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(PersonalWriteActivity.this, PersonalLockerActivity.class);
-                        intent.putExtra("STID",ID);
+                        Intent intent = new Intent(PersonalWriteActivity.this, PersonalMainActivity.class);
+                        intent.putExtra("STID", ID);
                         startActivity(intent);
                         finish();
                     }
                 })
+                
                 .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -106,10 +155,10 @@ public class PersonalWriteActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 personalTitle = personal_title.getText().toString();
                 personalText = editText.getText().toString();
-                executeServerInsertRequest(personalTitle,personalText);
+                executeServerInsertRequest(personalTitle, personalText);
                 // Intent를 생성하여 PersonalLockerActivity로 전달
                 Intent intent = new Intent(PersonalWriteActivity.this, PersonalMainActivity.class);
-                intent.putExtra("STID",ID);
+                intent.putExtra("STID", ID);
                 startActivity(intent);
             }
         });
@@ -153,6 +202,7 @@ public class PersonalWriteActivity extends AppCompatActivity {
         PersonalInsertRequest personalRequest = new PersonalInsertRequest(ID, personalTitle, personalText, responseListener);
         requestQueue.add(personalRequest);
     }
+
 
 
 

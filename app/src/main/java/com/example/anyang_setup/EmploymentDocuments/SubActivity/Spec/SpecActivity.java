@@ -49,8 +49,19 @@ public class SpecActivity extends AppCompatActivity {
     private List<String> awardsDataList;
 
     private String certificate; // 자격증
+    private String acquisitionDate; //자격증 취득일
+    private String certificateFinal; //자격증 종합
+
     private String externalActivities; //대외활동
+    private String externalDateStart; //대외활동 시작날짜
+    private String externalDateEnd; //대외활동 종료날짜
+    private String externalFinal; //대외활동 종합
+
     private String awards; //수상경력
+    private String awardsDateStart; //수상경력 시작날짜
+    private String awardsDateEnd; //수상경력 종료날짜
+    private String awardsFinal; //수상경력 종합
+
     private String ID; //학번
     private String userInfoStr;
     private String certificateSelect;
@@ -130,6 +141,7 @@ public class SpecActivity extends AppCompatActivity {
             addAwardsRow(award);
         }
 
+        //DB에서 불러오는 로직
         Update_certificate certificateTask = new Update_certificate();
         certificateTask.execute(ID);
 
@@ -164,6 +176,7 @@ public class SpecActivity extends AppCompatActivity {
         // TableRow를 certificationTable에 추가합니다.
         certificationTable.addView(newRow);
 
+        //DB 삽입
         executeServerInsertRequest(certificate);
     }
 
@@ -188,6 +201,7 @@ public class SpecActivity extends AppCompatActivity {
         // TableRow를 externalActivitiesTable에 추가합니다.
         externalActivitiesTable.addView(newRow);
 
+        //DB 삽입
         executeServerInsertRequest(externalActivities);
     }
 
@@ -213,8 +227,11 @@ public class SpecActivity extends AppCompatActivity {
         // TableRow를 awardsTable에 추가합니다.
         awardsTable.addView(newRow);
 
+        //DB 삽입
         executeServerInsertRequest(awards);
     }
+
+
     private void updateCertificationRow(String text) {
         // TableRow를 생성합니다.
         TableRow newRow = new TableRow(this);
@@ -296,21 +313,31 @@ public class SpecActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             // CertificateActivity에서 전달된 데이터를 가져옵니다.
             certificate = data.getStringExtra("certification");
+            acquisitionDate = data.getStringExtra("acquisitionDate");
+            certificateFinal = certificate + "(" + acquisitionDate + ")";
+
             externalActivities = data.getStringExtra("externalActivities");
+            externalDateStart = data.getStringExtra("externalDateStart");
+            externalDateEnd = data.getStringExtra("externalDateEnd");
+            externalFinal = externalActivities + "(" + externalDateStart + "~" + externalDateEnd + ")";
+
             awards = data.getStringExtra("awards");
+            awardsDateStart = data.getStringExtra("awardsDateStart");
+            awardsDateEnd = data.getStringExtra("awardsDateEnd");
+            awardsFinal = awards + "(" + awardsDateStart + "~" + awardsDateEnd + ")";
             // requestCode에 따라 데이터를 저장하고 표시합니다.
             if (requestCode == 1) {
-                certificationDataList.add(certificate);
-                addCertificationRow(certificate);
+                certificationDataList.add(certificateFinal);
+                addCertificationRow(certificateFinal);
 
             } else if (requestCode == 2) {
-                externalActivitiesDataList.add(externalActivities);
-                addExternalActivitiesRow(externalActivities);
+                externalActivitiesDataList.add(externalFinal);
+                addExternalActivitiesRow(externalFinal);
             }
 
             else if (requestCode == 3) {
-                awardsDataList.add(awards);
-                addAwardsRow(awards);
+                awardsDataList.add(awardsFinal);
+                addAwardsRow(awardsFinal);
             }
         }
     }
@@ -342,13 +369,13 @@ public class SpecActivity extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(SpecActivity.this);
 
-        AwardsInsertRequest awardsRequest = new AwardsInsertRequest(ID, awards, responseListener);
+        AwardsInsertRequest awardsRequest = new AwardsInsertRequest(ID, awards,awardsDateStart,awardsDateEnd, responseListener);
         requestQueue.add(awardsRequest);
 
-        CertificateInsertRequest certificateRequest = new CertificateInsertRequest(ID, certificate, responseListener);
+        CertificateInsertRequest certificateRequest = new CertificateInsertRequest(ID, certificate,acquisitionDate, responseListener);
         requestQueue.add(certificateRequest);
 
-        ExternalInsertRequest externalRequest = new ExternalInsertRequest(ID, externalActivities, responseListener);
+        ExternalInsertRequest externalRequest = new ExternalInsertRequest(ID, externalActivities,externalDateStart,externalDateEnd, responseListener);
         requestQueue.add(externalRequest);
 
     }
@@ -387,10 +414,15 @@ public class SpecActivity extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(result);
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    certificateSelect = jsonArray.getString(i);
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                    String certificate = jsonObject.getString("certificate");
+                    String acquisitionDate = jsonObject.getString("acquisitionDate");
+
+
+                    String concatenatedString = certificate + "(" + acquisitionDate + ")";
                     // Adding each certificate as a row to the table
-                    updateCertificationRow(certificateSelect);
+                    updateCertificationRow(concatenatedString);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -429,10 +461,17 @@ public class SpecActivity extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(result);
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    externalSelect = jsonArray.getString(i);
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    String externalActivities = jsonObject.getString("externalActivities");
+                    String startDate = jsonObject.getString("startDate");
+                    String endDate = jsonObject.getString("endDate");
+
+                    String concatenatedString = externalActivities + "(" + startDate + "~" + endDate + ")";
 
                     // Adding each certificate as a row to the table
-                    updateExternalActivitiesRow(externalSelect);
+                    updateExternalActivitiesRow(concatenatedString);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -471,15 +510,22 @@ public class SpecActivity extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(result);
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    awardsSelect = jsonArray.getString(i);
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                    // Adding each certificate as a row to the table
-                    updateAwardsRow(awardsSelect);
+                    String awards = jsonObject.getString("awards");
+                    String startDate = jsonObject.getString("startDate");
+                    String endDate = jsonObject.getString("endDate");
+
+                    String concatenatedString = awards + "(" + startDate + "~" + endDate + ")";
+
+                    // Adding each concatenated string as a row to the table
+                    updateAwardsRow(concatenatedString);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
 
     }
 

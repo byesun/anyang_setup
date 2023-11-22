@@ -108,13 +108,15 @@ public class MainActivity_start extends AppCompatActivity {
     ArrayAdapter<String> adapter2;
     ArrayAdapter<String> adapter3;
 
-    String ID;
+    private String ID;
+
 
     String Name;
     String Major;
 
 
     Calendar myCalendar;
+
     DatePickerDialog.OnDateSetListener date,rnDate,birthdate;
 
     @Override
@@ -283,6 +285,8 @@ public class MainActivity_start extends AppCompatActivity {
         });
 
     }
+
+
     public void deleteReport(View view) {
         exit();
     }
@@ -296,7 +300,7 @@ public class MainActivity_start extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 String link = "http://qkrwodbs.dothome.co.kr/Select_awards_resume.php";
                 Request request = new Request.Builder()
-                        .url(link + "?ID=" + id)
+                        .url(link + "?ID=" + ID)
                         .build();
                 okhttp3.Response response = client.newCall(request).execute();
 
@@ -353,7 +357,7 @@ public class MainActivity_start extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 String link = "http://qkrwodbs.dothome.co.kr/Select_certificate_resume.php";
                 Request request = new Request.Builder()
-                        .url(link + "?ID=" + id)
+                        .url(link + "?ID=" + ID)
                         .build();
                 okhttp3.Response response = client.newCall(request).execute();
 
@@ -410,7 +414,7 @@ public class MainActivity_start extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 String link = "http://qkrwodbs.dothome.co.kr/Select_external_activities_resume.php";
                 Request request = new Request.Builder()
-                        .url(link + "?ID=" + id)
+                        .url(link + "?ID=" + ID)
                         .build();
                 okhttp3.Response response = client.newCall(request).execute();
 
