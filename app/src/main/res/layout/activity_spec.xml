@@ -15,13 +15,13 @@
         android:orientation="vertical">
 
         <!-- 스펙 양식 템플릿 추가 버튼 -->
-        <Button
-            android:id="@+id/addTemplateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="스펙 양식 템플릿 추가"
-            android:layout_margin="15dp"
-            android:layout_gravity="center"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Spec Main"
+            android:textStyle="bold" 
+            android:textSize="40dp"
+            android:gravity="center"
             />
 
         <ImageView

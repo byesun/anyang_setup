@@ -33,8 +33,8 @@ public class PersonalLockerActivity extends Activity {
     private ArrayAdapter<String> adapter;
     private String id;
     private String personalTitle;
-
     private String personalText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class PersonalLockerActivity extends Activity {
 
         // ListView 설정
         personalList = findViewById(R.id.personal_list);
+
 
         // 어뎁터 설정
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
@@ -55,7 +56,7 @@ public class PersonalLockerActivity extends Activity {
 
 
 
-        // ListView 아이템 클릭 리스너 설정
+
         // ListView 아이템 클릭 리스너 설정
         personalList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

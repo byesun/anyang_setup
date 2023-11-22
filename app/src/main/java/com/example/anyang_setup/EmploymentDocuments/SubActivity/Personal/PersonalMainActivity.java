@@ -1,12 +1,15 @@
 package com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.anyang_setup.Info.UserInfoActivity;
 import com.example.anyang_setup.R;
 
 import org.json.JSONException;
@@ -45,6 +48,7 @@ public class PersonalMainActivity extends AppCompatActivity {
 
                 intent.putExtra("userinfo", userInfoStr);
                 startActivity(intent);
+                finish();
             }
         });
 

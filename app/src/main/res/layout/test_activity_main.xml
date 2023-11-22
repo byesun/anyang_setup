@@ -51,6 +51,38 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shadow_profile"
                 >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="이력서 파일 이름"
+                        android:gravity="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:layout_weight="2"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/txt_Filename"
+                        android:layout_weight="1"/>
+
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shadow_profile"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -310,22 +342,22 @@
                     android:text="수상목록"/>
             </RelativeLayout>
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/shadow_profile"
                 >
                 <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
                     android:id="@+id/awards_list"/>
 
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:layout_marginTop="8dp"
@@ -338,7 +370,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
@@ -346,8 +378,8 @@
                 >
 
                 <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
                     android:id="@+id/certificate_list"/>
 
 
@@ -375,8 +407,8 @@
                 >
 
                 <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
                     android:id="@+id/external_activities_list"/>
 
 
@@ -495,9 +527,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/shadow_border"
                     android:drawableEnd="@drawable/icon_forward"
+                    android:onClick="generalPhotos"
                     android:paddingEnd="5dp"
-                    android:text="다음"
-                    android:onClick="generalPhotos"/>
+                    android:text="다음" />
             </LinearLayout>
 
         </LinearLayout>

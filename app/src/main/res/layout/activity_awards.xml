@@ -16,14 +16,80 @@
         android:textSize="24sp"
         /><!-- 가운데 정렬 -->
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shadow_profile"
+        >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/date_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:hint="시작기간"
+                android:textColorHint="@color/grey_800"
+                android:drawableLeft="@drawable/icon_date"
+                android:drawablePadding="15sp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:onClick="dateStart"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shadow_profile"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/date_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:hint="종료기간"
+                android:textColorHint="@color/grey_800"
+                android:drawableLeft="@drawable/icon_date"
+                android:drawablePadding="15sp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:onClick="dateEnd"/>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <!-- 버튼들을 담을 수 있는 레이아웃 -->
 
     <EditText
         android:id="@+id/awards_text"
         android:layout_width="match_parent"
-        android:layout_height="598dp"
+        android:layout_height="470dp"
         android:layout_marginTop="16dp"
         android:gravity="start|top"
         android:hint="여기에 글을 작성하세요."

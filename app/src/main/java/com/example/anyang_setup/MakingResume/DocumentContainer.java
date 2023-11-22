@@ -347,13 +347,17 @@ public class DocumentContainer {
             cTShd.setVal(STShd.CLEAR);
             cTShd.setColor("auto");
             cTShd.setFill("deeaf6");
+
+
         } catch (InvalidFormatException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    /*
     public static void createPersonalInformationTable(Context context) {
+
         XWPFTable table = DocumentContainer.get(context).getDocument().createTable(5, 2);
 
         CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
@@ -386,6 +390,54 @@ public class DocumentContainer {
         addRun.addBreak();
     }
 
+     */
+    public static void createPersonalInformationTable(InputStream imageFile, Context context) {
+        try {
+            // Add Picture
+            XWPFParagraph paragraphPIC = DocumentContainer.get(context).getDocument().createParagraph();
+            paragraphPIC.setBorderBottom(Borders.BASIC_BLACK_DASHES);
+            paragraphPIC.setAlignment(ParagraphAlignment.CENTER);
+            XWPFRun runPIC = paragraphPIC.createRun();
+            int format = XWPFDocument.PICTURE_TYPE_JPEG;
+            runPIC.addPicture(imageFile, format, "logo.png", Units.toEMU(400), Units.toEMU(300)); // 200x200 pixels
+            CTShd cTShd = runPIC.getCTR().addNewRPr().addNewShd();
+            cTShd.setVal(STShd.CLEAR);
+            cTShd.setColor("auto");
+            cTShd.setFill("deeaf6");
+
+            // Add a line break after the picture
+            XWPFRun addRun = paragraphPIC.createRun();
+            addRun.addBreak();
+
+            // Add Text
+            XWPFParagraph paragraphText = DocumentContainer.get(context).getDocument().createParagraph();
+            paragraphText.setAlignment(ParagraphAlignment.CENTER);
+            XWPFRun runText = paragraphText.createRun();
+            runText.setText("이력서");
+            runText.setFontSize(16);
+            runText.setFontFamily("Calibri (Body)");
+            runText.setBold(true);
+
+            // Add a line break after the text
+            XWPFRun addRunText = paragraphText.createRun();
+            addRunText.addBreak();
+
+            // Create Personal Information Table
+            XWPFTable table = DocumentContainer.get(context).getDocument().createTable(5, 2);
+            CTTblWidth width = table.getCTTbl().addNewTblPr().addNewTblW();
+            width.setType(STTblWidth.DXA);
+            width.setW(BigInteger.valueOf(5000));
+
+            // ... (표 관련 코드는 이전과 동일)
+
+            // Add a line break after the table
+            XWPFParagraph paragraphBreak = DocumentContainer.get(context).getDocument().createParagraph();
+            XWPFRun runBreak = paragraphBreak.createRun();
+            runBreak.addBreak();
+        } catch (InvalidFormatException | IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static void createEducationInformationTable(Context context) {
         XWPFTable table = DocumentContainer.get(context).getDocument().createTable(4, 3);
 
