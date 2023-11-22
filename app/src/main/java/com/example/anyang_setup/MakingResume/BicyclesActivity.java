@@ -1,3 +1,4 @@
+/*
 package com.example.anyang_setup.MakingResume;
 
 import static com.example.anyang_setup.MakingResume.DocumentContainer.InputstreamBicyclePhotos1;
@@ -23,11 +24,13 @@ import com.example.anyang_setup.R;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+*/
 /**
  * Created by Muhammad Abubakar on 11/11/2017.
  * This is the 2nd last activity where we selected 2 photos
  *
- */
+ *//*
+
 
 public class BicyclesActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -176,4 +179,4 @@ public class BicyclesActivity extends AppCompatActivity implements View.OnClickL
         inflater.inflate(R.menu.menu_home, menu);
         return true;
     }
-}
+}*/

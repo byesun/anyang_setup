@@ -37,6 +37,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatActivity;
+import com.example.anyang_setup.Resume_test.Resume_MainActivity;
 import com.example.anyang_setup.Setting.SettingActivity;
 import com.example.anyang_setup.MakingResume.MainActivity_start;
 import com.google.android.material.navigation.NavigationBarView;
@@ -219,7 +220,7 @@ public class UserInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // ResumeMainActivity로 이동하는 코드를 추가합니다.
-                Intent intent = new Intent(UserInfoActivity.this, MainActivity_start.class);
+                Intent intent = new Intent(UserInfoActivity.this, Resume_MainActivity.class);
                 startActivity(intent);
             }
         });
