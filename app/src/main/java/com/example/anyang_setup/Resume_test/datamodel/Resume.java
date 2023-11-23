@@ -17,6 +17,7 @@ public class Resume implements Parcelable {
     public List<Experience> experience;
     public String languages;
     public String skills;
+    private String imageUri; // 이미지 URI 필드 추가
 
     private Resume() {
 
@@ -29,6 +30,7 @@ public class Resume implements Parcelable {
         experience = in.createTypedArrayList(Experience.CREATOR);
         languages = in.readString();
         skills = in.readString();
+        imageUri = in.readString(); // 이미지 URI 읽기
     }
 
     public static final Creator<Resume> CREATOR = new Creator<Resume>() {
@@ -67,5 +69,15 @@ public class Resume implements Parcelable {
         dest.writeTypedList(experience);
         dest.writeString(languages);
         dest.writeString(skills);
+        dest.writeString(imageUri); // 이미지 URI 쓰기
+    }
+
+    // 이미지 URI에 대한 getter와 setter
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 }
