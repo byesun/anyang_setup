@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test.datamodel;
+package com.example.anyang_setup.Resume.datamodel;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,6 +9,8 @@ import android.os.Parcelable;
 
 public class PersonalInfo implements Parcelable {
     private String name;
+
+    private String Major;
     private String jobTitle;
     private String addressLine1;
     private String addressLine2;
@@ -71,6 +73,7 @@ public class PersonalInfo implements Parcelable {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getJobTitle() {
         return jobTitle;
