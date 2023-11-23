@@ -114,14 +114,9 @@ public class PersonalInfoFragment extends ResumeFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK) {
             if (data != null) {
-                // 선택한 이미지의 URI를 얻어옴
                 Uri selectedImageUri = data.getData();
-
-                // 얻어온 URI를 이미지 뷰에 설정
                 profileImageView.setImageURI(selectedImageUri);
-
-                // 이미지를 저장하거나 필요한 대로 처리할 수 있습니다.
-                // 예를 들어, 이미지를 서버에 업로드하거나 로컬 저장소에 저장하는 등의 작업을 수행할 수 있습니다.
+                getResume().setImageUri(selectedImageUri.toString()); // Resume 데이터 모델에 이미지 URI 저장
             }
         }
     }
