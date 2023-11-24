@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test;
+package com.example.anyang_setup.Resume;
 
 
 import android.content.SharedPreferences;
@@ -15,14 +15,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.Resume_test.datamodel.Resume;
-import com.example.anyang_setup.Resume_test.fragments.EducationFragment;
-import com.example.anyang_setup.Resume_test.fragments.EssentialsFragment;
-import com.example.anyang_setup.Resume_test.fragments.ExperienceFragment;
-import com.example.anyang_setup.Resume_test.fragments.PersonalInfoFragment;
-import com.example.anyang_setup.Resume_test.fragments.PreviewFragment;
-import com.example.anyang_setup.Resume_test.fragments.ProjectsFragment;
-import com.example.anyang_setup.Resume_test.helper.ResumeFragment;
+import com.example.anyang_setup.Resume.datamodel.Resume;
+import com.example.anyang_setup.Resume.fragments.EducationFragment;
+import com.example.anyang_setup.Resume.fragments.EssentialsFragment;
+import com.example.anyang_setup.Resume.fragments.ExperienceFragment;
+import com.example.anyang_setup.Resume.fragments.PersonalInfoFragment;
+import com.example.anyang_setup.Resume.fragments.AwardsFragment;
+import com.example.anyang_setup.Resume.fragments.ExternalActivitiesFragment;
+import com.example.anyang_setup.Resume.fragments.Certificates;
+import com.example.anyang_setup.Resume.fragments.PreviewFragment;
+import com.example.anyang_setup.Resume.fragments.ProjectsFragment;
+import com.example.anyang_setup.Resume.helper.ResumeFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
@@ -129,6 +132,15 @@ public class Resume_MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_preview:
                 openFragment(PreviewFragment.newInstance(resume));
+                break;
+            case R.id.pick_awards:
+                openFragment(AwardsFragment.newInstance(resume));
+                break;
+            case R.id. pick_external_activities:
+                openFragment(ExternalActivitiesFragment.newInstance(resume));
+                break;
+            case R.id. pick_certificates:
+                openFragment(Certificates.newInstance(resume));
                 break;
             default:
                 return false;

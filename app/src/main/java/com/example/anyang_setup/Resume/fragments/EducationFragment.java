@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test.fragments;
+package com.example.anyang_setup.Resume.fragments;
 
 
 import android.app.Activity;
@@ -7,12 +7,12 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.anyang_setup.Resume_test.EditActivity;
-import com.example.anyang_setup.Resume_test.adapters.SchoolsAdapter;
-import com.example.anyang_setup.Resume_test.datamodel.Resume;
-import com.example.anyang_setup.Resume_test.datamodel.School;
-import com.example.anyang_setup.Resume_test.helper.ResumeEventFragment;
-import com.example.anyang_setup.Resume_test.helper.ResumeFragment;
+import com.example.anyang_setup.Resume.EditActivity;
+import com.example.anyang_setup.Resume.adapters.SchoolsAdapter;
+import com.example.anyang_setup.Resume.datamodel.Resume;
+import com.example.anyang_setup.Resume.datamodel.School;
+import com.example.anyang_setup.Resume.helper.ResumeEventFragment;
+import com.example.anyang_setup.Resume.helper.ResumeFragment;
 
 public class EducationFragment extends ResumeEventFragment<School> {
     public static ResumeFragment newInstance(Resume resume) {

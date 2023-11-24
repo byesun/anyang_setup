@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test.helper;
+package com.example.anyang_setup.Resume.helper;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.Resume_test.adapters.ResumeEventAdapter;
-import com.example.anyang_setup.Resume_test.datamodel.ResumeEvent;
+import com.example.anyang_setup.Resume.adapters.ResumeEventAdapter;
+import com.example.anyang_setup.Resume.datamodel.ResumeEvent;
 
 /**
  * Created by ibrahim on 1/19/18.

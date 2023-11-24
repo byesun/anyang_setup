@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test.fragments;
+package com.example.anyang_setup.Resume.fragments;
 
 
 import android.content.Context;
@@ -21,17 +21,15 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.Resume_test.datamodel.Experience;
-import com.example.anyang_setup.Resume_test.datamodel.PersonalInfo;
-import com.example.anyang_setup.Resume_test.datamodel.Project;
-import com.example.anyang_setup.Resume_test.datamodel.Resume;
-import com.example.anyang_setup.Resume_test.datamodel.School;
-import com.example.anyang_setup.Resume_test.helper.ResumeFragment;
-import com.example.anyang_setup.Resume_test.fragments.PersonalInfoFragment;
+import com.example.anyang_setup.Resume.datamodel.Experience;
+import com.example.anyang_setup.Resume.datamodel.PersonalInfo;
+import com.example.anyang_setup.Resume.datamodel.Project;
+import com.example.anyang_setup.Resume.datamodel.Resume;
+import com.example.anyang_setup.Resume.datamodel.School;
+import com.example.anyang_setup.Resume.helper.ResumeFragment;
+import com.example.anyang_setup.Resume.fragments.PersonalInfoFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class PreviewFragment extends ResumeFragment {
     WebView webView;
 

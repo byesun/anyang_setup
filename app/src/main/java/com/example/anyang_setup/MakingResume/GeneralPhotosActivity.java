@@ -280,7 +280,7 @@ public class GeneralPhotosActivity extends AppCompatActivity implements View.OnC
     }
 
     public void goTobicycleActivity(View view) {
-        Intent intent = new Intent(this,BicyclesActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this,BicyclesActivity.class);
+        //startActivity(intent);
     }
 }

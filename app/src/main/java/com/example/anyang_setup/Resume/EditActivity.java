@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test;
+package com.example.anyang_setup.Resume;
 
 
 import android.content.Context;
@@ -13,8 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.Resume_test.datamodel.ResumeEvent;
-import com.example.anyang_setup.Resume_test.helper.TextChangeListener;
+import com.example.anyang_setup.Resume.datamodel.ResumeEvent;
+import com.example.anyang_setup.Resume.helper.TextChangeListener;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class EditActivity extends AppCompatActivity {

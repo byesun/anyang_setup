@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test.datamodel;
+package com.example.anyang_setup.Resume.datamodel;
 
 import android.os.Parcel;
 import android.os.Parcelable;

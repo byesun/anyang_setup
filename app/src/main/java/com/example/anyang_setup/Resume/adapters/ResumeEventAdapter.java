@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test.adapters;
+package com.example.anyang_setup.Resume.adapters;
 
 
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.Resume_test.datamodel.ResumeEvent;
+import com.example.anyang_setup.Resume.datamodel.ResumeEvent;
 
 import java.util.List;
 

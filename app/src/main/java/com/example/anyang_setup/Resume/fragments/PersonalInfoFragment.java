@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test.fragments;
+package com.example.anyang_setup.Resume.fragments;
 
 
 import android.app.Activity;
@@ -15,11 +15,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.Resume_test.datamodel.PersonalInfo;
-import com.example.anyang_setup.Resume_test.datamodel.Resume;
-import com.example.anyang_setup.Resume_test.helper.ResumeFragment;
-import com.example.anyang_setup.Resume_test.helper.TextChangeListener;
+import com.example.anyang_setup.Resume.datamodel.PersonalInfo;
+import com.example.anyang_setup.Resume.datamodel.Resume;
+import com.example.anyang_setup.Resume.helper.ResumeFragment;
+import com.example.anyang_setup.Resume.helper.TextChangeListener;
 
 public class PersonalInfoFragment extends ResumeFragment {
 
@@ -40,8 +41,12 @@ public class PersonalInfoFragment extends ResumeFragment {
 
         final PersonalInfo personalInfo = getResume().personalInfo;
 
+        EditText MajorEditText = root.findViewById(R.id.input_Major);
+        MajorEditText.setText(GlobalVariables.getGlobalVariable_Major());
+
         EditText nameEditText = root.findViewById(R.id.input_name);
-        nameEditText.setText(personalInfo.getName());
+        nameEditText.setText(GlobalVariables.getGlobalVariable_Name());
+        //nameEditText.setText(personalInfo.getName());
         nameEditText.addTextChangedListener(new TextChangeListener() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {

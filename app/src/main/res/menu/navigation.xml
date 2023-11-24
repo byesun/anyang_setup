@@ -6,6 +6,18 @@
             android:checked="true"
             android:title="@string/navigation_personal_info" />
         <item
+            android:id="@+id/pick_awards"
+            android:checked="false"
+            android:title="수상 선택" />
+        <item
+            android:id="@+id/pick_external_activities"
+            android:checked="false"
+            android:title="외부활동 선택"/>
+        <item
+            android:id="@+id/pick_certificates"
+            android:checked="false"
+            android:title="자격증 선택"/>
+        <item
             android:id="@+id/action_essentials"
             android:checked="false"
             android:title="@string/navigation_essentials" />
@@ -31,5 +43,6 @@
             android:id="@+id/action_preview"
             android:checked="false"
             android:title="@string/navigation_preview" />
+
     </group>
 </menu>

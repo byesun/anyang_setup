@@ -1,11 +1,11 @@
-package com.example.anyang_setup.Resume_test.helper;
+package com.example.anyang_setup.Resume.helper;
 
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.anyang_setup.Resume_test.datamodel.Resume;
+import com.example.anyang_setup.Resume.datamodel.Resume;
 
 /**
  * Created by ibrahim on 1/19/18.

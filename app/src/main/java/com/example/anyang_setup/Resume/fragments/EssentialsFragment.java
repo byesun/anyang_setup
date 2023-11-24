@@ -1,4 +1,4 @@
-package com.example.anyang_setup.Resume_test.fragments;
+package com.example.anyang_setup.Resume.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,9 +9,9 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 
 import com.example.anyang_setup.R;
-import com.example.anyang_setup.Resume_test.datamodel.Resume;
-import com.example.anyang_setup.Resume_test.helper.ResumeFragment;
-import com.example.anyang_setup.Resume_test.helper.TextChangeListener;
+import com.example.anyang_setup.Resume.datamodel.Resume;
+import com.example.anyang_setup.Resume.helper.ResumeFragment;
+import com.example.anyang_setup.Resume.helper.TextChangeListener;
 
 public class EssentialsFragment extends ResumeFragment {
 

@@ -106,18 +106,18 @@
         </activity>
 
         <activity
-            android:name=".Resume_test.Resume_MainActivity"
+            android:name=".Resume.Resume_MainActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
-            android:name=".Resume_test.EditActivity"
-            android:parentActivityName=".Resume_test.Resume_MainActivity"
+            android:name=".Resume.EditActivity"
+            android:parentActivityName=".Resume.Resume_MainActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateVisible|adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Resume_test.Resume_MainActivity" />
+                android:value=".Resume.Resume_MainActivity" />
         </activity>
 
 

@@ -1,9 +1,9 @@
-package com.example.anyang_setup.Resume_test.adapters;
+package com.example.anyang_setup.Resume.adapters;
 
 
 import androidx.annotation.NonNull;
 
-import com.example.anyang_setup.Resume_test.datamodel.School;
+import com.example.anyang_setup.Resume.datamodel.School;
 
 import java.util.List;
 
