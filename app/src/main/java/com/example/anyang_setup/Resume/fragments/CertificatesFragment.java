@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,14 +29,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ExternalActivitiesFragment extends ResumeFragment {
+public class CertificatesFragment extends ResumeFragment {
 
-    ListView ExternalActivities_list;
+    ListView Certificates_list;
     String ID;
     ArrayAdapter<String> adapter1;
-
     public static ResumeFragment newInstance(Resume resume) {
-        ResumeFragment fragment = new ExternalActivitiesFragment();
+        ResumeFragment fragment = new CertificatesFragment();
         fragment.setResume(resume);
         return fragment;
     }
@@ -46,17 +44,20 @@ public class ExternalActivitiesFragment extends ResumeFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root =
-                inflater.inflate(R.layout.fragment_external_activities, container, false);
-        ExternalActivities_list = root.findViewById(R.id.externalactivities_list);
+                inflater.inflate(R.layout.fragment_certificates, container, false);
+        Certificates_list = root.findViewById(R.id.certificates_list);
         final PersonalInfo personalInfo = getResume().personalInfo;
         adapter1 = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1);
-        ExternalActivities_list.setAdapter(adapter1);
+        Certificates_list.setAdapter(adapter1);
         ID = GlobalVariables.getGlobalVariable_id();
+
         executeAsyncTask(ID);
+
+
         return root;
     }
 
-    private class UpdateExternalActivitiesListTask extends AsyncTask<String, Void, String> {
+    private class UpdateCertificatesListTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... arg0) {
@@ -64,7 +65,7 @@ public class ExternalActivitiesFragment extends ResumeFragment {
                 String id = arg0[0];
 
                 OkHttpClient client = new OkHttpClient();
-                String link = "http://qkrwodbs.dothome.co.kr/Select_externalActivities.php";
+                String link = "http://qkrwodbs.dothome.co.kr/Select_certificate.php";
                 Request request = new Request.Builder()
                         .url(link + "?ID=" + id)
                         .build();
@@ -89,11 +90,10 @@ public class ExternalActivitiesFragment extends ResumeFragment {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                    String externalActivities = jsonObject.getString("externalActivities");
-                    String startDate = jsonObject.getString("startDate");
-                    String endDate = jsonObject.getString("endDate");
+                    String certificate = jsonObject.getString("certificate");
+                    String acquisitionDate = jsonObject.getString("acquisitionDate");
 
-                    String concatenatedString = externalActivities + "(" + startDate + "~" + endDate + ")";
+                    String concatenatedString = certificate + "(" + acquisitionDate + ")";
 
                     if (concatenatedString != null) {
                         list.add(concatenatedString);
@@ -114,8 +114,9 @@ public class ExternalActivitiesFragment extends ResumeFragment {
         }
     }
 
+    // Example of how to execute the AsyncTask in your fragment
     private void executeAsyncTask(String id) {
-        UpdateExternalActivitiesListTask task = new UpdateExternalActivitiesListTask();
+        UpdateCertificatesListTask task = new UpdateCertificatesListTask();
         task.execute(id);
     }
 

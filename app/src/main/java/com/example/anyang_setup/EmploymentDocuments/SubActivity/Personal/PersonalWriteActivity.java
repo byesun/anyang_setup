@@ -133,7 +133,7 @@ public class PersonalWriteActivity extends AppCompatActivity {
                         finish();
                     }
                 })
-                
+
                 .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

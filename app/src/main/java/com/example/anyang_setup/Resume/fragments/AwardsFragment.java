@@ -19,6 +19,7 @@ import com.example.anyang_setup.Resume.helper.ResumeFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class AwardsFragment extends ResumeFragment {
                 String id = arg0[0];
 
                 OkHttpClient client = new OkHttpClient();
-                String link = "http://qkrwodbs.dothome.co.kr/Select_awards_resume.php";
+                String link = "http://qkrwodbs.dothome.co.kr/Select_awards.php";
                 Request request = new Request.Builder()
                         .url(link + "?ID=" + id)
                         .build();
@@ -86,9 +87,14 @@ public class AwardsFragment extends ResumeFragment {
                 JSONArray jsonArray = new JSONArray(result);
                 ArrayList<String> list = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    String Awards = jsonArray.getString(i);
-                    if (Awards != null) {
-                        list.add(Awards);
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String awards = jsonObject.getString("awards");
+                    String startDate = jsonObject.getString("startDate");
+                    String endDate = jsonObject.getString("endDate");
+
+                    String concatenatedString = awards + "(" + startDate + "~" + endDate + ")";
+                    if (concatenatedString != null) {
+                        list.add(concatenatedString);
                     }
                 }
 

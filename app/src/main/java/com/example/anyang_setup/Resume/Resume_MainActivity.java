@@ -22,7 +22,7 @@ import com.example.anyang_setup.Resume.fragments.ExperienceFragment;
 import com.example.anyang_setup.Resume.fragments.PersonalInfoFragment;
 import com.example.anyang_setup.Resume.fragments.AwardsFragment;
 import com.example.anyang_setup.Resume.fragments.ExternalActivitiesFragment;
-import com.example.anyang_setup.Resume.fragments.Certificates;
+import com.example.anyang_setup.Resume.fragments.CertificatesFragment;
 import com.example.anyang_setup.Resume.fragments.PreviewFragment;
 import com.example.anyang_setup.Resume.fragments.ProjectsFragment;
 import com.example.anyang_setup.Resume.helper.ResumeFragment;
@@ -140,7 +140,7 @@ public class Resume_MainActivity extends AppCompatActivity {
                 openFragment(ExternalActivitiesFragment.newInstance(resume));
                 break;
             case R.id. pick_certificates:
-                openFragment(Certificates.newInstance(resume));
+                openFragment(CertificatesFragment.newInstance(resume));
                 break;
             default:
                 return false;
