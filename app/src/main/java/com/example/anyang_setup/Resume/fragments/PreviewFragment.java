@@ -8,6 +8,7 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintJob;
 import android.print.PrintManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.R;
 import com.example.anyang_setup.Resume.datamodel.Experience;
 import com.example.anyang_setup.Resume.datamodel.PersonalInfo;
@@ -29,20 +31,43 @@ import com.example.anyang_setup.Resume.datamodel.School;
 import com.example.anyang_setup.Resume.helper.ResumeFragment;
 import com.example.anyang_setup.Resume.fragments.PersonalInfoFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class PreviewFragment extends ResumeFragment {
     WebView webView;
+    private String userinfo;
+    private String stdName;
+    private String stdDepart;
 
-    public static ResumeFragment newInstance(Resume resume) {
-        ResumeFragment fragment = new PreviewFragment();
-        fragment.setResume(resume);
+    public static PreviewFragment newInstance(Resume resume, String userinfo) {
+        PreviewFragment fragment = new PreviewFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("resume", resume); // Resume 객체를 Bundle에 추가
+        args.putString("userinfo", userinfo); // userinfo 문자열을 Bundle에 추가
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+        if (getArguments() != null) {
+            userinfo = getArguments().getString("userinfo");
+
+            try {
+                JSONObject jsonObject = new JSONObject(userinfo);
+                JSONObject data = jsonObject.getJSONObject("data");
+                this.stdName = data.getString("stdName"); // 클래스 멤버 변수에 할당
+                this.stdDepart = data.getString("stdDepart"); // 클래스 멤버 변수에 할당
+
+                Log.d("PreviewFragment", "Student Name: " + stdName);
+                Log.d("PreviewFragment", "Student ID: " + stdDepart);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -55,6 +80,11 @@ public class PreviewFragment extends ResumeFragment {
         PersonalInfo personalInfo = resume.personalInfo;
         // Resume 데이터 모델에서 이미지 URI 가져오기
         String imageUri = getResume().getImageUri();
+        Log.d("Resume_MainAcitivity","asdasdasd"+resume);
+        // CSS 클래스 정의 추가
+        htmlContent.append("<style type='text/css'> .right-align { text-align: right; } .left-align { text-align: left; } </style>\n"); //왼쪽 오른쪽
+        htmlContent.append("<style type='text/css'> .center-align { text-align: center; } </style>\n"); // 중앙 위치
+        htmlContent.append("<style type='text/css'> .box_1 {background-color: #F0F8FF;width: 100px;height: 100px;border: 0px solid black;padding: 20px;margin: 20px;} </style>");
         htmlContent.append(String.format("<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -67,39 +97,9 @@ public class PreviewFragment extends ResumeFragment {
                 "</head>\n" +
                 "<body>\n" +
                 "<div id=contents>\n" +
-                "<style type=text/css>@import url('https://themes.googleusercontent.com/fonts/css?kit=xTOoZr6X-i3kNg7pYrzMsnEzyYBuwf3lO_Sc3Mw9RUVbV0WvE1cEyAoIq5yYZlSc');" +
-                "ol{margin:0;padding:0}table td,table th{padding:0}.c26{border-right-style:solid;padding:3.6pt 3.6pt 3.6pt 3.6pt;border-bottom-color:#fff;border-top-width:0;" +
-                "border-right-width:0;border-left-color:#fff;vertical-align:top;border-right-color:#fff;border-left-width:0;border-top-style:solid;border-left-style:solid;" +
-                "border-bottom-width:0;width:176.3pt;border-top-color:#fff;border-bottom-style:solid}.c4{border-right-style:solid;padding:5pt 5pt 5pt 5pt;" +
-                "border-bottom-color:#fff;border-top-width:0;border-right-width:0;border-left-color:#fff;vertical-align:top;border-right-color:#fff;border-left-width:0;" +
-                "border-top-style:solid;border-left-style:solid;border-bottom-width:0;width:327.7pt;border-top-color:#fff;border-bottom-style:solid}.c16{color:#000;" +
-                "font-weight:700;text-decoration:none;vertical-align:baseline;font-size:12pt;font-family:\"Raleway\";" +
-                "font-style:normal}.c7{color:#000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:10pt;" +
-                "font-family:\"Lato\";font-style:normal}.c13{color:#000;font-weight:700;text-decoration:none;vertical-align:baseline;" +
-                "font-size:10pt;font-family:\"Lato\";font-style:normal}.c1{color:#666;font-weight:400;text-decoration:none;vertical-align:baseline;" +
-                "font-size:9pt;font-family:\"Lato\";font-style:normal}.c19{color:#000;font-weight:400;text-decoration:none;vertical-align:baseline;" +
-                "font-size:6pt;font-family:\"Lato\";font-style:normal}.c20{color:#f2511b;font-weight:700;text-decoration:none;vertical-align:baseline;" +
-                "font-size:16pt;font-family:\"Raleway\";font-style:normal}.c6{padding-top:0;padding-bottom:0;line-height:1.0;text-align:left}.c32{padding-top:5pt;" +
-                "padding-bottom:0;line-height:1.15;text-align:left}.c0{padding-top:10pt;padding-bottom:0;line-height:1.0;text-align:left}.c22{padding-top:5pt;" +
-                "padding-bottom:0;line-height:1.0;text-align:left}.c10{color:#d44500;text-decoration:none;vertical-align:baseline;font-style:normal}.c2{padding-top:0;" +
-                "padding-bottom:0;line-height:1.15;text-align:left}.c33{padding-top:3pt;padding-bottom:0;line-height:1.0;text-align:left}.c9{padding-top:4pt;" +
-                "padding-bottom:0;line-height:1.15;text-align:left}.c23{border-spacing:0;border-collapse:collapse;margin:0 auto}.c30{color:#000;text-decoration:none;" +
-                "vertical-align:baseline;font-style:normal}.c3{padding-top:6pt;padding-bottom:0;line-height:1.15;text-align:left}.c14{padding-top:16pt;padding-bottom:0;" +
-                "line-height:1.15;text-align:left}.c28{padding-top:6pt;padding-bottom:0;line-height:1.0;text-align:left}.c18{font-size:9pt;font-family:\"Lato\";" +
-                "font-weight:400}.c24{font-size:14pt;font-family:\"Lato\";font-weight:700}.c8{font-size:10pt;font-family:\"Lato\";font-weight:400}.c5{font-size:11pt;" +
-                "font-family:\"Lato\";font-weight:400}.c31{background-color:#fff;max-width:504pt;padding:36pt 54pt 36pt 54pt}.c35{font-weight:700;font-size:24pt;" +
-                "font-family:\"Raleway\"}.c11{orphans:2;widows:2;height:11pt}.c21{height:auto}.c15{height:auto}.c27{height:auto}.c34{height:auto}.c29{height:auto}.c25{font-size:10pt}.c12{page-break-after:avoid}.c17{height:265pt}." +
-                "title{padding-top:6pt;color:#000;font-weight:700;font-size:24pt;padding-bottom:0;font-family:\"Raleway\";line-height:1.0;page-break-after:avoid;orphans:2;widows:2;text-align:left}.subtitle{padding-top:3pt;color:#f2511b;" +
-                "font-weight:700;font-size:16pt;padding-bottom:0;font-family:\"Raleway\";line-height:1.0;" +
-                "page-break-after:avoid;orphans:2;widows:2;text-align:left}li{color:#000;font-size:11pt;font-family:\"Lato\"}p{margin:0;color:#000;font-size:11pt;" +
-                "font-family:\"Lato\"}h1{padding-top:4pt;color:#000;font-weight:700;font-size:12pt;padding-bottom:0;font-family:\"Raleway\";" +
-                "line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h2{padding-top:6pt;color:#000;font-weight:700;font-size:11pt;padding-bottom:0;" +
-                "font-family:\"Lato\";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h3{padding-top:6pt;color:#666;font-size:9pt;padding-bottom:0;" +
-                "font-family:\"Lato\";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h4{padding-top:8pt;-webkit-text-decoration-skip:none;" +
-                "color:#666;text-decoration:underline;font-size:11pt;padding-bottom:0;line-height:1.15;page-break-after:avoid;" +
-                "text-decoration-skip-ink:none;font-family:\"Trebuchet MS\";orphans:2;widows:2;text-align:left}h5{padding-top:8pt;color:#666;font-size:11pt;padding-bottom:0;" +
-                "font-family:\"Trebuchet MS\";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h6{padding-top:8pt;color:#666;font-size:11pt;padding-bottom:0;" +
-                "font-family:\"Trebuchet MS\";line-height:1.15;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left}</style>\n" +
+/*                "<style type=text/css>@import url('https://themes.googleusercontent.com/fonts/css?kit=xTOoZr6X-i3kNg7pYrzMsnEzyYBuwf3lO_Sc3Mw9RUVbV0WvE1cEyAoIq5yYZlSc');" +
+                "c6{text-align: right;}\n" +
+                "</style>\n" +*/
                 "<p class=\"c2 c29\"><span class=c19></span></p>\n" +
                 "<a id=t.b7144d62fc47a2bfcf177a3c3dd72df0e868051e></a>\n" +
                 "<a id=t.0></a>\n" +
@@ -107,21 +107,22 @@ public class PreviewFragment extends ResumeFragment {
                 "            <tbody>\n" +
                 "                <tr class=\"c21\">\n" +
                 "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                "                        <img src=\"" + imageUri + "\" style=\"width:160px; height:170px;\">" +
+                "                        <p class=\"center-align\"><img src=\"" + imageUri + "\" style=\"width:103px; height:132px; color:box_1;\" onerror=\"this.src='https://via.placeholder.com/103x132.jpg'\"></p>" +
 /*                "                        <p class=\"c6 c12 title\" id=\"h.4prkjmzco10w\"><span>%s</span></p>\n" +
                 "                        <p class=\"c33 subtitle\" id=\"h.o2iwx3vdck7p\"><span class=\"c20\">%s</span></p>\n" +*/
                 "                    </td>\n" +
-                "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n" +
+                "                    <td class=\"box_1\" colspan=\"1\" rowspan=\"1\">\n" +
                 "                        <p class=\"c6\"><span style=\"overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 418.00px; height: 2.67px;\"><img alt=\"\" src=\"https://lh4.googleusercontent.com/j7t3_XjsJ1PHIrgcWuJOWmQ2fFs9q-TT_LNTDfAXGnVu49aapNgutWcfK1k7pPzGtsu9lOvPynvLW07b_KwpVV0ituspJAXOQ_IBZyN087cqGsXawUahO2qDRCQZ8-qq4esAcP7M\" style=\"width: 418.00px; height: 2.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);\" title=\"horizontal line\"></span></p>\n" +
-                "                        <hr><h1 class=\"c3\" id=\"h.lf5wiiqsu4ub\"><span>%s</span></h1>\n" +
-                "                        <p class=\"c6\"><span class=\"c7\">이름 : %s</span></p>\n" +
-                "                        <p class=\"c6\"><span class=\"c25\">생년월일 : %s</span></p>\n" +
-                "                        <p class=\"c0\"><span class=\"c10 c8\">연락처 : %s</span></p>\n" +
-                "                        <p class=\"c6\"><span class=\"c8 c10\">주소 : %s</span></p>\n" +
-                "                        <p class=\"c6\"><span class=\"c8\">e_mail : %s</span></p>\n" +
+/*                "                        <hr><h1 class=\"c3\" id=\"h.lf5wiiqsu4ub\"><span>%s</span></h1>\n" +*/
+                "                        <p class=\"c6\"><span class=\"label\">이름 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">" + stdName + "</span></p>\n" +
+                "                        <p class=\"c6\"><span class=\"label\">생년월일 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
+                "                        <p class=\"c6\"><span class=\"label\">연락처 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
+                "                        <p class=\"c6\"><span class=\"label\">주소 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
+                "                        <p class=\"c6\"><span class=\"label\">e_mail &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>"+
+                "                        <p class=\"c6\"><span class=\"label\">학과 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">" + stdDepart + "</span></p>"+
                 "                    </td>\n" +
-                "                </tr><hr>", personalInfo.getName(), personalInfo.getJobTitle(), personalInfo.getName(), personalInfo.getAddressLine1(), personalInfo.getAddressLine2(), personalInfo.getPhone(), personalInfo.getEmail()));
-
+                "                </tr><hr>", personalInfo.getJobTitle(), personalInfo.getPhone(), personalInfo.getAddressLine1(), personalInfo.getEmail()));
+//, personalInfo.getAddressLine2()
         if (!resume.skills.isEmpty()) {
             htmlContent.append(String.format("\n" +
                     "                <tr class=\"c27\">\n" +
@@ -167,8 +168,8 @@ public class PreviewFragment extends ResumeFragment {
             htmlContent.append("\n" +
                     "                <tr class=\"c15\">\n" +
                     "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p>\n" +
-                    "                        <h1 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+getString(R.string.hint_project_name)+"</span></h1></td>\n" +
+                    "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
+                    "                        <h3 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+getString(R.string.hint_project_name)+"</span></h3></td>\n" +
                     "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
             boolean first = true;
             for (Project project : resume.projects) {
@@ -202,6 +203,10 @@ public class PreviewFragment extends ResumeFragment {
                 "</div>\n" +
                 "</body>\n" +
                 "</html>");
+        htmlContent.append("<hr><p class='center-align'>본 이력서에 기재한 사항은 사실과 다름없음을 확인합니다.</p>\n");
+        htmlContent.append("<p class='right-align'>작성일 : 2023 년 11월 29일</p>\n");
+        htmlContent.append(String.format("<p class='right-align'>지원자 : " + stdName + " (인)</p>\n"));
+
         webView.loadDataWithBaseURL(null, htmlContent.toString(), "text/html", "utf-8", null);
         return view;
     }

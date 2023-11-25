@@ -1,3 +1,4 @@
+/*
 package com.example.anyang_setup.MakingResume;
 
 
@@ -31,10 +32,12 @@ import com.example.anyang_setup.R;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+*/
 /**
  * Created by Muhammad Abubakar on 11/11/2017.
  * this is the secod activity where we selected 6 photos
- */
+ *//*
+
 
 public class GeneralPhotosActivity extends AppCompatActivity implements View.OnClickListener {
     Button generalPhotos1,generalPhotos2,generalPhotos3,generalPhotos4,generalPhotos5,generalPhotos6,btn_goTobicycleActivity
@@ -273,14 +276,17 @@ public class GeneralPhotosActivity extends AppCompatActivity implements View.OnC
     public void goBack(View view) {
         //if(DocumentContainer.get(this).clearDocument(this,getLayoutInflater())){
             finish();
-        /*}else {
+        */
+/*}else {
             MessageHelper.showCustomToastError(this,getLayoutInflater(),"Something Went Wrong.");
             finish();
-        }*/
+        }*//*
+
     }
 
-    /*public void goTobicycleActivity(View view) {
+    public void goTobicycleActivity(View view) {
         Intent intent = new Intent(this,BicyclesActivity.class);
         startActivity(intent);
-    }*/
+    }
 }
+*/

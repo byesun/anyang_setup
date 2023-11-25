@@ -9,8 +9,6 @@ import android.os.Parcelable;
 
 public class PersonalInfo implements Parcelable {
     private String name;
-
-    private String Major;
     private String jobTitle;
     private String addressLine1;
     private String addressLine2;
@@ -62,6 +60,7 @@ public class PersonalInfo implements Parcelable {
         dest.writeString(jobTitle);
         dest.writeString(addressLine1);
         dest.writeString(addressLine2);
+        dest.writeString(phone);
         dest.writeString(email);
     }
 
@@ -72,7 +71,6 @@ public class PersonalInfo implements Parcelable {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getJobTitle() {
         return jobTitle;
