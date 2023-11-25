@@ -68,6 +68,7 @@ public class PreviewFragment extends ResumeFragment {
                 e.printStackTrace();
             }
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class PreviewFragment extends ResumeFragment {
         // CSS 클래스 정의 추가
         htmlContent.append("<style type='text/css'> .right-align { text-align: right; } .left-align { text-align: left; } </style>\n"); //왼쪽 오른쪽
         htmlContent.append("<style type='text/css'> .center-align { text-align: center; } </style>\n"); // 중앙 위치
-        htmlContent.append("<style type='text/css'> .box_1 {background-color: #F0F8FF;width: 100px;height: 100px;border: 0px solid black;padding: 20px;margin: 20px;} </style>");
+        htmlContent.append("<style type='text/css'> .box_1 {background-color: #FFFFFF;width: 100px;height: 100px;border: 0px solid black;padding: 20px;margin: 20px;} </style>");
         htmlContent.append(String.format("<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -105,7 +106,7 @@ public class PreviewFragment extends ResumeFragment {
                 "<a id=t.0></a>\n" +
                 "<table class=c23>\n" +
                 "            <tbody>\n" +
-                "                <tr class=\"c21\">\n" +
+                "                <tr class=\"box_1\">\n" +
                 "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
                 "                        <p class=\"center-align\"><img src=\"" + imageUri + "\" style=\"width:103px; height:132px; color:box_1;\" onerror=\"this.src='https://via.placeholder.com/103x132.jpg'\"></p>" +
 /*                "                        <p class=\"c6 c12 title\" id=\"h.4prkjmzco10w\"><span>%s</span></p>\n" +
