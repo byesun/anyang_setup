@@ -1,10 +1,12 @@
 package com.example.anyang_setup.Resume.fragments;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -33,6 +36,7 @@ public class AwardsFragment extends ResumeFragment {
     ListView awards_list;
     String ID;
     ArrayAdapter<String> adapter1;
+    List<Integer> selectedItems = new ArrayList<>();
 
     public static ResumeFragment newInstance(Resume resume) {
         ResumeFragment fragment = new AwardsFragment();
@@ -52,6 +56,32 @@ public class AwardsFragment extends ResumeFragment {
 
         // Execute AsyncTask
         executeAsyncTask(ID);
+
+        awards_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Check if the item is already selected
+                if (selectedItems.contains(position)) {
+                    // If selected, remove it from the list
+                    selectedItems.remove(Integer.valueOf(position));
+                } else {
+                    // If not selected, add it to the list
+                    selectedItems.add(position);
+                }
+
+                // Update the background color of the selected items in awards_list
+                for (int i = 0; i < awards_list.getChildCount(); i++) {
+                    View listItem = awards_list.getChildAt(i);
+                    if (selectedItems.contains(i)) {
+                        // Set the background color for selected items
+                        listItem.setBackgroundColor(Color.GRAY);
+                    } else {
+                        // Set the background color for unselected items
+                        listItem.setBackgroundColor(Color.TRANSPARENT);
+                    }
+                }
+            }
+        });
 
         return root;
     }
