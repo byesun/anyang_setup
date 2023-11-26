@@ -25,6 +25,21 @@
                 android:inputType="textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- 학과 입력 -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_Major"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_input_margin_bottom">
+
+            <EditText
+                android:id="@+id/input_Major"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Major"
+                android:inputType="textCapWords" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <!-- 직책 입력 -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout_job_title"
@@ -105,22 +120,23 @@
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- 이미지 표시용 ImageView -->
-        <ImageView
-            android:id="@+id/profile_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop" />
 
         <!-- 이미지 선택 버튼 -->
         <Button
             android:id="@+id/select_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Image"
+            android:text="증명사진 가져오기"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp" />
+
+        <!-- 이미지 표시용 ImageView -->
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="200dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop" />
     </LinearLayout>
 </ScrollView>

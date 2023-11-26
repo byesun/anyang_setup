@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/action_personal_info"
@@ -18,31 +19,43 @@
             android:checked="false"
             android:title="자격증 선택"/>
         <item
-            android:id="@+id/action_essentials"
+            android:id="@+id/pick_personal"
             android:checked="false"
-            android:title="기술" />
+            android:title="자기소개서 선택"/>
         <item
-            android:id="@+id/action_projects"
-            android:checked="false"
-            android:title="프로젝트" />
-        <item
-            android:id="@+id/action_education"
-            android:checked="false"
-            android:title="학력" />
-        <item
-            android:id="@+id/action_experience"
-            android:checked="false"
-            android:title="경험" />
-        <!--
-        <item
-            android:id="@+id/action_awards"
-            android:checked="false"
-            android:title="@string/action_awards" />
-            -->
-        <item
-            android:id="@+id/action_preview"
-            android:checked="false"
-            android:title="미리보기" />
+            android:id="@+id/action_text_set"
+            android:orderInCategory="1"
+            android:title="@string/resume_text_write"
+            app:showAsAction="never">
+            <menu>
+                <item
+                    android:id="@+id/action_essentials"
+                    android:checked="false"
+                    android:title="기술" />
+                <item
+                    android:id="@+id/action_projects"
+                    android:checked="false"
+                    android:title="프로젝트" />
+                <item
+                    android:id="@+id/action_education"
+                    android:checked="false"
+                    android:title="학력" />
+                <item
+                    android:id="@+id/action_experience"
+                    android:checked="false"
+                    android:title="경험" />
+                <!--
+                <item
+                    android:id="@+id/action_awards"
+                    android:checked="false"
+                    android:title="@string/action_awards" />
+                    -->
+                <item
+                    android:id="@+id/action_preview"
+                    android:checked="false"
+                    android:title="미리보기" />
+            </menu>
+        </item>
 
     </group>
 </menu>

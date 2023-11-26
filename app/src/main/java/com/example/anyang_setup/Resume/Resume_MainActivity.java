@@ -19,6 +19,7 @@ import com.example.anyang_setup.Resume.datamodel.Resume;
 import com.example.anyang_setup.Resume.fragments.EducationFragment;
 import com.example.anyang_setup.Resume.fragments.EssentialsFragment;
 import com.example.anyang_setup.Resume.fragments.ExperienceFragment;
+import com.example.anyang_setup.Resume.fragments.PersonalFragment;
 import com.example.anyang_setup.Resume.fragments.PersonalInfoFragment;
 import com.example.anyang_setup.Resume.fragments.AwardsFragment;
 import com.example.anyang_setup.Resume.fragments.ExternalActivitiesFragment;
@@ -148,6 +149,9 @@ public class Resume_MainActivity extends AppCompatActivity {
                 break;
             case R.id. pick_certificates:
                 openFragment(CertificatesFragment.newInstance(resume));
+                break;
+            case R.id. pick_personal:
+                openFragment(PersonalFragment.newInstance(resume));
                 break;
             default:
                 return false;

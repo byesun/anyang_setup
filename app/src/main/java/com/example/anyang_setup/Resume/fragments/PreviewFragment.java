@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ import com.example.anyang_setup.Resume.fragments.PersonalInfoFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,6 +46,8 @@ public class PreviewFragment extends ResumeFragment {
     private String userinfo;
     private String stdName;
     private String stdDepart;
+    private Object titleText;
+    private Object personalsText;
 
     public static PreviewFragment newInstance(Resume resume, String userinfo) {
         PreviewFragment fragment = new PreviewFragment();
@@ -135,13 +139,43 @@ public class PreviewFragment extends ResumeFragment {
             externalText = externalStringBuilder.toString();
         }
 
+        // 자기소개서 제목
+
+        String titleText = "";
+        List<String> selectedTitle = PersonalFragment.getSelectedTitles();
+
+        StringBuilder titleStringBuilder = new StringBuilder();
+        for (String title : selectedTitle) {
+            titleStringBuilder.append(title).append("\n");
+        }
+
+        // awardsStringBuilder가 null이 아닌 경우에 awardsText에 할당
+        if (titleStringBuilder != null) {
+            titleText = titleStringBuilder.toString();
+        }
+
+        // 자기소개서 내용
+
+        String personalsText = "";
+        List<String> selectedPersonals = PersonalFragment.getSelectedPersonals();
+
+        StringBuilder persoanlsStringBuilder = new StringBuilder();
+        for (String personals : selectedPersonals) {
+            persoanlsStringBuilder.append(personals).append("\n");
+        }
+
+        // awardsStringBuilder가 null이 아닌 경우에 awardsText에 할당
+        if (persoanlsStringBuilder != null) {
+            personalsText = persoanlsStringBuilder.toString();
+        }
+
 
         // CSS 클래스 정의
         htmlContent.append("<style type='text/css'>\n" +
                 "    .right-align { text-align: right; }\n" +
                 "    .left-align { text-align: left; }\n" +
                 "    .center-align { text-align: center; }\n" +
-                "    .rounded-box { background-color: #C6C6C6; border-radius: 15px; padding: 20px; margin: 20px; }\n" + // 둥근 네모 박스
+                "    .rounded-box { background-color: #EDEDED; border-radius: 15px; padding: 20px; margin: 20px; }\n" + // 둥근 네모 박스
                 "    .oval-box { background-color: #C6C6C6; border-radius: 50%; width: 200px; height: 100px; text-align: center; }\n" + // 타원형 박스
                 "    body { font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.6; background-color: #f8f8f8; }\n" +
                 "    h1, h2, h3, p { color: #000; }\n" + // 검정색 텍스트
@@ -167,120 +201,247 @@ public class PreviewFragment extends ResumeFragment {
                 "#footer{background:#f0f0f0;padding:10px 10px}#header{border-bottom:1px #ccc solid}#footer{border-top:1px #ccc solid;border-bottom:1px #ccc solid;font-size:13}" +
                 "#contents{margin:6px}.dash{padding:0 6px}</style>\n" +
                 "</head>\n" +
-                "<body style=\"background-color:#EAE5DE\">\n" +
+                "<body style=\"background-color:#FAF5EC\">\n" +
                 "<div id=contents >\n" +
 /*                "<style type=text/css>@import url('https://themes.googleusercontent.com/fonts/css?kit=xTOoZr6X-i3kNg7pYrzMsnEzyYBuwf3lO_Sc3Mw9RUVbV0WvE1cEyAoIq5yYZlSc');" +
                 "c6{text-align: right;}\n" +
                 "</style>\n" +*/
-                "<table class=c23>\n" +
-                "            <tbody>\n" +
-                "               <p class=\"c6\"><span class=\"c24\"><hr>ㅡ</span></p>\n" +
-                "                <tr class=\"c15\">\n" +
-                "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                "                        <p class=\"center-align\"><img src=\"" + imageUri + "\" style=\"width:133px; height:162px; color:box_1;\" onerror=\"this.src='https://via.placeholder.com/103x132.jpg'\"></p>" +
-/*                "                        <p class=\"c6 c12 title\" id=\"h.4prkjmzco10w\"><span>%s</span></p>\n" +
-                "                        <p class=\"c33 subtitle\" id=\"h.o2iwx3vdck7p\"><span class=\"c20\">%s</span></p>\n" +*/
-                "                    </td>\n" +
-                "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                "                        <p class=\"c6\"><span style=\"overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 418.00px; height: 2.67px;\"><img alt=\"\" src=\"https://lh4.googleusercontent.com/j7t3_XjsJ1PHIrgcWuJOWmQ2fFs9q-TT_LNTDfAXGnVu49aapNgutWcfK1k7pPzGtsu9lOvPynvLW07b_KwpVV0ituspJAXOQ_IBZyN087cqGsXawUahO2qDRCQZ8-qq4esAcP7M\" style=\"width: 418.00px; height: 2.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);\" title=\"horizontal line\"></span></p>\n" +
-                /*                "                        <hr><h1 class=\"c3\" id=\"h.lf5wiiqsu4ub\"><span>%s</span></h1>\n" +*/
-                "                        <p class=\"c6\"><span class=\"label\">이름 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">" + stdName + "</span></p>\n" +
-                "                        <p class=\"c6\"><span class=\"label\">생년월일 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
-                "                        <p class=\"c6\"><span class=\"label\">연락처 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
-                "                        <p class=\"c6\"><span class=\"label\">주소 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
-                "                        <p class=\"c6\"><span class=\"label\">e_mail &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>"+
-                "                        <p class=\"c6\"><span class=\"label\">학과 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">" + stdDepart + "</span></p>" +
-                "                    </td>\n" +
-                "               </p>\n", personalInfo.getBirthTitle(), personalInfo.getPhone(), personalInfo.getAddressLine1(), personalInfo.getEmail()));
+                        "<table class='c23'>\n" +
+                        "    <tbody>\n" +
+                        "            <tr>\n" +
+                        "                <td class='rounded-box' colspan='2' rowspan='1'>\n" +
+                        "                    <h3 class='c9'> </h3>\n" +
+                        "                </td>\n" +
+                        "            </tr>\n" +
+                        // 프로필 사진과 개인 정보 부분
+                        "        <tr>\n" +
+                        "            <td rowspan='2' class='c26'>\n" +
+                        "                <p class='center-align'><img src='" + imageUri + "' style='width:133px; height:162px; color:box_1;' onerror=\"this.src='https://via.placeholder.com/103x132.jpg'\"></p>\n" +
+                        "            </td>\n" +
+                        "            <td class='c26'>\n" +
+                        "                <p class='c6'><h1>" + stdName + "</h1></p>\n" +
+                        "                <p class='c6'><span class='label'>생년월일: </span><span class='data'>" + personalInfo.getBirthTitle() + "</span></p>\n" +
+                        "                <p class='c6'><span class='label'>연락처: </span><span class='data'>" + personalInfo.getPhone() + "</span></p>\n" +
+                        "            </td>\n" +
+                        "        </tr>\n" +
+                        "        <tr>\n" +
+                        "            <td class='c26'>\n" +
+                        "                <p class='c6'><span class='label'>주소: </span><span class='data'>" + personalInfo.getAddressLine1() + "</span></p>\n" +
+                        "                <p class='c6'><span class='label'>이메일: </span><span class='data'>" + personalInfo.getEmail() + "</span></p>\n" +
+                        "                <p class='c6'><span class='label'>학과: </span><span class='data'>" + stdDepart + "</span></p>\n" +
+                        "            </td>\n" +
+                        "        </tr>\n"));
+                        // 기술과 언어 부분
+
+        // 경계선 추가
+        htmlContent.append(
+                "            <tr>\n" +
+                        "                <td class='rounded-box' colspan='4' rowspan='1'>\n" +
+                        "                    <h4 class='c9'> </h4>\n" +
+                        "                </td>\n" +
+                        "            </tr>\n"
+        );
+        // 기술(skills) 항목 처리
+        if (!resume.skills.isEmpty()) {
+            htmlContent.append(String.format(
+                            "            <td class='left-align' colspan='1'>\n" +
+                            "                <h4>%s</h4>\n" +
+                            "                <p>%s</p>\n" +
+                            "            </td>\n", getString(R.string.hint_skills), resume.skills
+            ));
+        }
+        // 언어(languages) 항목 처리
+        if (!resume.languages.isEmpty()) {
+            htmlContent.append(String.format(
+                            "            <td class='left-align' colspan='2'>\n" +
+                            "                <h4>%s</h4>\n" +
+                            "                <p>%s</p>\n" +
+                            "            </td>\n", getString(R.string.hint_languages), resume.languages
+            ));
+        }
+        // 수상 내역 섹션
+        if (!awardsText.isEmpty()) {
+            htmlContent.append(String.format(
+/*                    "            <tr>\n" +
+                            "                <td class='rounded-box' colspan='4' rowspan='1'>\n" +
+                            "                    <h3 class='c9'> </h3>\n" +
+                            "                </td>\n" +
+                            "            </tr>\n" +*/
+                    "        <tr class='c27'>\n" +
+                            "            <td class='c26' colspan='1' rowspan='1'>\n" +
+                            "                <h4 class='c9'><span class='c16'>수상목록</span></h4>\n" +
+                            "            </td>\n" +
+                            "            <td class='c4' colspan='1' rowspan='1'>\n" +
+                            "                <p class='c3'><span class='c7'>%s</span></p>\n" +
+                            "            </td>\n" +
+                            "        </tr>\n", awardsText));
+        }
+
+        // 자격증 섹션
+        if (!certificatesText.isEmpty()) {
+            htmlContent.append(String.format(
+/*                    "            <tr>\n" +
+                            "                <td class='rounded-box' colspan='4' rowspan='1'>\n" +
+                            "                    <h4 class='c9'> </h4>\n" +
+                            "                </td>\n" +
+                            "            </tr>\n" +*/
+                    "        <tr class='c27'>\n" +
+                            "            <td class='c26' colspan='1' rowspan='1'>\n" +
+                            "                <hr>\n" +
+                            "                <h4 class='c9'><span class='c16'>자격증</span></h4>\n" +
+                            "            </td>\n" +
+                            "            <td class='c4' colspan='1' rowspan='1'>\n" +
+                            "                <p class='left-align'>%s<br></p>\n" +
+                            "            </td>\n" +
+                            "        </tr>\n", certificatesText));
+        }
+
+        // 대외활동 섹션
+        if (!externalText.isEmpty()) {
+            htmlContent.append(String.format(
+/*                    "            <tr>\n" +
+                            "                <td class='rounded-box' colspan='4' rowspan='1'>\n" +
+                            "                    <h5 class='c9'> </h5>\n" +
+                            "                </td>\n" +
+                            "            </tr>\n" +*/
+                    "        <tr class='c27'>\n" +
+                            "            <td class='c26' colspan='1' rowspan='1'>\n" +
+                            "                <hr>\n" +
+                            "                <h4 class='c9'><span class='c16'>대외활동</span></h4>\n" +
+                            "            </td>\n" +
+                            "            <td class='c4' colspan='1' rowspan='1'>\n" +
+                            "                <p class='left-align'>%s</p>\n" +
+                            "            </td>\n" +
+                            "        </tr>\n", externalText));
+        }
+
+        // 경계선 추가
+        htmlContent.append(
+                "            <tr>\n" +
+                        "                <td class='rounded-box' colspan='4' rowspan='1'>\n" +
+                        "                    <h3 class='c9'> </h3>\n" +
+                        "                </td>\n" +
+                        "            </tr>\n"
+        );
 
 //, personalInfo.getAddressLine2()
-        if (!resume.skills.isEmpty()) {
-            htmlContent.append(String.format("\n" +
-                    "                <tr class=\"c27\">\n" +
-                    "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
-                    "                        <h1 class=\"c9\" id=\"h.61e3cm1p1fln\"><span class=\"c16\">"+getString(R.string.hint_skills)+"</span></h1></td>\n" +
-                    "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <p class=\"c2\"><span style=\"overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 418.00px; height: 2.67px;\"><img alt=\"\" src=\"https://lh3.googleusercontent.com/n8bZfGajkthDbPpbjeiRJ4w7rNUmj1iFxdZKCHUOVnfH9FgHVt5EBo3vOYIIoE3augYQ_DCZJUzdlStyJ5RaldVrSG36sTE0CjIot2qaiJ3YRyr2i87bt9Y9d0ngdseS9PpG0HzM\" style=\"width: 418.00px; height: 2.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);\" title=\"horizontal line\"></span></p>\n" +
-                    "                        <p class=\"c3\"><span class=\"c7\">%s</span></p>\n" +
-                    "                    </td>\n" +
-                    "                </tr>", resume.skills));
-        }
-        // HTML에 추가
-        htmlContent.append(String.format("<p class='right-align'>수상목록 : %s </p>\n", awardsText));
+
+/*        // HTML에 추가
+        htmlContent.append(String.format("<p class='left-align'>수상목록 : %s </p>\n", awardsText));
         htmlContent.append(String.format("<p class='right-align'>자격증 : %s </p>\n", certificatesText));
-        htmlContent.append(String.format("<p class='right-align'>대외활동 : %s </p>\n", externalText));
-        if (!resume.languages.isEmpty()) {
+        htmlContent.append(String.format("<p class='right-align'>대외활동 : %s </p>\n", externalText));*/
+/*        if (!resume.languages.isEmpty()) {
             htmlContent.append(String.format("\n" +
                     "                <tr class=\"c27\">\n" +
                     "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
                     "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
-                    "                        <h1 class=\"c9\" id=\"h.61e3cm1p1fln\"><span class=\"c16\">"+getString(R.string.hint_languages)+"</span></h1></td>\n" +
+                    "                        <h4 class=\"c9\" id=\"h.61e3cm1p1fln\"><span class=\"c16\">"+getString(R.string.hint_languages)+"</span></h4></td>\n" +
                     "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <p class=\"c2\"><span style=\"overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 418.00px; height: 2.67px;\"><img alt=\"\" src=\"https://lh3.googleusercontent.com/n8bZfGajkthDbPpbjeiRJ4w7rNUmj1iFxdZKCHUOVnfH9FgHVt5EBo3vOYIIoE3augYQ_DCZJUzdlStyJ5RaldVrSG36sTE0CjIot2qaiJ3YRyr2i87bt9Y9d0ngdseS9PpG0HzM\" style=\"width: 418.00px; height: 2.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);\" title=\"horizontal line\"></span></p>\n" +
                     "                        <p class=\"c3\"><span class=\"c7\">%s</span></p>\n" +
                     "                    </td>\n" +
                     "                </tr>", resume.languages));
-        }
-        if (resume.schools.size() != 0) {
-            htmlContent.append("\n" +
-                    "                <tr class=\"c15\">\n" +
-                    "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
-                    "                        <h1 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+getString(R.string.education)+"</span></h1></td>\n" +
-                    "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
-            boolean first = true;
+        }*/
+        // 학력 섹션
+        if (!resume.schools.isEmpty()) {
+            htmlContent.append("\n<tr class=\"c15\">\n" +
+                    "    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
+                    "                <hr>\n" +
+                    "        <h4 class=\"c9\"><span class=\"c16\">" + getString(R.string.navigation_education) + "</span></h4>\n" +
+                    "    </td>\n" +
+                    "    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
+
             for (School school : resume.schools) {
-                htmlContent.append(String.format("<h2 class=\"%s\" id=\"h.u3uy0857ab2n\"><span class=\"c5\">%s </span><span class=\"c30 c5\">/ %s</span></h2>\n" +
-                        "                        <h3 class=\"c2\" id=\"h.re1qtuma0rpm\"><span class=\"c1\">%s</span></h3>\n" +
-                        "                        <p class=\"c32\"><span class=\"c7\">%s</span></p>\n", first ? "c3" : "c14", school.getSchoolName(), school.getDegree(), school.getLocation(), school.getDescription()));
-                first = false;
+                htmlContent.append(String.format(
+                        "        <h5 class=\"c5\">%s / %s</h5>\n" +
+                                "        <p class=\"c32\">%s - %s</p>\n",
+                        school.getSchoolName(), school.getDegree(), school.getLocation(), school.getDescription()));
             }
-            htmlContent.append("</td>\n" +
-                    "                </tr>");
+
+            htmlContent.append("</td>\n</tr>\n");
         }
-        if (resume.projects.size() != 0) {
-            htmlContent.append("\n" +
-                    "                <tr class=\"c15\">\n" +
-                    "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
-                    "                        <h3 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+getString(R.string.hint_project_name)+"</span></h3></td>\n" +
-                    "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
-            boolean first = true;
+
+        // 프로젝트 섹션
+        if (!resume.projects.isEmpty()) {
+            htmlContent.append("\n<tr class=\"c15\">\n" +
+                    "    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
+                    "                <hr>\n" +
+                    "        <h4 class=\"c9\">" + getString(R.string.play_project) + "</h4>\n" +
+                    "    </td>\n" +
+                    "    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
+
             for (Project project : resume.projects) {
-                htmlContent.append(String.format("<h2 class=\"%s\" id=\"h.u3uy0857ab2n\"><span class=\"c5\">%s </span><span class=\"c30 c5\">/ %s</span></h2>\n" +
-                        "                        <p class=\"c32\"><span class=\"c7\">%s</span></p>\n", first ? "c3" : "c14", project.getName(), project.getDetail(), project.getDescription()));
-                first = false;
+                htmlContent.append(String.format(
+                        "        <h5 class=\"c5\">%s / %s</h5>\n" +
+                                "        <p class=\"c32\">%s</p>\n",
+                        project.getName(), project.getDetail(), project.getDescription()));
             }
-            htmlContent.append("</td>\n" +
-                    "                </tr>");
+
+            htmlContent.append("</td>\n</tr>\n");
         }
-        if (resume.experience.size() != 0) {
-            htmlContent.append("\n" +
-                    "                <tr class=\"c15\">\n" +
-                    "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
-                    "                        <h1 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+getString(R.string.navigation_experience)+"</span></h1></td>\n" +
-                    "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
-            boolean first = true;
+
+        // 경력 섹션
+        if (!resume.experience.isEmpty()) {
+            htmlContent.append("\n<tr class=\"c15\">\n" +
+                    "    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
+                    "                <hr>\n" +
+                    "        <h4 class=\"c9\">" + getString(R.string.navigation_experience) + "</h4>\n" +
+                    "    </td>\n" +
+                    "    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
+
             for (Experience experience : resume.experience) {
-                htmlContent.append(String.format("<h2 class=\"%s\" id=\"h.u3uy0857ab2n\"><span class=\"c5\">%s </span><span class=\"c30 c5\">/ %s</span></h2>\n" +
-                        "                        <h3 class=\"c2\" id=\"h.re1qtuma0rpm\"><span class=\"c1\">%s</span></h3>\n" +
-                        "                        <p class=\"c32\"><span class=\"c7\">%s</span></p>\n", first ? "c3" : "c14", experience.getCompany(), experience.getLocation(), experience.getJobTitle(), experience.getDescription()));
-                first = false;
+                htmlContent.append(String.format(
+                        "        <h5 class=\"c5\">%s / %s</h5>\n" +
+                                "        <p class=\"c32\">%s - %s</p>\n",
+                        experience.getCompany(), experience.getLocation(), experience.getJobTitle(), experience.getDescription()));
             }
-            htmlContent.append("</td>\n" +
-                    "                </tr>");
+
+            htmlContent.append("</td>\n</tr>\n");
         }
+
+
+        /*//자기소개서 제목---------------------------------------------
+        htmlContent.append("<p class='right-align'>제목 : ");
+        for (String title : titles) {
+            htmlContent.append(title).append(", ");
+        }
+        // 마지막 쉼표와 공백 제거
+        if (htmlContent.length() > 0) {
+            htmlContent.setLength(htmlContent.length() - 2);
+        }
+        htmlContent.append("</p>\n");
+
+
+        //자기소개서 내용---------------------------------------------
+        htmlContent.append("<p class='right-align'>내용 : ");
+        for (String personal : personals) {
+            htmlContent.append(personal).append(", ");
+        }
+        // 마지막 쉼표와 공백 제거
+        if (htmlContent.length() > 0) {
+            htmlContent.setLength(htmlContent.length() - 2);
+        }*/
+        // 자기소개서 제목 및 내용 처리
+        if (!titleText.isEmpty()) {
+            htmlContent.append(String.format("<p class='left-align'>제목: %s </p>\n", titleText));
+        }
+        if (!personalsText.isEmpty()) {
+            htmlContent.append(String.format("<p class='left-align'>내용: %s </p>\n", personalsText));
+        }
+
+        htmlContent.append("</p>\n");
         htmlContent.append("</tbody>\n" +
                 "</table>\n" +
                 "<p class=\"c2 c11\"><span class=\"c30 c5\"></span></p>\n" +
                 "</div>\n" +
                 "</body>\n" +
                 "</html>");
+
+
+
         htmlContent.append("<hr><p class='center-align'>본 이력서에 기재한 사항은 사실과 다름없음을 확인합니다.</p>\n");
         htmlContent.append("<p class='right-align'>작성일 : 2023 년 11월 29일</p>\n");
-        htmlContent.append(String.format("<p class='right-align'>지원자 : " + stdName + " (인)</p>\n"));
+        htmlContent.append(String.format("<p class='right-align'>작성인 : " + stdName + " (인)</p>\n"));
+
 
 
 
@@ -288,6 +449,17 @@ public class PreviewFragment extends ResumeFragment {
 
         webView.loadDataWithBaseURL(null, htmlContent.toString(), "text/html", "utf-8", null);
         return view;
+    }
+    // 선택된 항목 목록을 개행 문자로 구분된 문자열로 변환하는 메서드
+    private String getFormattedText(List<String> items) {
+        if (items == null || items.isEmpty()) {
+            return "";
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String item : items) {
+            stringBuilder.append(item).append("\n");
+        }
+        return stringBuilder.toString().trim();
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -298,8 +470,13 @@ public class PreviewFragment extends ResumeFragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_print) {
-            createWebPrintJob(webView);
+        switch (item.getItemId()) {
+            case R.id.action_print:
+                createWebPrintJob(webView);
+                return true;
+            case R.id.action_print_resume:
+                createResumePrintJob();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -321,6 +498,41 @@ public class PreviewFragment extends ResumeFragment {
         String jobName = getString(R.string.app_name) + " Document";
         PrintJob printJob = printManager.print(jobName, printAdapter,
                 new PrintAttributes.Builder().build());
+    }
+
+    // 인쇄 버튼 클릭 시 호출되는 메서드
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void createResumePrintJob() {
+        WebView printWebView = new WebView(getContext());
+        printWebView.setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+                // 웹뷰 로딩이 완료되면 인쇄 작업 생성 및 실행
+                PrintDocumentAdapter printAdapter = printWebView.createPrintDocumentAdapter();
+                String jobName = getString(R.string.app_name) + " Resume Document";
+                PrintJob printJob = ((PrintManager) getActivity().getSystemService(Context.PRINT_SERVICE))
+                        .print(jobName, printAdapter, new PrintAttributes.Builder().build());
+            }
+        });
+
+        // 자기소개서 제목 및 내용만 포함된 HTML 콘텐츠 생성
+        String resumeContentHtml = createResumeContentHtml();
+        printWebView.loadDataWithBaseURL(null, resumeContentHtml, "text/html", "utf-8", null);
+    }
+
+    // 자기소개서 제목 및 내용만 포함된 HTML 콘텐츠 생성 메서드
+    private String createResumeContentHtml() {
+        StringBuilder htmlContent = new StringBuilder();
+        // 기본 CSS 스타일 및 HTML 구조를 추가
+        htmlContent.append("<html><head><style type='text/css'>/* CSS 스타일 */</style></head><body>");
+
+        // 자기소개서 제목 및 내용 추가
+        htmlContent.append(String.format("<p class='right-align'>제목: %s </p>\n", titleText));
+        htmlContent.append(String.format("<p class='right-align'>내용: %s </p>\n", personalsText));
+
+        // HTML 닫기
+        htmlContent.append("</body></html>");
+
+        return htmlContent.toString();
     }
 
     @Override
