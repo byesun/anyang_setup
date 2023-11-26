@@ -46,8 +46,6 @@ public class PreviewFragment extends ResumeFragment {
     private String userinfo;
     private String stdName;
     private String stdDepart;
-    private Object titleText;
-    private Object personalsText;
 
     public static PreviewFragment newInstance(Resume resume, String userinfo) {
         PreviewFragment fragment = new PreviewFragment();
@@ -139,35 +137,6 @@ public class PreviewFragment extends ResumeFragment {
             externalText = externalStringBuilder.toString();
         }
 
-        // 자기소개서 제목
-
-        String titleText = "";
-        List<String> selectedTitle = PersonalFragment.getSelectedTitles();
-
-        StringBuilder titleStringBuilder = new StringBuilder();
-        for (String title : selectedTitle) {
-            titleStringBuilder.append(title).append("\n");
-        }
-
-        // awardsStringBuilder가 null이 아닌 경우에 awardsText에 할당
-        if (titleStringBuilder != null) {
-            titleText = titleStringBuilder.toString();
-        }
-
-        // 자기소개서 내용
-
-        String personalsText = "";
-        List<String> selectedPersonals = PersonalFragment.getSelectedPersonals();
-
-        StringBuilder persoanlsStringBuilder = new StringBuilder();
-        for (String personals : selectedPersonals) {
-            persoanlsStringBuilder.append(personals).append("\n");
-        }
-
-        // awardsStringBuilder가 null이 아닌 경우에 awardsText에 할당
-        if (persoanlsStringBuilder != null) {
-            personalsText = persoanlsStringBuilder.toString();
-        }
 
 
         // CSS 클래스 정의
@@ -175,7 +144,7 @@ public class PreviewFragment extends ResumeFragment {
                 "    .right-align { text-align: right; }\n" +
                 "    .left-align { text-align: left; }\n" +
                 "    .center-align { text-align: center; }\n" +
-                "    .rounded-box { background-color: #EDEDED; border-radius: 15px; padding: 20px; margin: 20px; }\n" + // 둥근 네모 박스
+                "    .rounded-box { background-color: #566573; border-radius: 15px; padding: 20px; margin: 20px; }\n" + // 둥근 네모 박스
                 "    .oval-box { background-color: #C6C6C6; border-radius: 50%; width: 200px; height: 100px; text-align: center; }\n" + // 타원형 박스
                 "    body { font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.6; background-color: #f8f8f8; }\n" +
                 "    h1, h2, h3, p { color: #000; }\n" + // 검정색 텍스트
@@ -201,7 +170,7 @@ public class PreviewFragment extends ResumeFragment {
                 "#footer{background:#f0f0f0;padding:10px 10px}#header{border-bottom:1px #ccc solid}#footer{border-top:1px #ccc solid;border-bottom:1px #ccc solid;font-size:13}" +
                 "#contents{margin:6px}.dash{padding:0 6px}</style>\n" +
                 "</head>\n" +
-                "<body style=\"background-color:#FAF5EC\">\n" +
+                "<body style=\"background-color:#AED6F1\">\n" +
                 "<div id=contents >\n" +
 /*                "<style type=text/css>@import url('https://themes.googleusercontent.com/fonts/css?kit=xTOoZr6X-i3kNg7pYrzMsnEzyYBuwf3lO_Sc3Mw9RUVbV0WvE1cEyAoIq5yYZlSc');" +
                 "c6{text-align: right;}\n" +
@@ -420,13 +389,13 @@ public class PreviewFragment extends ResumeFragment {
         if (htmlContent.length() > 0) {
             htmlContent.setLength(htmlContent.length() - 2);
         }*/
-        // 자기소개서 제목 및 내용 처리
+/*        // 자기소개서 제목 및 내용 처리
         if (!titleText.isEmpty()) {
             htmlContent.append(String.format("<p class='left-align'>제목: %s </p>\n", titleText));
         }
         if (!personalsText.isEmpty()) {
             htmlContent.append(String.format("<p class='left-align'>내용: %s </p>\n", personalsText));
-        }
+        }*/
 
         htmlContent.append("</p>\n");
         htmlContent.append("</tbody>\n" +
@@ -522,6 +491,35 @@ public class PreviewFragment extends ResumeFragment {
     // 자기소개서 제목 및 내용만 포함된 HTML 콘텐츠 생성 메서드
     private String createResumeContentHtml() {
         StringBuilder htmlContent = new StringBuilder();
+        // 자기소개서 제목
+
+        String titleText = "";
+        List<String> selectedTitle = PersonalFragment.getSelectedTitles();
+
+        StringBuilder titleStringBuilder = new StringBuilder();
+        for (String title : selectedTitle) {
+            titleStringBuilder.append(title).append("\n");
+        }
+
+        // awardsStringBuilder가 null이 아닌 경우에 awardsText에 할당
+        if (titleStringBuilder != null) {
+            titleText = titleStringBuilder.toString();
+        }
+
+        // 자기소개서 내용
+
+        String personalsText = "";
+        List<String> selectedPersonals = PersonalFragment.getSelectedPersonals();
+
+        StringBuilder persoanlsStringBuilder = new StringBuilder();
+        for (String personals : selectedPersonals) {
+            persoanlsStringBuilder.append(personals).append("\n");
+        }
+
+        // awardsStringBuilder가 null이 아닌 경우에 awardsText에 할당
+        if (persoanlsStringBuilder != null) {
+            personalsText = persoanlsStringBuilder.toString();
+        }
         // 기본 CSS 스타일 및 HTML 구조를 추가
         htmlContent.append("<html><head><style type='text/css'>/* CSS 스타일 */</style></head><body>");
 
