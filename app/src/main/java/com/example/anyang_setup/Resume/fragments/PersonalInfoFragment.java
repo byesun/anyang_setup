@@ -2,6 +2,7 @@ package com.example.anyang_setup.Resume.fragments;
 
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,23 +10,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.anyang_setup.GlobalVariables;
+import com.example.anyang_setup.MakingResume.MainActivity_start;
 import com.example.anyang_setup.R;
 import com.example.anyang_setup.Resume.datamodel.PersonalInfo;
 import com.example.anyang_setup.Resume.datamodel.Resume;
 import com.example.anyang_setup.Resume.helper.ResumeFragment;
 import com.example.anyang_setup.Resume.helper.TextChangeListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class PersonalInfoFragment extends ResumeFragment {
 
     private ImageView profileImageView;
+    TextView txt_birth_date0;
     private static final int REQUEST_IMAGE_PICK = 1;
+    Calendar myCalendar;
+
+    DatePickerDialog.OnDateSetListener birthdate;
+    TextView txt_birth_date;
 
     public static ResumeFragment newInstance(Resume resume) {
         ResumeFragment fragment = new PersonalInfoFragment();
@@ -36,11 +49,11 @@ public class PersonalInfoFragment extends ResumeFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root =
-                inflater.inflate(R.layout.fragment_personal_info, container, false);
+        View root = inflater.inflate(R.layout.fragment_personal_info, container, false);
 
         final PersonalInfo personalInfo = getResume().personalInfo;
-
+        txt_birth_date = root.findViewById(R.id.input_birth_date);
+        txt_birth_date.setText(personalInfo.getBirthTitle());
         EditText MajorEditText = root.findViewById(R.id.input_Major);
         MajorEditText.setText(GlobalVariables.getGlobalVariable_Major());
 
@@ -51,15 +64,6 @@ public class PersonalInfoFragment extends ResumeFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 personalInfo.setName(s.toString());
-            }
-        });
-
-        EditText jobTitleEditText = root.findViewById(R.id.input_job_title);
-        jobTitleEditText.setText(personalInfo.getJobTitle());
-        jobTitleEditText.addTextChangedListener(new TextChangeListener() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                personalInfo.setJobTitle(s.toString());
             }
         });
 
@@ -112,8 +116,46 @@ public class PersonalInfoFragment extends ResumeFragment {
             }
         });
 
+        myCalendar = Calendar.getInstance();
+        birthdate = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // This is the date picker of offence date
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+        txt_birth_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getActivity(), birthdate, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                txt_birth_date.addTextChangedListener(new TextChangeListener() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        personalInfo.setBirthTitle(s.toString());
+                    }
+                });
+            }
+        });
+
         return root;
     }
+
+    private void updateLabel() {
+        String myFormat = "yyyy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        txt_birth_date.setText(sdf.format(myCalendar.getTime()));
+
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -124,5 +166,10 @@ public class PersonalInfoFragment extends ResumeFragment {
                 getResume().setImageUri(selectedImageUri.toString()); // Resume 데이터 모델에 이미지 URI 저장
             }
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
     }
 }
