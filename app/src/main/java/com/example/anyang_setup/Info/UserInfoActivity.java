@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
@@ -38,6 +39,7 @@ import android.widget.Toast;
 import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatActivity;
 import com.example.anyang_setup.Resume.Resume_MainActivity;
 import com.example.anyang_setup.Setting.SettingActivity;
+import com.example.anyang_setup.MakingResume.MainActivity_start;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -160,9 +162,10 @@ public class UserInfoActivity extends AppCompatActivity {
             stdIdText.setText(dataObj.getString("stdId"));
             majorText.setText(dataObj.getString("stdDepart"));
             asd.setText(dataObj.getString("stdsigan"));
-
-
-
+            String name = stdNameText.getText().toString();
+            String major = majorText.getText().toString();
+            GlobalVariables.setGlobalVariable_Name(name);
+            GlobalVariables.setGlobalVariable_Major(major);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -218,6 +221,7 @@ public class UserInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // ResumeMainActivity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(UserInfoActivity.this, Resume_MainActivity.class);
+                intent.putExtra("userinfo", userInfoStr);
                 startActivity(intent);
             }
         });
@@ -281,11 +285,6 @@ public class UserInfoActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        String name = stdNameText.getText().toString();
-        String major = majorText.getText().toString();
-        GlobalVariables.setGlobalVariable_Name(name);
-        GlobalVariables.setGlobalVariable_Major(major);
     }
 
     private void loadUserProfile() {

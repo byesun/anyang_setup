@@ -1,9 +1,9 @@
 package com.example.anyang_setup.Resume;
 
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -33,11 +33,17 @@ public class Resume_MainActivity extends AppCompatActivity {
     private Resume resume;
     private String currentTitle;
     private String STATE_CURRENT_TITLE = "current title";
+    private String userinfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resume_activity_main);
+
+        // userinfo 데이터 받기
+        userinfo = getIntent().getStringExtra("userinfo");
+        // 로그로 userinfo 데이터 확인
+        Log.d("Resume_MainActivity", "Received userinfo: " + userinfo);
 
         setupLayout();
 
@@ -131,7 +137,8 @@ public class Resume_MainActivity extends AppCompatActivity {
                 openFragment(ExperienceFragment.newInstance(resume));
                 break;
             case R.id.action_preview:
-                openFragment(PreviewFragment.newInstance(resume));
+                PreviewFragment previewFragment = PreviewFragment.newInstance(resume, userinfo);
+                openFragment(previewFragment);
                 break;
             case R.id.pick_awards:
                 openFragment(AwardsFragment.newInstance(resume));
