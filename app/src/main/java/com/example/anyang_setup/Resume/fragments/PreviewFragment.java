@@ -8,6 +8,7 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintJob;
 import android.print.PrintManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,21 +32,46 @@ import com.example.anyang_setup.Resume.datamodel.School;
 import com.example.anyang_setup.Resume.helper.ResumeFragment;
 import com.example.anyang_setup.Resume.fragments.PersonalInfoFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 
 public class PreviewFragment extends ResumeFragment {
     WebView webView;
 
-    public static ResumeFragment newInstance(Resume resume) {
-        ResumeFragment fragment = new PreviewFragment();
-        fragment.setResume(resume);
+    private String userinfo;
+    private String stdName;
+    private String stdDepart;
+
+    public static PreviewFragment newInstance(Resume resume, String userinfo) {
+        PreviewFragment fragment = new PreviewFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("resume", resume); // Resume 객체를 Bundle에 추가
+        args.putString("userinfo", userinfo); // userinfo 문자열을 Bundle에 추가
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            userinfo = getArguments().getString("userinfo");
+
+            try {
+                JSONObject jsonObject = new JSONObject(userinfo);
+                JSONObject data = jsonObject.getJSONObject("data");
+                this.stdName = data.getString("stdName"); // 클래스 멤버 변수에 할당
+                this.stdDepart = data.getString("stdDepart"); // 클래스 멤버 변수에 할당
+
+                Log.d("PreviewFragment", "Student Name: " + stdName);
+                Log.d("PreviewFragment", "Student ID: " + stdDepart);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         setHasOptionsMenu(true);
     }
 
@@ -110,11 +136,27 @@ public class PreviewFragment extends ResumeFragment {
         }
 
 
+        // CSS 클래스 정의
+        htmlContent.append("<style type='text/css'>\n" +
+                "    .right-align { text-align: right; }\n" +
+                "    .left-align { text-align: left; }\n" +
+                "    .center-align { text-align: center; }\n" +
+                "    .rounded-box { background-color: #C6C6C6; border-radius: 15px; padding: 20px; margin: 20px; }\n" + // 둥근 네모 박스
+                "    .oval-box { background-color: #C6C6C6; border-radius: 50%; width: 200px; height: 100px; text-align: center; }\n" + // 타원형 박스
+                "    body { font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.6; background-color: #f8f8f8; }\n" +
+                "    h1, h2, h3, p { color: #000; }\n" + // 검정색 텍스트
+                "    img { width: 200px; height: auto; border-radius: 100%; }\n" + // 이미지 크기 변경
+                "</style>");
 
-        // CSS 클래스 정의 추가
-        htmlContent.append("<style type='text/css'> .right-align { text-align: right; } .left-align { text-align: left; } </style>\n"); //왼쪽 오른쪽
-        htmlContent.append("<style type='text/css'> .center-align { text-align: center; } </style>\n"); // 중앙 위치
-        htmlContent.append("<style type='text/css'> .box_1 {background-color: #F0F8FF;width: 100px;height: 100px;border: 0px solid black;padding: 20px;margin: 20px;} </style>");
+
+/*        // HTML 컨텐츠 추가 (여기에 필요한 HTML을 추가합니다)
+        htmlContent.append("<div class='rounded-box'>\n"); // 둥근 네모 박스 시작
+        // 여기에 이력서의 내용을 추가합니다.
+        htmlContent.append("</div>\n"); // 둥근 네모 박스 종료
+
+        htmlContent.append("<div class='oval-box'>\n"); // 타원형 박스 시작
+        // 타원형 박스 내용을 추가합니다.
+        htmlContent.append("</div>\n"); // 타원형 박스 종료*/
         htmlContent.append(String.format("<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -125,38 +167,38 @@ public class PreviewFragment extends ResumeFragment {
                 "#footer{background:#f0f0f0;padding:10px 10px}#header{border-bottom:1px #ccc solid}#footer{border-top:1px #ccc solid;border-bottom:1px #ccc solid;font-size:13}" +
                 "#contents{margin:6px}.dash{padding:0 6px}</style>\n" +
                 "</head>\n" +
-                "<body>\n" +
-                "<div id=contents>\n" +
+                "<body style=\"background-color:#EAE5DE\">\n" +
+                "<div id=contents >\n" +
 /*                "<style type=text/css>@import url('https://themes.googleusercontent.com/fonts/css?kit=xTOoZr6X-i3kNg7pYrzMsnEzyYBuwf3lO_Sc3Mw9RUVbV0WvE1cEyAoIq5yYZlSc');" +
                 "c6{text-align: right;}\n" +
                 "</style>\n" +*/
-                "<p class=\"c2 c29\"><span class=c19></span></p>\n" +
-                "<a id=t.b7144d62fc47a2bfcf177a3c3dd72df0e868051e></a>\n" +
-                "<a id=t.0></a>\n" +
                 "<table class=c23>\n" +
                 "            <tbody>\n" +
-                "                <tr class=\"c21\">\n" +
+                "               <p class=\"c6\"><span class=\"c24\"><hr>ㅡ</span></p>\n" +
+                "                <tr class=\"c15\">\n" +
                 "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                "                        <p class=\"center-align\"><img src=\"" + imageUri + "\" style=\"width:103px; height:132px; color:box_1;\" onerror=\"this.src='https://via.placeholder.com/103x132.jpg'\"></p>" +
+                "                        <p class=\"center-align\"><img src=\"" + imageUri + "\" style=\"width:133px; height:162px; color:box_1;\" onerror=\"this.src='https://via.placeholder.com/103x132.jpg'\"></p>" +
 /*                "                        <p class=\"c6 c12 title\" id=\"h.4prkjmzco10w\"><span>%s</span></p>\n" +
                 "                        <p class=\"c33 subtitle\" id=\"h.o2iwx3vdck7p\"><span class=\"c20\">%s</span></p>\n" +*/
                 "                    </td>\n" +
-                "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n" +
+                "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
                 "                        <p class=\"c6\"><span style=\"overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 418.00px; height: 2.67px;\"><img alt=\"\" src=\"https://lh4.googleusercontent.com/j7t3_XjsJ1PHIrgcWuJOWmQ2fFs9q-TT_LNTDfAXGnVu49aapNgutWcfK1k7pPzGtsu9lOvPynvLW07b_KwpVV0ituspJAXOQ_IBZyN087cqGsXawUahO2qDRCQZ8-qq4esAcP7M\" style=\"width: 418.00px; height: 2.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);\" title=\"horizontal line\"></span></p>\n" +
                 /*                "                        <hr><h1 class=\"c3\" id=\"h.lf5wiiqsu4ub\"><span>%s</span></h1>\n" +*/
-                "                        <p class=\"c6\"><span class=\"label\">이름 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
+                "                        <p class=\"c6\"><span class=\"label\">이름 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">" + stdName + "</span></p>\n" +
                 "                        <p class=\"c6\"><span class=\"label\">생년월일 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
                 "                        <p class=\"c6\"><span class=\"label\">연락처 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
                 "                        <p class=\"c6\"><span class=\"label\">주소 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>\n" +
                 "                        <p class=\"c6\"><span class=\"label\">e_mail &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">%s</span></p>"+
+                "                        <p class=\"c6\"><span class=\"label\">학과 &nbsp;&nbsp;&nbsp;&nbsp;</span><span class=\"data\">" + stdDepart + "</span></p>" +
                 "                    </td>\n" +
-                "                </tr><hr>", personalInfo.getName(), personalInfo.getBirthTitle(), personalInfo.getPhone(), personalInfo.getAddressLine1(), personalInfo.getEmail()));
+                "               </p>\n", personalInfo.getBirthTitle(), personalInfo.getPhone(), personalInfo.getAddressLine1(), personalInfo.getEmail()));
+
 //, personalInfo.getAddressLine2()
         if (!resume.skills.isEmpty()) {
             htmlContent.append(String.format("\n" +
                     "                <tr class=\"c27\">\n" +
                     "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p>\n" +
+                    "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
                     "                        <h1 class=\"c9\" id=\"h.61e3cm1p1fln\"><span class=\"c16\">"+getString(R.string.hint_skills)+"</span></h1></td>\n" +
                     "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n" +
                     "                        <p class=\"c2\"><span style=\"overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 418.00px; height: 2.67px;\"><img alt=\"\" src=\"https://lh3.googleusercontent.com/n8bZfGajkthDbPpbjeiRJ4w7rNUmj1iFxdZKCHUOVnfH9FgHVt5EBo3vOYIIoE3augYQ_DCZJUzdlStyJ5RaldVrSG36sTE0CjIot2qaiJ3YRyr2i87bt9Y9d0ngdseS9PpG0HzM\" style=\"width: 418.00px; height: 2.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);\" title=\"horizontal line\"></span></p>\n" +
@@ -164,11 +206,15 @@ public class PreviewFragment extends ResumeFragment {
                     "                    </td>\n" +
                     "                </tr>", resume.skills));
         }
+        // HTML에 추가
+        htmlContent.append(String.format("<p class='right-align'>수상목록 : %s </p>\n", awardsText));
+        htmlContent.append(String.format("<p class='right-align'>자격증 : %s </p>\n", certificatesText));
+        htmlContent.append(String.format("<p class='right-align'>대외활동 : %s </p>\n", externalText));
         if (!resume.languages.isEmpty()) {
             htmlContent.append(String.format("\n" +
                     "                <tr class=\"c27\">\n" +
                     "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p>\n" +
+                    "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
                     "                        <h1 class=\"c9\" id=\"h.61e3cm1p1fln\"><span class=\"c16\">"+getString(R.string.hint_languages)+"</span></h1></td>\n" +
                     "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n" +
                     "                        <p class=\"c2\"><span style=\"overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 418.00px; height: 2.67px;\"><img alt=\"\" src=\"https://lh3.googleusercontent.com/n8bZfGajkthDbPpbjeiRJ4w7rNUmj1iFxdZKCHUOVnfH9FgHVt5EBo3vOYIIoE3augYQ_DCZJUzdlStyJ5RaldVrSG36sTE0CjIot2qaiJ3YRyr2i87bt9Y9d0ngdseS9PpG0HzM\" style=\"width: 418.00px; height: 2.67px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);\" title=\"horizontal line\"></span></p>\n" +
@@ -180,7 +226,7 @@ public class PreviewFragment extends ResumeFragment {
             htmlContent.append("\n" +
                     "                <tr class=\"c15\">\n" +
                     "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p>\n" +
+                    "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
                     "                        <h1 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+getString(R.string.education)+"</span></h1></td>\n" +
                     "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
             boolean first = true;
@@ -197,8 +243,8 @@ public class PreviewFragment extends ResumeFragment {
             htmlContent.append("\n" +
                     "                <tr class=\"c15\">\n" +
                     "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
-                    "                        <h1 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+getString(R.string.hint_project_name)+"</span></h1></td>\n" +
+                    "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
+                    "                        <h3 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+getString(R.string.hint_project_name)+"</span></h3></td>\n" +
                     "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
             boolean first = true;
             for (Project project : resume.projects) {
@@ -213,7 +259,7 @@ public class PreviewFragment extends ResumeFragment {
             htmlContent.append("\n" +
                     "                <tr class=\"c15\">\n" +
                     "                    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                        <p class=\"c6\"><span class=\"c24\">ㅡ</span></p>\n" +
+                    "                        <br><p class=\"c6\"><span class=\"c24\">ㅡ</span></p><br>\n" +
                     "                        <h1 class=\"c9\" id=\"h.tk538brb1kdf\"><span class=\"c16\">"+getString(R.string.navigation_experience)+"</span></h1></td>\n" +
                     "                    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
             boolean first = true;
@@ -234,12 +280,7 @@ public class PreviewFragment extends ResumeFragment {
                 "</html>");
         htmlContent.append("<hr><p class='center-align'>본 이력서에 기재한 사항은 사실과 다름없음을 확인합니다.</p>\n");
         htmlContent.append("<p class='right-align'>작성일 : 2023 년 11월 29일</p>\n");
-        htmlContent.append(String.format("<p class='right-align'>지원자 : %s (인)</p>\n",personalInfo.getName()));
-
-        // HTML에 추가
-        htmlContent.append(String.format("<p class='right-align'>수상목록 : %s </p>\n", awardsText));
-        htmlContent.append(String.format("<p class='right-align'>자격증 : %s </p>\n", certificatesText));
-        htmlContent.append(String.format("<p class='right-align'>대외활동 : %s </p>\n", externalText));
+        htmlContent.append(String.format("<p class='right-align'>지원자 : " + stdName + " (인)</p>\n"));
 
 
 
