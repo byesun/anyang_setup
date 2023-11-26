@@ -3,8 +3,12 @@ package com.example.anyang_setup.Resume.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.anyang_setup.Resume.EditActivity;
@@ -57,5 +61,10 @@ public class EducationFragment extends ResumeEventFragment<School> {
             notifyDataChanged();
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
     }
 }

@@ -3,6 +3,7 @@ package com.example.anyang_setup.Resume.fragments;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +34,13 @@ import okhttp3.Response;
 
 public class AwardsFragment extends ResumeFragment {
 
-    ListView awards_list;
-    String ID;
-    ArrayAdapter<String> adapter1;
-    List<Integer> selectedItems = new ArrayList<>();
+    private ListView awards_list;
+    private String ID;
+    private ArrayAdapter<String> adapter1;
+    private List<Integer> selectedItems = new ArrayList<>();
+
+    private static List<String> selectedAwardsTexts = new ArrayList<>();
+
 
     public static ResumeFragment newInstance(Resume resume) {
         ResumeFragment fragment = new AwardsFragment();
@@ -50,22 +54,19 @@ public class AwardsFragment extends ResumeFragment {
         View root = inflater.inflate(R.layout.fragment_awards, container, false);
         awards_list = root.findViewById(R.id.awards_list);
         final PersonalInfo personalInfo = getResume().personalInfo;
+
         adapter1 = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1);
         awards_list.setAdapter(adapter1);
         ID = GlobalVariables.getGlobalVariable_id();
 
-        // Execute AsyncTask
         executeAsyncTask(ID);
 
         awards_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Check if the item is already selected
                 if (selectedItems.contains(position)) {
-                    // If selected, remove it from the list
                     selectedItems.remove(Integer.valueOf(position));
                 } else {
-                    // If not selected, add it to the list
                     selectedItems.add(position);
                 }
 
@@ -73,17 +74,27 @@ public class AwardsFragment extends ResumeFragment {
                 for (int i = 0; i < awards_list.getChildCount(); i++) {
                     View listItem = awards_list.getChildAt(i);
                     if (selectedItems.contains(i)) {
-                        // Set the background color for selected items
                         listItem.setBackgroundColor(Color.GRAY);
                     } else {
-                        // Set the background color for unselected items
                         listItem.setBackgroundColor(Color.TRANSPARENT);
                     }
                 }
+
+                // Update the selectedTexts global variable
+                selectedAwardsTexts.clear();
+                for (Integer selectedItem : selectedItems) {
+                    selectedAwardsTexts.add(adapter1.getItem(selectedItem));
+                }
+                Log.d("Selected Items", selectedAwardsTexts.toString());
             }
         });
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
     }
 
     private class UpdateAwardsListTask extends AsyncTask<String, Void, String> {
@@ -142,9 +153,13 @@ public class AwardsFragment extends ResumeFragment {
         }
     }
 
-    // Example of how to execute the AsyncTask in your fragment
     private void executeAsyncTask(String id) {
         UpdateAwardsListTask task = new UpdateAwardsListTask();
         task.execute(id);
     }
+
+    public static List<String> getSelectedAwards() {
+        return selectedAwardsTexts;
+    }
+
 }

@@ -47,4 +47,9 @@ public class EssentialsFragment extends ResumeFragment {
         });
         return root;
     }
+
+    @Override
+    public void onViewCreated(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    }
 }

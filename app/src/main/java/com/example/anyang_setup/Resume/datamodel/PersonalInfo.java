@@ -75,11 +75,11 @@ public class PersonalInfo implements Parcelable {
     }
 
 
-    public String getJobTitle() {
+    public String getBirthTitle() {
         return jobTitle;
     }
 
-    public void setJobTitle(String jobTitle) {
+    public void setBirthTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
 

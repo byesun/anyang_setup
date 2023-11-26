@@ -46,13 +46,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/text_input_margin_bottom">
-
             <EditText
-                android:id="@+id/input_job_title"
+                android:id="@+id/input_birth_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_job_title"
-                android:inputType="textCapWords" />
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:hint="생년월일"
+                android:textColorHint="@color/grey_800"
+                android:drawablePadding="15sp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- 주소 입력 -->

@@ -15,6 +15,7 @@ public class Resume implements Parcelable {
     public List<Project> projects;
     public List<School> schools;
     public List<Experience> experience;
+
     public String languages;
     public String skills;
     private String imageUri; // 이미지 URI 필드 추가

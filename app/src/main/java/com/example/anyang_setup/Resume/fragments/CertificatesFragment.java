@@ -4,6 +4,7 @@ package com.example.anyang_setup.Resume.fragments;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,10 @@ public class CertificatesFragment extends ResumeFragment {
     ListView Certificates_list;
     String ID;
     ArrayAdapter<String> adapter1;
+
     List<Integer> selectedItems = new ArrayList<>();
+
+    private static List<String> selectedCertificatesTexts = new ArrayList<>();
     public static ResumeFragment newInstance(Resume resume) {
         ResumeFragment fragment = new CertificatesFragment();
         fragment.setResume(resume);
@@ -56,7 +60,6 @@ public class CertificatesFragment extends ResumeFragment {
         ID = GlobalVariables.getGlobalVariable_id();
 
         executeAsyncTask(ID);
-
         Certificates_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -80,11 +83,22 @@ public class CertificatesFragment extends ResumeFragment {
                         listItem.setBackgroundColor(Color.TRANSPARENT);
                     }
                 }
+
+                // Print the text of the selected items to the console
+                selectedCertificatesTexts.clear();
+                for (Integer selectedItem : selectedItems) {
+                    selectedCertificatesTexts.add(adapter1.getItem(selectedItem));
+                }
+                Log.d("Selected Items", selectedCertificatesTexts.toString());
             }
         });
 
-
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
     }
 
     private class UpdateCertificatesListTask extends AsyncTask<String, Void, String> {
@@ -148,6 +162,10 @@ public class CertificatesFragment extends ResumeFragment {
     private void executeAsyncTask(String id) {
         UpdateCertificatesListTask task = new UpdateCertificatesListTask();
         task.execute(id);
+    }
+
+    public static List<String> getSelectedCertificates() {
+        return selectedCertificatesTexts;
     }
 
 }

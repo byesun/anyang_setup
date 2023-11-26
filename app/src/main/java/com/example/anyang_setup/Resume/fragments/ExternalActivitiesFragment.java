@@ -4,6 +4,7 @@ package com.example.anyang_setup.Resume.fragments;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,8 @@ public class ExternalActivitiesFragment extends ResumeFragment {
     ArrayAdapter<String> adapter1;
     List<Integer> selectedItems = new ArrayList<>();
 
+    private static List<String> selectedExternalTexts = new ArrayList<>();
+
     public static ResumeFragment newInstance(Resume resume) {
         ResumeFragment fragment = new ExternalActivitiesFragment();
         fragment.setResume(resume);
@@ -56,9 +59,7 @@ public class ExternalActivitiesFragment extends ResumeFragment {
         adapter1 = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_list_item_1);
         ExternalActivities_list.setAdapter(adapter1);
         ID = GlobalVariables.getGlobalVariable_id();
-
         executeAsyncTask(ID);
-
         ExternalActivities_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -82,9 +83,21 @@ public class ExternalActivitiesFragment extends ResumeFragment {
                         listItem.setBackgroundColor(Color.TRANSPARENT);
                     }
                 }
+
+                // Print the text of the selected items to the console
+                selectedExternalTexts.clear();
+                for (Integer selectedItem : selectedItems) {
+                    selectedExternalTexts.add(adapter1.getItem(selectedItem));
+                }
+                Log.d("Selected Items", selectedExternalTexts.toString());
             }
         });
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
     }
 
     private class UpdateExternalActivitiesListTask extends AsyncTask<String, Void, String> {
@@ -148,6 +161,10 @@ public class ExternalActivitiesFragment extends ResumeFragment {
     private void executeAsyncTask(String id) {
         UpdateExternalActivitiesListTask task = new UpdateExternalActivitiesListTask();
         task.execute(id);
+    }
+
+    public static List<String> getSelectedExternal() {
+        return selectedExternalTexts;
     }
 
 }

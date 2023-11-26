@@ -4,7 +4,7 @@
         <item
             android:id="@+id/action_personal_info"
             android:checked="true"
-            android:title="@string/navigation_personal_info" />
+            android:title="인적사항" />
         <item
             android:id="@+id/pick_awards"
             android:checked="false"
@@ -20,19 +20,19 @@
         <item
             android:id="@+id/action_essentials"
             android:checked="false"
-            android:title="@string/navigation_essentials" />
+            android:title="기술" />
         <item
             android:id="@+id/action_projects"
             android:checked="false"
-            android:title="@string/navigation_projects" />
+            android:title="프로젝트" />
         <item
             android:id="@+id/action_education"
             android:checked="false"
-            android:title="@string/navigation_education" />
+            android:title="학력" />
         <item
             android:id="@+id/action_experience"
             android:checked="false"
-            android:title="@string/navigation_experience" />
+            android:title="경험" />
         <!--
         <item
             android:id="@+id/action_awards"
@@ -42,7 +42,7 @@
         <item
             android:id="@+id/action_preview"
             android:checked="false"
-            android:title="@string/navigation_preview" />
+            android:title="미리보기" />
 
     </group>
 </menu>
