@@ -31,24 +31,13 @@ public class PersonalMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_main);
 
-
-        //자기소개서
-        Intent intent = getIntent();
-        STID = intent.getStringExtra("STID");
-
-
         // personal_write_button에 대한 클릭 리스너를 설정합니다.
         findViewById(R.id.personal_write_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // PersonalWriteActivity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(PersonalMainActivity.this, PersonalWriteActivity.class);
-
-                intent.putExtra("STID",STID);
-
-                intent.putExtra("userinfo", userInfoStr);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent, 1); // requestCode
             }
         });
 
@@ -57,7 +46,7 @@ public class PersonalMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // PersonalWriteActivity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(PersonalMainActivity.this, PersonalGptActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 2); // requestCode
             }
         });
 
@@ -66,14 +55,18 @@ public class PersonalMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // PersonalWriteActivity로 이동하는 코드를 추가합니다.
                 Intent intent = new Intent(PersonalMainActivity.this, PersonalLockerActivity.class);
-
-                intent.putExtra("STID",STID);
-
-                intent.putExtra("userinfo", userInfoStr);
-                intent.putExtra("personalTitle", personalTitle);
-                intent.putExtra("personalText", personalText);
-                startActivity(intent);
+                startActivityForResult(intent, 3); // requestCode
             }
         });
+
+
     }
+    public void onBackPressed() {
+        // BActivity에서 뒤로 가기 버튼을 눌렀을 때의 동작 처리
+        Intent intent = new Intent(PersonalMainActivity.this, UserInfoActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
+    }
+
 }

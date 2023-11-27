@@ -128,12 +128,11 @@ public class PersonalWriteActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(PersonalWriteActivity.this, PersonalMainActivity.class);
-                        intent.putExtra("STID", ID);
                         startActivity(intent);
                         finish();
                     }
                 })
-                
+
                 .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -158,8 +157,8 @@ public class PersonalWriteActivity extends AppCompatActivity {
                 executeServerInsertRequest(personalTitle, personalText);
                 // Intent를 생성하여 PersonalLockerActivity로 전달
                 Intent intent = new Intent(PersonalWriteActivity.this, PersonalMainActivity.class);
-                intent.putExtra("STID", ID);
                 startActivity(intent);
+                finish();
             }
         });
 
