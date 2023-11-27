@@ -26,20 +26,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/text_input_margin_bottom">
-
-            <EditText
-                android:id="@+id/input_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_location"
-                android:inputType="textCapWords" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,17 +40,44 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_input_margin_bottom">
+            <EditText
+                android:id="@+id/input_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:hint="입학날짜"
+                android:textColorHint="@color/grey_800"
+                android:drawablePadding="15sp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:onClick="detail"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/text_input_margin_bottom">
-
             <EditText
                 android:id="@+id/input_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_description"
-                android:inputType="text|textCapSentences|textMultiLine" />
+                android:inputType="textAutoComplete"
+                android:maxLines="1"
+                android:hint="졸업날짜"
+                android:textColorHint="@color/grey_800"
+                android:drawablePadding="15sp"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:onClick="description"/>
+
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 </ScrollView>

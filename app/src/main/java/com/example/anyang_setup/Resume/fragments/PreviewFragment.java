@@ -196,6 +196,7 @@ public class PreviewFragment extends ResumeFragment {
                         "        <tr>\n" +
                         "            <td class='c26'>\n" +
                         "                <p class='c6'><span class='label'>주소: </span><span class='data'>" + personalInfo.getAddressLine1() + "</span></p>\n" +
+                        "                <p class='c6'><span class='label'>상세주소: </span><span class='data'>" + personalInfo.getAddressLine2() + "</span></p>\n" +
                         "                <p class='c6'><span class='label'>이메일: </span><span class='data'>" + personalInfo.getEmail() + "</span></p>\n" +
                         "                <p class='c6'><span class='label'>학과: </span><span class='data'>" + stdDepart + "</span></p>\n" +
                         "            </td>\n" +

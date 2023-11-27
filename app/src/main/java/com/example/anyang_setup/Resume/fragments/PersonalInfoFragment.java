@@ -54,18 +54,18 @@ public class PersonalInfoFragment extends ResumeFragment {
         final PersonalInfo personalInfo = getResume().personalInfo;
         txt_birth_date = root.findViewById(R.id.input_birth_date);
         txt_birth_date.setText(personalInfo.getBirthTitle());
-        EditText MajorEditText = root.findViewById(R.id.input_Major);
+        /*EditText MajorEditText = root.findViewById(R.id.input_Major);
         MajorEditText.setText(GlobalVariables.getGlobalVariable_Major());
 
         EditText nameEditText = root.findViewById(R.id.input_name);
         nameEditText.setText(GlobalVariables.getGlobalVariable_Name());
-        //nameEditText.setText(personalInfo.getName());
+        nameEditText.setText(personalInfo.getName());
         nameEditText.addTextChangedListener(new TextChangeListener() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 personalInfo.setName(s.toString());
             }
-        });
+        });*/
 
         EditText address1EditText = root.findViewById(R.id.input_address1);
         address1EditText.setText(personalInfo.getAddressLine1());

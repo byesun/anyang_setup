@@ -145,6 +145,8 @@ public class UserInfoActivity extends AppCompatActivity {
 
 
         button.setOnClickListener(view -> {
+            String major = majorText.getText().toString();
+            GlobalVariables.setGlobalVariable_Major(major);
             Intent intent = new Intent(UserInfoActivity.this, DiagnosisActivity.class);
             intent.putExtra("userinfo", userInfoStr);
             startActivity(intent);

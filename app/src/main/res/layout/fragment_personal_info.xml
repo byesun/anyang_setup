@@ -9,38 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <!-- 이름 입력 -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/text_input_margin_bottom">
-
-            <EditText
-                android:id="@+id/input_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_name"
-                android:inputType="textCapWords" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- 학과 입력 -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_Major"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/text_input_margin_bottom">
-
-            <EditText
-                android:id="@+id/input_Major"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Major"
-                android:inputType="textCapWords" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- 직책 입력 -->
+        <!-- 생년월일 입력 -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout_job_title"
             android:layout_width="match_parent"
@@ -72,7 +41,7 @@
                 android:id="@+id/input_address1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_address_line1"
+                android:hint="주소(시/도)"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,7 +55,7 @@
                 android:id="@+id/input_address2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_address_line2"
+                android:hint="상세주소"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 

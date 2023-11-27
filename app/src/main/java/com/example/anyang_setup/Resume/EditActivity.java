@@ -1,21 +1,29 @@
 package com.example.anyang_setup.Resume;
 
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.anyang_setup.MakingResume.MainActivity_start;
 import com.example.anyang_setup.R;
 import com.example.anyang_setup.Resume.datamodel.ResumeEvent;
 import com.example.anyang_setup.Resume.helper.TextChangeListener;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class EditActivity extends AppCompatActivity {
     public static final String EXTRA_TYPE = "type";
@@ -43,6 +51,10 @@ public class EditActivity extends AppCompatActivity {
     TextInputLayout detailEditTextLayout;
     TextInputLayout subtitleEditTextLayout;
     TextInputLayout descriptionEditTextLayout;
+
+    Calendar myCalendar;
+
+    DatePickerDialog.OnDateSetListener startDate,endDate;
 
     public static Intent setData(Intent intent, int id, ResumeEvent resumeEvent) {
         intent.putExtra(FIELD_ID, id);
@@ -99,14 +111,44 @@ public class EditActivity extends AppCompatActivity {
                 break;
         }
         titleEditText = findViewById(R.id.input_title);
-        detailEditText = findViewById(R.id.input_detail);
+        detailEditText = findViewById(R.id.input_detail); //입학날짜
         subtitleEditText = findViewById(R.id.input_subtitle);
-        descriptionEditText = findViewById(R.id.input_description);
+        descriptionEditText = findViewById(R.id.input_description); //졸업날짜
 
         titleEditTextLayout = findViewById(R.id.input_layout_title);
-        detailEditTextLayout = findViewById(R.id.input_layout_detail);
+        detailEditTextLayout = findViewById(R.id.input_layout_detail); //입학날짜
         subtitleEditTextLayout = findViewById(R.id.input_layout_subtitle);
-        descriptionEditTextLayout = findViewById(R.id.input_layout_description);
+        descriptionEditTextLayout = findViewById(R.id.input_layout_description); //졸업날짜
+
+        myCalendar = Calendar.getInstance();
+
+        startDate = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // This is the date picker of rn date
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel_1();
+            }
+
+        };
+        endDate = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // This is the date picker of rn date
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel_2();
+            }
+
+        };
+
 
         titleEditText.addTextChangedListener(new TextChangeListener() {
             @Override
@@ -197,5 +239,31 @@ public class EditActivity extends AppCompatActivity {
         intent.putExtra(FIELD_SUBTITLE, subtitle);
         intent.putExtra(FIELD_DESCRIPTION, description);
         return intent;
+    }
+
+    private void updateLabel_1() {
+        String myFormat = "yyyy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        detailEditText.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    private void updateLabel_2() {
+        String myFormat = "yyyy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        descriptionEditText.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    public void detail(View view) {
+        new DatePickerDialog(EditActivity.this, startDate, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    public void description(View view) {
+        new DatePickerDialog(EditActivity.this, endDate, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 }
