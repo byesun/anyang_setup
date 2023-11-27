@@ -69,12 +69,12 @@ public class DiagnosisActivity extends AppCompatActivity {
             JSONObject userData = jsonObject.getJSONObject("data");
 
             JSONObject creditStatus = userData.getJSONObject("creditStatus");
-            totalCurrentText.setText("취득학점/" + creditStatus.getInt("total_current"));
-            graduateBaseText.setText("졸업학점/" + creditStatus.getInt("graduate_base"));
+            totalCurrentText.setText("취득학점 : " + creditStatus.getInt("total_current"));
+            graduateBaseText.setText("졸업학점 : " + creditStatus.getInt("graduate_base"));
             totalRemainText.setText("현재 " + creditStatus.getInt("total_remain") + "학점이 부족합니다.");
             int stdLevel = Integer.parseInt(userData.getString("stdLevel").split("학년")[0]);
             int totalCurrent = creditStatus.getInt("total_current");
-            averageCreditResultText.setText("현재 학년: " + stdLevel + "학년\n학년별 평균 취득 학점은 " + totalCurrent/stdLevel + "학점 입니다.");
+            averageCreditResultText.setText("현재 학년: " + stdLevel + "현쨰 까지 학년\n학년별 평균 취득 학점은 " + (totalCurrent/stdLevel)/2 + "학점 입니다.");
 
             // 필수과목
             JSONArray requiredSubjectsArray = userData.getJSONArray("requiredSubjects");
@@ -170,7 +170,7 @@ public class DiagnosisActivity extends AppCompatActivity {
 
             chapelTable.addView(chapelCompleteTableRow);
 
-            graduateResultText.setText(userData.getString("graduateResult"));
+            graduateResultText.setText("졸업 작품 : "+(userData.getString("graduateResult")));
 
         } catch (JSONException e) {
             e.printStackTrace();

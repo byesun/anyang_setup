@@ -144,11 +144,16 @@ public class PreviewFragment extends ResumeFragment {
                 "    .right-align { text-align: right; }\n" +
                 "    .left-align { text-align: left; }\n" +
                 "    .center-align { text-align: center; }\n" +
-                "    .rounded-box { background-color: #566573; border-radius: 15px; padding: 20px; margin: 20px; }\n" + // 둥근 네모 박스
+                "    .rounded-box { background-color: #00ff0000; border-radius: 15px; padding: 20px; margin: 20px; }\n" + // 둥근 네모 박스
                 "    .oval-box { background-color: #C6C6C6; border-radius: 50%; width: 200px; height: 100px; text-align: center; }\n" + // 타원형 박스
                 "    body { font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.6; background-color: #f8f8f8; }\n" +
                 "    h1, h2, h3, p { color: #000; }\n" + // 검정색 텍스트
-                "    img { width: 200px; height: auto; border-radius: 100%; }\n" + // 이미지 크기 변경
+                "    img { width: 300px; height: auto; border-radius: 200%; }\n" + // 이미지 크기 변경
+                "</style>");
+
+        // 배경 이미지 및 꽉 차게 만드는 스타일 추가
+        htmlContent.append("<style type='text/css'>\n" +
+                "    body { background-image: url('https://i.pinimg.com/564x/0e/88/9c/0e889caac98a80ce1e8a265e8d923d3a.jpg'); background-size: cover; }\n" +
                 "</style>");
 
 
@@ -170,7 +175,7 @@ public class PreviewFragment extends ResumeFragment {
                 "#footer{background:#f0f0f0;padding:10px 10px}#header{border-bottom:1px #ccc solid}#footer{border-top:1px #ccc solid;border-bottom:1px #ccc solid;font-size:13}" +
                 "#contents{margin:6px}.dash{padding:0 6px}</style>\n" +
                 "</head>\n" +
-                "<body style=\"background-color:#AED6F1\">\n" +
+                "<body style=\"background-image: url('https://i.pinimg.com/564x/30/31/99/3031991966978eab1c619a0247a0de67.jpg'); background-size: cover;\">\n" +
                 "<div id=contents >\n" +
 /*                "<style type=text/css>@import url('https://themes.googleusercontent.com/fonts/css?kit=xTOoZr6X-i3kNg7pYrzMsnEzyYBuwf3lO_Sc3Mw9RUVbV0WvE1cEyAoIq5yYZlSc');" +
                 "c6{text-align: right;}\n" +
@@ -211,7 +216,7 @@ public class PreviewFragment extends ResumeFragment {
                         "                </td>\n" +
                         "            </tr>\n"
         );
-        // 기술(skills) 항목 처리
+/*        // 기술(skills) 항목 처리
         if (!resume.skills.isEmpty()) {
             htmlContent.append(String.format(
                             "            <td class='left-align' colspan='1'>\n" +
@@ -228,7 +233,7 @@ public class PreviewFragment extends ResumeFragment {
                             "                <p>%s</p>\n" +
                             "            </td>\n", getString(R.string.hint_languages), resume.languages
             ));
-        }
+        }*/
         // 수상 내역 섹션
         if (!awardsText.isEmpty()) {
             htmlContent.append(String.format(
@@ -242,7 +247,7 @@ public class PreviewFragment extends ResumeFragment {
                             "                <h4 class='c9'><span class='c16'>수상목록</span></h4>\n" +
                             "            </td>\n" +
                             "            <td class='c4' colspan='1' rowspan='1'>\n" +
-                            "                <p class='c3'><span class='c7'>%s</span></p>\n" +
+                            "                <p class='c3'><span class='c7'>%s / </span></p>\n" +
                             "            </td>\n" +
                             "        </tr>\n", awardsText));
         }
@@ -261,7 +266,7 @@ public class PreviewFragment extends ResumeFragment {
                             "                <h4 class='c9'><span class='c16'>자격증</span></h4>\n" +
                             "            </td>\n" +
                             "            <td class='c4' colspan='1' rowspan='1'>\n" +
-                            "                <p class='left-align'>%s<br></p>\n" +
+                            "                <p class='left-align'>%s / <br></p>\n" +
                             "            </td>\n" +
                             "        </tr>\n", certificatesText));
         }
@@ -280,7 +285,7 @@ public class PreviewFragment extends ResumeFragment {
                             "                <h4 class='c9'><span class='c16'>대외활동</span></h4>\n" +
                             "            </td>\n" +
                             "            <td class='c4' colspan='1' rowspan='1'>\n" +
-                            "                <p class='left-align'>%s</p>\n" +
+                            "                <p class='left-align'>%s / </p>\n" +
                             "            </td>\n" +
                             "        </tr>\n", externalText));
         }
@@ -313,59 +318,71 @@ public class PreviewFragment extends ResumeFragment {
         }*/
         // 학력 섹션
         if (!resume.schools.isEmpty()) {
+            // '학력' 제목이 포함된 첫 번째 행 추가
             htmlContent.append("\n<tr class=\"c15\">\n" +
-                    "    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                <hr>\n" +
-                    "        <h4 class=\"c9\"><span class=\"c16\">" + getString(R.string.navigation_education) + "</span></h4>\n" +
-                    "    </td>\n" +
-                    "    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
+                    "    <th class=\"c26\"> <hr> <p>ㅡ").append(getString(R.string.navigation_education)).append("ㅡ</p></th>\n" +
+                    "    <td class=\"c4\"></td>\n" +
+                    "</tr>\n");
 
+            // 각 학교의 세부사항을 새로운 행에 추가
             for (School school : resume.schools) {
                 htmlContent.append(String.format(
-                        "        <h5 class=\"c5\">%s / %s</h5>\n" +
-                                "        <p class=\"c32\">%s - %s</p>\n",
+                        "        <tr>\n" +
+                                "            <td class=\"c26\"></td>\n" + // 첫 번째 열은 비워둠
+                                "            <td class=\"c4\">\n" +
+                                "                <h5>학교 이름 : %s / 학위 : %s</h5>\n" +
+                                "                <h5> 입학 날짜 : %s / 좋업 날짜 : %s</h5>\n" +
+                                "                <hr>\n" +
+                                "            </td>\n" +
+                                "        </tr>\n",
                         school.getSchoolName(), school.getDegree(), school.getLocation(), school.getDescription()));
             }
-
-            htmlContent.append("</td>\n</tr>\n");
-        }
-
-        // 프로젝트 섹션
-        if (!resume.projects.isEmpty()) {
-            htmlContent.append("\n<tr class=\"c15\">\n" +
-                    "    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                <hr>\n" +
-                    "        <h4 class=\"c9\">" + getString(R.string.play_project) + "</h4>\n" +
-                    "    </td>\n" +
-                    "    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
-
-            for (Project project : resume.projects) {
-                htmlContent.append(String.format(
-                        "        <h5 class=\"c5\">%s / %s</h5>\n" +
-                                "        <p class=\"c32\">%s</p>\n",
-                        project.getName(), project.getDetail(), project.getDescription()));
-            }
-
-            htmlContent.append("</td>\n</tr>\n");
         }
 
         // 경력 섹션
         if (!resume.experience.isEmpty()) {
+            // '경력' 제목이 포함된 첫 번째 행 추가
             htmlContent.append("\n<tr class=\"c15\">\n" +
-                    "    <td class=\"c26\" colspan=\"1\" rowspan=\"1\">\n" +
-                    "                <hr>\n" +
-                    "        <h4 class=\"c9\">" + getString(R.string.navigation_experience) + "</h4>\n" +
-                    "    </td>\n" +
-                    "    <td class=\"c4\" colspan=\"1\" rowspan=\"1\">\n");
+                    "    <th class=\"c26\"> <hr> <p>ㅡ").append(getString(R.string.navigation_experience)).append("ㅡ</p></th>\n" +
+                    "    <td class=\"c4\"></td>\n" +
+                    "</tr>\n");
 
+            // 각 경험의 세부사항을 새로운 행에 추가
             for (Experience experience : resume.experience) {
                 htmlContent.append(String.format(
-                        "        <h5 class=\"c5\">%s / %s</h5>\n" +
-                                "        <p class=\"c32\">%s - %s</p>\n",
+                        "        <tr>\n" +
+                                "            <td class=\"c26\"></td>\n" + // 첫 번째 열은 비워둠
+                                "            <td class=\"c4\">\n" +
+                                "                <h5>회사 : %s  위치 : %s</h5>\n" +
+                                "                <h5>직무 : %s  담당 업무 설명 : %s</h5>\n" +
+                                "                <hr>\n" +
+                                "            </td>\n" +
+                                "        </tr>\n",
                         experience.getCompany(), experience.getLocation(), experience.getJobTitle(), experience.getDescription()));
             }
+        }
 
-            htmlContent.append("</td>\n</tr>\n");
+        // 프로젝트 섹션
+        if (!resume.projects.isEmpty()) {
+            // '프로젝트' 제목이 포함된 첫 번째 행 추가
+            htmlContent.append("\n<tr class=\"c15\">\n" +
+                    "    <th class=\"c26\"> <hr> <p>ㅡ").append(getString(R.string.play_project)).append("ㅡ</p></th>\n" +
+                    "    <td class=\"c4\"></td>\n" +
+                    "</tr>\n");
+
+            // 각 프로젝트의 세부사항을 새로운 행에 추가
+            for (Project project : resume.projects) {
+                htmlContent.append(String.format(
+                        "        <tr>\n" +
+                                "            <hr><td class=\"c26\"></td>\n" + // 첫 번째 열은 비워둠
+                                "            <td class=\"c4\">\n" +
+                                "                <h5>프로젝트 이름 : %s / 주제 : %s</h5>\n" +
+                                "                <h5>%s 설명 : %s</h5>\n" +
+                                "                <hr>\n" +
+                                "            </td>\n" +
+                                "        </tr>\n",
+                        project.getName(), project.getDetail(),project.getName(), project.getDescription()));
+            }
         }
 
 
@@ -397,6 +414,35 @@ public class PreviewFragment extends ResumeFragment {
         if (!personalsText.isEmpty()) {
             htmlContent.append(String.format("<p class='left-align'>내용: %s </p>\n", personalsText));
         }*/
+        // 자기소개서 제목 및 내용 처리
+        String titleText = getFormattedText(PersonalFragment.getSelectedTitles());
+        String personalsText = getFormattedText(PersonalFragment.getSelectedPersonals());
+
+        // 자기소개서 내용을 이력서 HTML 마지막 부분에 추가
+        if (!titleText.isEmpty() || !personalsText.isEmpty()) {
+            htmlContent.append("<tr><td colspan='2'><hr><h2>자기소개서</h2></tr>\n");
+            if (!titleText.isEmpty()) {
+                htmlContent.append(String.format("<hr><tr><td class=\"c26\"></td>\n" + // 첫 번째 열은 비워둠
+                        "            <td class=\"c4\">\n" +
+                        "                <h5>제목 : %s </h5>\n", titleText));
+            }
+            if (!personalsText.isEmpty()) {
+                htmlContent.append(String.format("<p>내용: %s</p>\n" +
+                        "</td>\n" +
+                        "</tr>\n", personalsText));
+            }
+        }
+
+/*        "        <tr>\n" +
+                "            <hr><td class=\"c26\"></td>\n" + // 첫 번째 열은 비워둠
+                "            <td class=\"c4\">\n" +
+                "                <h5>프로젝트 이름 : %s / 주제 : %s</h5>\n" +
+                "                <h5>%s 설명 : %s</h5>\n" +
+                "                <hr>\n" +
+                "            </td>\n" +
+                "        </tr>\n",
+                */
+
 
         htmlContent.append("</p>\n");
         htmlContent.append("</tbody>\n" +
@@ -408,8 +454,9 @@ public class PreviewFragment extends ResumeFragment {
 
 
 
-        htmlContent.append("<hr><p class='center-align'>본 이력서에 기재한 사항은 사실과 다름없음을 확인합니다.</p>\n");
+/*        htmlContent.append("<hr><p class='center-align'>본 이력서에 기재한 사항은 사실과 다름없음을 확인합니다.</p>\n");*/
         htmlContent.append("<p class='right-align'>작성일 : 2023 년 11월 29일</p>\n");
+        htmlContent.append((String.format("<p class='right-align'>안양대학교 " + stdDepart + "\n")));
         htmlContent.append(String.format("<p class='right-align'>작성인 : " + stdName + " (인)</p>\n"));
 
 
@@ -522,11 +569,13 @@ public class PreviewFragment extends ResumeFragment {
             personalsText = persoanlsStringBuilder.toString();
         }
         // 기본 CSS 스타일 및 HTML 구조를 추가
-        htmlContent.append("<html><head><style type='text/css'>/* CSS 스타일 */</style></head><body>");
+        htmlContent.append("<html><head><style type='text/css'>/* CSS 스타일 */</style></head><body style=\"background-image: url('https://i.pinimg.com/564x/30/31/99/3031991966978eab1c619a0247a0de67.jpg'); background-size: cover;\">\n");
 
         // 자기소개서 제목 및 내용 추가
-        htmlContent.append(String.format("<p class='right-align'>제목: %s </p>\n", titleText));
-        htmlContent.append(String.format("<p class='right-align'>내용: %s </p>\n", personalsText));
+        htmlContent.append("<br><br><hr><br><br>\n");
+        htmlContent.append(String.format("<h2 class='ight-align'>&nbsp &nbsp &nbsp &nbsp 제목: %s </h2>\n", titleText));
+        htmlContent.append("<br><hr><br>\n");
+        htmlContent.append(String.format("<h5 class='right-align'>&nbsp &nbsp &nbsp &nbsp 내용: %s </h5>\n", personalsText));
 
         // HTML 닫기
         htmlContent.append("</body></html>");
