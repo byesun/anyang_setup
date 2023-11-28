@@ -38,6 +38,7 @@
             android:id="@+id/personal_out_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#2196F3"
             android:text="나가기" />
 
         <!-- 저장하기 버튼 -->
@@ -45,6 +46,7 @@
             android:id="@+id/personal_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#2196F3"
             android:text="저장하기" />
 
     </LinearLayout>

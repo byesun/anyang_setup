@@ -279,7 +279,7 @@ public class SpecActivity extends AppCompatActivity {
         // 새로운 TextView를 생성하고 텍스트를 설정합니다.
         TextView newCertificationTextView = new TextView(this);
         newCertificationTextView.setText(text);
-        newCertificationTextView.setTextSize(20);
+        newCertificationTextView.setTextSize(14);
 
         // TextView의 텍스트를 가운데 정렬합니다.
         newCertificationTextView.setGravity(Gravity.CENTER); // 가운데 정렬
@@ -306,7 +306,7 @@ public class SpecActivity extends AppCompatActivity {
         // 새로운 TextView를 생성하고 텍스트를 설정합니다.
         TextView newExternalActivitiesTextView = new TextView(this);
         newExternalActivitiesTextView.setText(text);
-        newExternalActivitiesTextView.setTextSize(20);
+        newExternalActivitiesTextView.setTextSize(14);
 
         // TextView의 텍스트를 가운데 정렬합니다.
         newExternalActivitiesTextView.setGravity(Gravity.CENTER); // 가운데 정렬
@@ -331,7 +331,7 @@ public class SpecActivity extends AppCompatActivity {
         // 새로운 TextView를 생성하고 텍스트를 설정합니다.
         TextView newAwardsTextView = new TextView(this);
         newAwardsTextView.setText(text);
-        newAwardsTextView.setTextSize(20);
+        newAwardsTextView.setTextSize(14);
 
         // TextView의 텍스트를 가운데 정렬합니다.
         newAwardsTextView.setGravity(Gravity.CENTER); // 가운데 정렬
@@ -358,7 +358,7 @@ public class SpecActivity extends AppCompatActivity {
         // 새로운 TextView를 생성하고 텍스트를 설정합니다.
         TextView newCertificationTextView = new TextView(this);
         newCertificationTextView.setText(text);
-        newCertificationTextView.setTextSize(20);
+        newCertificationTextView.setTextSize(14);
 
         // TextView의 텍스트를 가운데 정렬합니다.
         newCertificationTextView.setGravity(Gravity.CENTER); // 가운데 정렬
@@ -382,7 +382,7 @@ public class SpecActivity extends AppCompatActivity {
         // 새로운 TextView를 생성하고 텍스트를 설정합니다.
         TextView newExternalActivitiesTextView = new TextView(this);
         newExternalActivitiesTextView.setText(text);
-        newExternalActivitiesTextView.setTextSize(20);
+        newExternalActivitiesTextView.setTextSize(14);
 
         // TextView의 텍스트를 가운데 정렬합니다.
         newExternalActivitiesTextView.setGravity(Gravity.CENTER); // 가운데 정렬
@@ -408,7 +408,7 @@ public class SpecActivity extends AppCompatActivity {
         // 새로운 TextView를 생성하고 텍스트를 설정합니다.
         TextView newAwardsTextView = new TextView(this);
         newAwardsTextView.setText(text);
-        newAwardsTextView.setTextSize(20);
+        newAwardsTextView.setTextSize(14);
 
         // TextView의 텍스트를 가운데 정렬합니다.
         newAwardsTextView.setGravity(Gravity.CENTER); // 가운데 정렬

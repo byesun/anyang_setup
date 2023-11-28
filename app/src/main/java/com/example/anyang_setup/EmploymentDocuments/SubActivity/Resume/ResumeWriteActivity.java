@@ -1,3 +1,4 @@
+/*
 package com.example.anyang_setup.EmploymentDocuments.SubActivity.Resume;
 
 import android.animation.ObjectAnimator;
@@ -101,7 +102,7 @@ public class ResumeWriteActivity extends AppCompatActivity {
                 }
             }
         });*/
-
+/*
         // 파일 목록에서 항목을 클릭하면 선택 상태를 토글하도록 설정
         fileListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -150,14 +151,9 @@ public class ResumeWriteActivity extends AppCompatActivity {
         }
     }
 
-
-
-    /**
-     * 파일 선택 다이얼로그를 열기 위한 메서드
-     */
     private void openFileSelector() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*"); // 모든 파일 타입을 선택할 수 있도록 설정
+        intent.setType("*
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         try {
@@ -241,3 +237,4 @@ public class ResumeWriteActivity extends AppCompatActivity {
     }
 
 }
+*/

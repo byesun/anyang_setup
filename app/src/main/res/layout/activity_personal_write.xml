@@ -47,13 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="다시 작성"
-            android:background="@color/blue_a400" />
+            android:backgroundTint="#2196F3" />
 
         <Button
             android:id="@+id/personal_write_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="저장하기"
-            android:background="@color/blue_a400" />
+            android:backgroundTint="#2196F3"/>
     </LinearLayout>
 </LinearLayout>

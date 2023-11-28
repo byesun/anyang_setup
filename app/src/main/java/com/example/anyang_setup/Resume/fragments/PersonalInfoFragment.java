@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.MakingResume.MainActivity_start;
 import com.example.anyang_setup.R;
@@ -39,6 +40,9 @@ public class PersonalInfoFragment extends ResumeFragment {
 
     DatePickerDialog.OnDateSetListener birthdate;
     TextView txt_birth_date;
+
+    private static final String DEFAULT_IMAGE_URL = "https://via.placeholder.com/163x192.jpg"; // 웹 URL로부터 로드할 기본 이미지
+
 
     public static ResumeFragment newInstance(Resume resume) {
         ResumeFragment fragment = new PersonalInfoFragment();
@@ -106,6 +110,10 @@ public class PersonalInfoFragment extends ResumeFragment {
         profileImageView = root.findViewById(R.id.profile_image);
 
         Button selectImageButton = root.findViewById(R.id.select_image_button);
+
+        Glide.with(this)
+                        .load(DEFAULT_IMAGE_URL)
+                                .into(profileImageView);
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,6 +123,8 @@ public class PersonalInfoFragment extends ResumeFragment {
                 startActivityForResult(intent, REQUEST_IMAGE_PICK);
             }
         });
+
+        //https://via.placeholder.com/163x192.jpg
 
         myCalendar = Calendar.getInstance();
         birthdate = new DatePickerDialog.OnDateSetListener() {

@@ -308,7 +308,8 @@
                 android:layout_width="110dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="10dp"
-                android:text="최종진단" />
+                android:text="최종진단"
+                android:backgroundTint="#2196F3"/>
 
         </LinearLayout>
     </ScrollView>

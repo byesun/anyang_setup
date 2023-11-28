@@ -17,6 +17,7 @@
         android:background="@color/blue"
         android:gravity="center"
         android:text="안양대학교 Setup"
+        android:backgroundTint="#2196F3"
         android:textColor="@color/white"
         android:textSize="20dp" />
 
@@ -62,6 +63,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="40dp"
+        android:backgroundTint="#2196F3"
         android:text="Login"
         />
 

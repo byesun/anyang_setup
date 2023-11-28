@@ -18,7 +18,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Spec Main"
+            android:text="스펙 작성 공간"
+            android:textSize="30sp"
+            android:fontFamily="@font/him"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:gravity="center"
             android:padding="8dp"/>
@@ -46,6 +48,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="자격증"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/him"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:gravity="center"/>
 
@@ -67,6 +71,13 @@
             </TableRow>
         </TableLayout>
 
+        <!-- 경계선 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#BDBDBD"
+            android:layout_marginVertical="10dp"/>
+
         <!-- 대외활동 테이블 -->
         <TableLayout
             android:id="@+id/external_activitiesTable"
@@ -84,6 +95,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="대외활동"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/him"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:gravity="center"/>
 
@@ -105,6 +118,13 @@
             </TableRow>
         </TableLayout>
 
+        <!-- 경계선 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#BDBDBD"
+            android:layout_marginVertical="10dp"/>
+
         <!-- 수상내역 테이블 -->
         <TableLayout
             android:id="@+id/awardsTable"
@@ -122,6 +142,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="수상내역"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/him"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:gravity="center"/>
 

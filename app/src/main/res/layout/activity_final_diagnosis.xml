@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="홈 화면"
+        android:backgroundTint="#2196F3"
         android:textSize="16sp"
         android:fontFamily="@font/him"/>
 
@@ -60,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:backgroundTint="#2196F3"
         android:text="학과 커리큘럼 확인하기"
         android:textSize="16sp"
         android:fontFamily="@font/him"/>

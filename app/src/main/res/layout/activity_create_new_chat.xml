@@ -110,6 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="생성하기"
+        android:backgroundTint="#2196F3"
         android:textColor="#FFFFFF" />
 
 </LinearLayout>
