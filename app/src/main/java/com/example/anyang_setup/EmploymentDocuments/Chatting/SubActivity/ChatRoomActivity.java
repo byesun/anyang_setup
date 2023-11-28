@@ -226,7 +226,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     private void sendMessageWithImage(String imageUrl) {
         long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd hh:mm");
         String getTime = sdf.format(date);
 
         ChatDTO chat = new ChatDTO(USER_NAME, "이미지를 보냈습니다.", getTime);

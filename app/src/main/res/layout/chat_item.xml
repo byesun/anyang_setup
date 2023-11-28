@@ -19,7 +19,7 @@
             android:layout_width="33dp"
             android:layout_height="33dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/chat_img_1" />
+            app:srcCompat="@drawable/icon_chat_gpt" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,11 +49,11 @@
             android:text="Hello World"/>
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/ic"
             android:layout_width="34dp"
             android:layout_height="33dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_profile" />
+            app:srcCompat="@drawable/profile_icon" />
 
     </LinearLayout>
 
