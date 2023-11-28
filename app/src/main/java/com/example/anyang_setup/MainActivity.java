@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             mPasswordEditText.setText(loginPwd);
             autoLoginCheckBox.setChecked(true);
 
-            progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "로그인 중...\n최장 2분 소요됩니다.");
+            progressDialog = ProgressDialog.show(MainActivity.this, "Loading", "로그인 중...\n최장 2분 소요됩니다.\n잠시만 기다려주세요.");
             JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.put("id", mUsernameEditText.getText().toString()); // 2019U1132

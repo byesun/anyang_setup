@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="false"
         android:fullBackupContent="false"
@@ -18,6 +17,10 @@
         android:theme="@style/Theme.Anyang_setup"
         android:usesCleartextTraffic="true"
         tools:ignore="DataExtractionRules">
+        <activity
+            android:name=".Setting.DeveloperActivity"
+            android:exported="false" />
+
         <activity
             android:name=".EmploymentDocuments.Chatting.SubActivity.ChatRoomInfoActivity"
             android:exported="false" />
@@ -85,31 +88,30 @@
             android:name=".HomeActivity"
             android:exported="false" />
         -->
-        <!--<activity
+        <!--
+<activity
             android:name=".MakingResume.BicyclesActivity"
-            android:exported="false" />-->
+            android:exported="false" />
+        -->
         <activity
             android:name=".MakingResume.MainActivity_start"
             android:exported="false" />
-        <!--<activity
+        <!--
+<activity
             android:name=".MakingResume.GeneralPhotosActivity"
-            android:exported="false" />-->
-
-
+            android:exported="false" />
+        -->
         <activity
             android:name=".MakingResume.GenerateReportActivity"
             android:exported="false" />
         <activity
             android:name=".MakingResume.HandleSnipersActivity"
             android:exported="false" />
-        <activity android:name=".EmploymentDocuments.Chatting.SubActivity.ChatMyActivity">
-        </activity>
-
+        <activity android:name=".EmploymentDocuments.Chatting.SubActivity.ChatMyActivity" />
         <activity
             android:name=".Resume.Resume_MainActivity"
             android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustResize"/>
-
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Resume.EditActivity"
             android:parentActivityName=".Resume.Resume_MainActivity"
@@ -119,15 +121,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Resume.Resume_MainActivity" />
         </activity>
-
-
-
         <activity
             android:name=".StartActivity"
             android:exported="true"
             android:screenOrientation="portrait">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

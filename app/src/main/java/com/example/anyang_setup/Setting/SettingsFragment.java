@@ -5,11 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import com.example.anyang_setup.MainActivity;
 import com.example.anyang_setup.R;
+import com.example.anyang_setup.StartActivity;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -33,7 +36,26 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
+
+        Preference developerPref = findPreference("developer");
+        if (developerPref != null) {
+            developerPref.setOnPreferenceClickListener(preference -> {
+                showDeveloperSettings();
+                return true;
+            });
+        }
+
+
     }
+
+    private void showDeveloperSettings() {
+        // Create an intent to open DeveloperActivity
+        Intent developerIntent = new Intent(getActivity(), DeveloperActivity.class);
+
+        // Start the DeveloperActivity
+        startActivity(developerIntent);
+    }
+
 
     private void logout() {
         // SharedPreferences에서 로그인 정보 제거

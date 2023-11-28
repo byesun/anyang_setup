@@ -1,7 +1,9 @@
 package com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -86,8 +88,6 @@ public class SpecActivity extends AppCompatActivity {
     private String lastCertificationRowData;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,12 +117,11 @@ public class SpecActivity extends AppCompatActivity {
 
         userInfoStr = getIntent().getStringExtra("userinfo");
 
-        try{
+        try {
             JSONObject jsonObject = new JSONObject(userInfoStr);
             JSONObject dataObj = jsonObject.getJSONObject("data");
             ID = dataObj.getString("stdId");
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -182,26 +181,46 @@ public class SpecActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                deleteLastRow((TableLayout) certificationTable);
-
-                new delete_certificate().execute(ID, lastCertificationRowData);
-
-                // Delete the last row from the table
-
-
-                //Toast.makeText(getApplicationContext(), lastCertificationRowData, Toast.LENGTH_SHORT).show();
-
+                new AlertDialog.Builder(SpecActivity.this)
+                        .setMessage("정말 삭제하시겠습니까?")
+                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteLastRow((TableLayout) certificationTable);
+                                new delete_certificate().execute(ID, lastCertificationRowData);
+                            }
+                        })
+                        .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
-
 
 
         deleteExternalActivitiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteLastRow((TableLayout) externalActivitiesTable);
-                new delete_external().execute(ID, lastCertificationRowData);
 
+                new AlertDialog.Builder(SpecActivity.this)
+                        .setMessage("정말 삭제하시겠습니까?")
+                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteLastRow((TableLayout) externalActivitiesTable);
+                                new delete_external().execute(ID, lastCertificationRowData);
+                            }
+                        })
+                        .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
 
             }
         });
@@ -209,9 +228,22 @@ public class SpecActivity extends AppCompatActivity {
         deleteAwardsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteLastRow((TableLayout) awardsTable);
-                new delete_awards().execute(ID, lastCertificationRowData);
-
+                new AlertDialog.Builder(SpecActivity.this)
+                        .setMessage("정말 삭제하시겠습니까?")
+                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteLastRow((TableLayout) awardsTable);
+                                new delete_awards().execute(ID, lastCertificationRowData);
+                            }
+                        })
+                        .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
 
@@ -242,7 +274,6 @@ public class SpecActivity extends AppCompatActivity {
         }
         return "";
     }
-
 
 
     // Helper method to get the concatenated data of a TableRow
@@ -400,7 +431,6 @@ public class SpecActivity extends AppCompatActivity {
     }
 
 
-
     private void updateAwardsRow(String text) {
         // TableRow를 생성합니다.
         TableRow newRow = new TableRow(this);
@@ -452,9 +482,7 @@ public class SpecActivity extends AppCompatActivity {
             } else if (requestCode == 2) {
                 externalActivitiesDataList.add(externalFinal);
                 addExternalActivitiesRow(externalFinal);
-            }
-
-            else if (requestCode == 3) {
+            } else if (requestCode == 3) {
                 awardsDataList.add(awardsFinal);
                 addAwardsRow(awardsFinal);
             }
@@ -488,17 +516,16 @@ public class SpecActivity extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(SpecActivity.this);
 
-        AwardsInsertRequest awardsRequest = new AwardsInsertRequest(ID, awards,awardsDateStart,awardsDateEnd, responseListener);
+        AwardsInsertRequest awardsRequest = new AwardsInsertRequest(ID, awards, awardsDateStart, awardsDateEnd, responseListener);
         requestQueue.add(awardsRequest);
 
-        CertificateInsertRequest certificateRequest = new CertificateInsertRequest(ID, certificate,acquisitionDate, responseListener);
+        CertificateInsertRequest certificateRequest = new CertificateInsertRequest(ID, certificate, acquisitionDate, responseListener);
         requestQueue.add(certificateRequest);
 
-        ExternalInsertRequest externalRequest = new ExternalInsertRequest(ID, externalActivities,externalDateStart,externalDateEnd, responseListener);
+        ExternalInsertRequest externalRequest = new ExternalInsertRequest(ID, externalActivities, externalDateStart, externalDateEnd, responseListener);
         requestQueue.add(externalRequest);
 
     }
-
 
 
     private class Update_certificate extends AsyncTask<String, Void, String> {
@@ -548,10 +575,6 @@ public class SpecActivity extends AppCompatActivity {
         }
 
     }
-
-
-
-
 
 
     private class Update_externalActivities extends AsyncTask<String, Void, String> {
@@ -650,8 +673,8 @@ public class SpecActivity extends AppCompatActivity {
         }
 
 
-
     }
+
     /*
     private class Update_externalActivities extends AsyncTask<String, Void, String> {
         @Override
@@ -747,6 +770,7 @@ public class SpecActivity extends AppCompatActivity {
         }
 
     }
+
     private class delete_awards extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... arg0) {
@@ -792,6 +816,7 @@ public class SpecActivity extends AppCompatActivity {
         }
 
     }
+
     private class delete_external extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... arg0) {
