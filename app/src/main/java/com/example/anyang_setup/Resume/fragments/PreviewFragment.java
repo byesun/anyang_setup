@@ -200,11 +200,11 @@ public class PreviewFragment extends ResumeFragment {
                         "        </tr>\n" +
                         "        <tr>\n" +
                         "            <td class='c26'>\n" +
-                        "                <p class='c6'><span class='label'>주소: </span><span class='data'>" + personalInfo.getAddressLine1() + "</span></p>\n" +
+                        "                <br><p class='c6'><span class='label'>주소: </span><span class='data'>" + personalInfo.getAddressLine1() + "</span></p>\n" +
                         "                <p class='c6'><span class='label'>상세주소: </span><span class='data'>" + personalInfo.getAddressLine2() + "</span></p>\n" +
                         "                <p class='c6'><span class='label'>이메일: </span><span class='data'>" + personalInfo.getEmail() + "</span></p>\n" +
-                        "                <p class='c6'><span class='label'>학과: </span><span class='data'>" + stdDepart + "</span></p>\n" +
-                        "            </td>\n" +
+/*                        "                <p class='c6'><span class='label'>학과: </span><span class='data'>" + stdDepart + "</span></p>\n" +*/
+                        "            <hr></td>\n" +
                         "        </tr>\n"));
                         // 기술과 언어 부분
 
@@ -212,7 +212,7 @@ public class PreviewFragment extends ResumeFragment {
         htmlContent.append(
                 "            <tr>\n" +
                         "                <td class='rounded-box' colspan='4' rowspan='1'>\n" +
-                        "                    <h4 class='c9'> </h4>\n" +
+                        "                    <h5 class='c9'> </h5>\n" +
                         "                </td>\n" +
                         "            </tr>\n"
         );
@@ -244,7 +244,7 @@ public class PreviewFragment extends ResumeFragment {
                             "            </tr>\n" +*/
                     "        <tr class='c27'>\n" +
                             "            <td class='c26' colspan='1' rowspan='1'>\n" +
-                            "                <h4 class='c9'><span class='c16'>수상목록</span></h4>\n" +
+                            "                <h4 class='center-align'><span class='c16'>수상목록</span></h4>\n" +
                             "            </td>\n" +
                             "            <td class='c4' colspan='1' rowspan='1'>\n" +
                             "                <p class='c3'><span class='c7'>%s / </span></p>\n" +
@@ -263,7 +263,7 @@ public class PreviewFragment extends ResumeFragment {
                     "        <tr class='c27'>\n" +
                             "            <td class='c26' colspan='1' rowspan='1'>\n" +
                             "                <hr>\n" +
-                            "                <h4 class='c9'><span class='c16'>자격증</span></h4>\n" +
+                            "                <h4 class='center-align'><span class='c16'>자격증</span></h4>\n" +
                             "            </td>\n" +
                             "            <td class='c4' colspan='1' rowspan='1'>\n" +
                             "                <p class='left-align'>%s / <br></p>\n" +
@@ -282,7 +282,7 @@ public class PreviewFragment extends ResumeFragment {
                     "        <tr class='c27'>\n" +
                             "            <td class='c26' colspan='1' rowspan='1'>\n" +
                             "                <hr>\n" +
-                            "                <h4 class='c9'><span class='c16'>대외활동</span></h4>\n" +
+                            "                <h4 class='center-align'><span class='c16'>대외활동</span></h4>\n" +
                             "            </td>\n" +
                             "            <td class='c4' colspan='1' rowspan='1'>\n" +
                             "                <p class='left-align'>%s / </p>\n" +
@@ -420,7 +420,7 @@ public class PreviewFragment extends ResumeFragment {
 
         // 자기소개서 내용을 이력서 HTML 마지막 부분에 추가
         if (!titleText.isEmpty() || !personalsText.isEmpty()) {
-            htmlContent.append("<tr><td colspan='2'><hr><h2>자기소개서</h2></tr>\n");
+            htmlContent.append("<tr><td colspan='2'><hr><h2>자기소개</h2></tr>\n");
             if (!titleText.isEmpty()) {
                 htmlContent.append(String.format("<hr><tr><td class=\"c26\"></td>\n" + // 첫 번째 열은 비워둠
                         "            <td class=\"c4\">\n" +

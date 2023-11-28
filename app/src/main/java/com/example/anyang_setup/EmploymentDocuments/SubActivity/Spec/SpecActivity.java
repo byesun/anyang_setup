@@ -8,28 +8,35 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecDB.AwardsInsertRequest;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecDB.CertificateInsertRequest;
 import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecDB.ExternalInsertRequest;
+import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Connection;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -37,16 +44,19 @@ import okhttp3.Request;
 public class SpecActivity extends AppCompatActivity {
 
     private LinearLayout certificationTable;
-    private Button addCertificationButton;
+    private ImageButton addCertificationButton;
     private List<String> certificationDataList;
 
+
     private LinearLayout externalActivitiesTable;
-    private Button addExternalActivitiesButton;
+    private ImageButton addExternalActivitiesButton;
     private List<String> externalActivitiesDataList;
 
+
     private LinearLayout awardsTable;
-    private Button addAwardsButton;
+    private ImageButton addAwardsButton;
     private List<String> awardsDataList;
+
 
     private String certificate; // 자격증
     private String acquisitionDate; //자격증 취득일
@@ -68,7 +78,12 @@ public class SpecActivity extends AppCompatActivity {
     private String externalSelect;
     private String awardsSelect;
 
+    private ImageButton deleteCertificationButton;
+    private ImageButton deleteExternalActivitiesButton;
+    private ImageButton deleteAwardsButton;
 
+
+    private String lastCertificationRowData;
 
 
 
@@ -89,6 +104,16 @@ public class SpecActivity extends AppCompatActivity {
         awardsTable = findViewById(R.id.awardsTable);
         addAwardsButton = findViewById(R.id.addAwardsButton);
         awardsDataList = new ArrayList<>();
+
+
+        deleteCertificationButton = findViewById(R.id.deleteCertificationButton);
+        deleteExternalActivitiesButton = findViewById(R.id.delete_external_activitiesButton);
+        deleteAwardsButton = findViewById(R.id.deleteAwardsButton);
+
+        //GlobalVariables.setLastCertificationRowData(lastCertificationRowData);
+
+        //lastCertificationRowData = getLastRowWithoutParentheses((TableLayout) certificationTable);
+
 
         userInfoStr = getIntent().getStringExtra("userinfo");
 
@@ -151,6 +176,99 @@ public class SpecActivity extends AppCompatActivity {
         Update_awards awardsTask = new Update_awards();
         awardsTask.execute(ID);
 
+
+        // Set onClick listeners for delete buttons
+        deleteCertificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                deleteLastRow((TableLayout) certificationTable);
+
+                new delete_certificate().execute(ID, lastCertificationRowData);
+
+                // Delete the last row from the table
+
+
+                //Toast.makeText(getApplicationContext(), lastCertificationRowData, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
+        deleteExternalActivitiesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteLastRow((TableLayout) externalActivitiesTable);
+                new delete_external().execute(ID, lastCertificationRowData);
+
+
+            }
+        });
+
+        deleteAwardsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteLastRow((TableLayout) awardsTable);
+                new delete_awards().execute(ID, lastCertificationRowData);
+
+            }
+        });
+
+    }
+
+
+    private void deleteLastRow(TableLayout table) {
+        int rowCount = table.getChildCount();
+        if (rowCount > 1) {
+            // Get the last row data before removing
+            TableRow lastRow = (TableRow) table.getChildAt(rowCount - 1);
+            lastCertificationRowData = getRowData(lastRow);
+
+            // Remove the last row from the table
+            table.removeViewAt(rowCount - 1);
+
+
+        } else {
+            Toast.makeText(getApplicationContext(), "더 이상 삭제할 수 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private String getLastRowData(TableLayout table) {
+        int rowCount = table.getChildCount();
+        if (rowCount > 0) {
+            TableRow lastRow = (TableRow) table.getChildAt(rowCount - 1);
+            return getRowData(lastRow);
+        }
+        return "";
+    }
+
+
+
+    // Helper method to get the concatenated data of a TableRow
+    private String getRowData(TableRow row) {
+        StringBuilder rowData = new StringBuilder();
+        int cellCount = row.getChildCount();
+
+        for (int i = 0; i < cellCount; i++) {
+            View cellView = row.getChildAt(i);
+
+            if (cellView instanceof TextView) {
+                String cellData = ((TextView) cellView).getText().toString();
+
+                // Remove text inside parentheses and the parentheses themselves
+                cellData = cellData.replaceAll("\\([^\\(]*\\)", "").trim();
+
+                rowData.append(cellData);
+
+                // If it's not the last cell, add a space
+                if (i < cellCount - 1) {
+                    rowData.append(" ");
+                }
+            }
+        }
+
+        return rowData.toString();
     }
 
 
@@ -175,6 +293,7 @@ public class SpecActivity extends AppCompatActivity {
 
         // TableRow를 certificationTable에 추가합니다.
         certificationTable.addView(newRow);
+
 
         //DB 삽입
         executeServerInsertRequest(certificate);
@@ -382,9 +501,6 @@ public class SpecActivity extends AppCompatActivity {
 
 
 
-
-
-
     private class Update_certificate extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... arg0) {
@@ -423,6 +539,8 @@ public class SpecActivity extends AppCompatActivity {
                     String concatenatedString = certificate + "(" + acquisitionDate + ")";
                     // Adding each certificate as a row to the table
                     updateCertificationRow(concatenatedString);
+
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -430,6 +548,10 @@ public class SpecActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+
 
 
     private class Update_externalActivities extends AsyncTask<String, Void, String> {
@@ -520,12 +642,199 @@ public class SpecActivity extends AppCompatActivity {
 
                     // Adding each concatenated string as a row to the table
                     updateAwardsRow(concatenatedString);
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
+
+
+    }
+    /*
+    private class Update_externalActivities extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... arg0) {
+            try {
+                String id = arg0[0];
+
+                OkHttpClient client = new OkHttpClient();
+                String link = "http://qkrwodbs.dothome.co.kr/Select_externalActivities.php";
+                Request request = new Request.Builder()
+                        .url(link + "?ID=" + ID)
+                        .build();
+                okhttp3.Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
+                }
+            } catch (IOException e) {
+                return "예외 발생: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    String externalActivities = jsonObject.getString("externalActivities");
+                    String startDate = jsonObject.getString("startDate");
+                    String endDate = jsonObject.getString("endDate");
+
+                    String concatenatedString = externalActivities + "(" + startDate + "~" + endDate + ")";
+
+                    // Adding each certificate as a row to the table
+                    updateExternalActivitiesRow(concatenatedString);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+*/
+    private class delete_certificate extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... arg0) {
+            try {
+                String id = arg0[0];
+                String data = arg0[1];
+
+                OkHttpClient client = new OkHttpClient();
+                String link = "http://qkrwodbs.dothome.co.kr/delete_certificate.php";
+                Request request = new Request.Builder()
+                        .url(link + "?ID=" + id + "&lastCertificationRowData=" + data)
+                        .build();
+                okhttp3.Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
+                }
+            } catch (IOException e) {
+                return "예외 발생: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    String lastCertificationRowData = jsonObject.getString("lastCertificationRowData");
+                    String ID = jsonObject.getString("ID");
+
+                    // Adding each certificate as a row to the table
+                    //updateExternalActivitiesRow(concatenatedString);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    private class delete_awards extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... arg0) {
+            try {
+                String id = arg0[0];
+                String data = arg0[1];
+
+                OkHttpClient client = new OkHttpClient();
+                String link = "http://qkrwodbs.dothome.co.kr/delete_awards.php";
+                Request request = new Request.Builder()
+                        .url(link + "?ID=" + id + "&lastCertificationRowData=" + data)
+                        .build();
+                okhttp3.Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
+                }
+            } catch (IOException e) {
+                return "예외 발생: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    String lastCertificationRowData = jsonObject.getString("lastCertificationRowData");
+                    String ID = jsonObject.getString("ID");
+
+                    // Adding each certificate as a row to the table
+                    //updateExternalActivitiesRow(concatenatedString);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    private class delete_external extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... arg0) {
+            try {
+                String id = arg0[0];
+                String data = arg0[1];
+
+                OkHttpClient client = new OkHttpClient();
+                String link = "http://qkrwodbs.dothome.co.kr/delete_externalActivities.php";
+                Request request = new Request.Builder()
+                        .url(link + "?ID=" + id + "&lastCertificationRowData=" + data)
+                        .build();
+                okhttp3.Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful()) {
+                    return response.body().string();
+                } else {
+                    return "HTTP 요청 실패";
+                }
+            } catch (IOException e) {
+                return "예외 발생: " + e.getMessage();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONArray jsonArray = new JSONArray(result);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    String lastCertificationRowData = jsonObject.getString("lastCertificationRowData");
+                    String ID = jsonObject.getString("ID");
+
+                    // Adding each certificate as a row to the table
+                    //updateExternalActivitiesRow(concatenatedString);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
