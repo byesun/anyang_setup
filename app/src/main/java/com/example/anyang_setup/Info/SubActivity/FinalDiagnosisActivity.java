@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.anyang_setup.GlobalVariables;
+import com.example.anyang_setup.Info.UserInfoActivity;
 import com.example.anyang_setup.R;
 
 import org.json.JSONArray;
@@ -47,6 +48,16 @@ public class FinalDiagnosisActivity extends AppCompatActivity {
         homeButton = findViewById(R.id.homeButton);
         curriculumButton = findViewById(R.id.curriculumButton);
         imageView = findViewById(R.id.imageView);
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FinalDiagnosisActivity.this, UserInfoActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         curriculumButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,7 +216,7 @@ public class FinalDiagnosisActivity extends AppCompatActivity {
             if (userData.getString("graduateResult").compareTo("미통과") == 0) {
                 imageView = (ImageView) findViewById(R.id.imageView); //GIF ImageView연결
                 Glide.with(this).load(R.raw.loading).into(imageView); //R.raw.loading GIF파일 load
-                homeButton.setVisibility(View.INVISIBLE);
+                homeButton.setVisibility(View.VISIBLE);
 
                 // 1. 부족 학점
                 JSONObject creditStatus = userData.getJSONObject("creditStatus");
