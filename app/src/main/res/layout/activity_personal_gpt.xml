@@ -35,7 +35,7 @@
             android:layout_centerInParent="true"
             android:layout_toLeftOf="@+id/btn_send"
             android:background="@drawable/rounded_corner"
-            android:hint="Write here"
+            android:hint="gpt에게 질문 작성"
             android:padding="16dp" />
 
         <ImageButton
@@ -47,7 +47,7 @@
             android:layout_marginStart="10dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
-            app:srcCompat="@drawable/ic_send" />
+            app:srcCompat="@drawable/icon_send" />
 
     </RelativeLayout>
 

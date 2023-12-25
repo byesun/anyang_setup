@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".EmploymentDocuments.SubActivity.Personal.PersonalMainActivity">
+    tools:context=".Resume_test.datamodel.EmploymentDocuments.SubActivity.Personal.PersonalMainActivity">
 
     <ScrollView
         android:id="@+id/scrollView_home"

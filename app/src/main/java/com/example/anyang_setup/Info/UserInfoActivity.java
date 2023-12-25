@@ -18,8 +18,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalMainActivity;
-import com.example.anyang_setup.EmploymentDocuments.SubActivity.Spec.SpecActivity;
+import com.example.anyang_setup.Resume_test.datamodel.EmploymentDocuments.SubActivity.Personal.PersonalMainActivity;
+import com.example.anyang_setup.Resume_test.datamodel.EmploymentDocuments.SubActivity.Spec.SpecActivity;
 import com.example.anyang_setup.GlobalVariables;
 import com.example.anyang_setup.Info.SubActivity.DiagnosisActivity;
 import com.example.anyang_setup.LoginDB.LoginRequest;
@@ -29,17 +29,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.anyang_setup.EmploymentDocuments.Chatting.ChatActivity;
+import com.example.anyang_setup.Resume_test.datamodel.EmploymentDocuments.Chatting.ChatActivity;
 import com.example.anyang_setup.Resume.Resume_MainActivity;
 import com.example.anyang_setup.Setting.SettingActivity;
-import com.example.anyang_setup.MakingResume.MainActivity_start;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -253,10 +251,10 @@ public class UserInfoActivity extends AppCompatActivity {
                 switch (item.getItemId())
                 {
                     case R.id.home :
-                    {
+                    {/*
                         Intent intent = new Intent(UserInfoActivity.this, UserInfoActivity.class);
                         intent.putExtra("userinfo", userinfo);
-                        startActivity(intent);
+                        startActivity(intent);*/
                         break;
                     }
                     case R.id.setting :

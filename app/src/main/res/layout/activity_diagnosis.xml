@@ -79,14 +79,14 @@
                 android:text="현재 9 학점이 부족합니다."
                 android:textSize="17dp" />
 
-            <TextView
+<!--            <TextView
                 android:id="@+id/averageCreditResultText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="--학년 평균 취득 학점은 --입니다."
-                android:textSize="17dp" />
+                android:text="&#45;&#45;학년 평균 취득 학점은 &#45;&#45;입니다."
+                android:textSize="17dp" />-->
 
 
             <TextView

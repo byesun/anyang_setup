@@ -491,9 +491,9 @@ public class PreviewFragment extends ResumeFragment {
             case R.id.action_print:
                 createWebPrintJob(webView);
                 return true;
-            case R.id.action_print_resume:
+/*            case R.id.action_print_resume:
                 createResumePrintJob();
-                return true;
+                return true;*/
         }
 
         return super.onOptionsItemSelected(item);

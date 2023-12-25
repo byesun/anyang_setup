@@ -37,24 +37,24 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
 
-        Preference developerPref = findPreference("developer");
+        /*Preference developerPref = findPreference("developer");
         if (developerPref != null) {
             developerPref.setOnPreferenceClickListener(preference -> {
                 showDeveloperSettings();
                 return true;
             });
-        }
+        }*/
 
 
     }
 
-    private void showDeveloperSettings() {
+/*    private void showDeveloperSettings() {
         // Create an intent to open DeveloperActivity
         Intent developerIntent = new Intent(getActivity(), DeveloperActivity.class);
 
         // Start the DeveloperActivity
         startActivity(developerIntent);
-    }
+    }*/
 
 
     private void logout() {

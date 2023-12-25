@@ -52,7 +52,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         chapelTable = findViewById(R.id.chapelTable);
         graduateResultText = findViewById(R.id.graduateResultText);
         finalDiagnosisButton = findViewById(R.id.finalDiagnosisButton);
-        averageCreditResultText = findViewById(R.id.averageCreditResultText);
+/*        averageCreditResultText = findViewById(R.id.averageCreditResultText);*/
         requiredSubjectText = findViewById(R.id.requiredSubjectText);
         generalSubjectResult = findViewById(R.id.generalSubjectResult);
         chapelResultText = findViewById(R.id.chapelResultText);
@@ -74,7 +74,7 @@ public class DiagnosisActivity extends AppCompatActivity {
             totalRemainText.setText("현재 " + creditStatus.getInt("total_remain") + "학점이 부족합니다.");
             int stdLevel = Integer.parseInt(userData.getString("stdLevel").split("학년")[0]);
             int totalCurrent = creditStatus.getInt("total_current");
-            averageCreditResultText.setText("현재 학년: " + stdLevel + "현쨰 까지 학년\n학년별 평균 취득 학점은 " + (totalCurrent/stdLevel)/2 + "학점 입니다.");
+/*            averageCreditResultText.setText("현재 학년: " + stdLevel + "현쨰 까지 학년\n학년별 평균 취득 학점은 " + (totalCurrent/stdLevel)/2 + "학점 입니다.");*/
 
             // 필수과목
             JSONArray requiredSubjectsArray = userData.getJSONArray("requiredSubjects");

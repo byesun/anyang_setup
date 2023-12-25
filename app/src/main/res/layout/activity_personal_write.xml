@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@color/grey_100"
-    tools:context=".EmploymentDocuments.SubActivity.Personal.PersonalWriteActivity">
+    tools:context=".Resume_test.datamodel.EmploymentDocuments.SubActivity.Personal.PersonalWriteActivity">
 
     <EditText
         android:id="@+id/personal_title"

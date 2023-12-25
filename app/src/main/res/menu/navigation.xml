@@ -28,10 +28,10 @@
             android:title="@string/resume_text_write"
             app:showAsAction="never">
             <menu>
-                <item
+<!--                <item
                     android:id="@+id/action_essentials"
                     android:checked="false"
-                    android:title="기술" />
+                    android:title="기술" />-->
                 <item
                     android:id="@+id/action_projects"
                     android:checked="false"

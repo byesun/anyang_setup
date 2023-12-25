@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="#F0F0F0"
-    tools:context=".EmploymentDocuments.SubActivity.Spec.SpecActivity">
+    tools:context=".Resume_test.datamodel.EmploymentDocuments.SubActivity.Spec.SpecActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -125,9 +125,9 @@ public class Resume_MainActivity extends AppCompatActivity {
             case R.id.action_personal_info:
                 openFragment(PersonalInfoFragment.newInstance(resume));
                 break;
-            case R.id.action_essentials:
+/*            case R.id.action_essentials:
                 openFragment(EssentialsFragment.newInstance(resume));
-                break;
+                break;*/
             case R.id.action_projects:
                 openFragment(ProjectsFragment.newInstance(resume));
                 break;

@@ -5,8 +5,8 @@
         android:id="@+id/action_print"
         android:title="@string/action_print"
         app:showAsAction="always" />
-    <item
+<!--    <item
         android:id="@+id/action_print_resume"
         android:title="자기소개서 인쇄"
-        app:showAsAction="always"/>
+        app:showAsAction="always"/>-->
 </menu>

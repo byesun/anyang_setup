@@ -78,9 +78,7 @@ import static com.example.anyang_setup.MakingResume.DocumentContainer.graduate_d
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.anyang_setup.EmploymentDocuments.SubActivity.Personal.PersonalLockerActivity;
 import com.example.anyang_setup.GlobalVariables;
-import com.example.anyang_setup.Info.UserInfoActivity;
 import com.example.anyang_setup.R;
 
 import okhttp3.OkHttpClient;
