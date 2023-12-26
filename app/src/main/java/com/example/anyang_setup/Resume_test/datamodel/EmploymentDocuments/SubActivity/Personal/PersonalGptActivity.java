@@ -43,7 +43,7 @@ public class PersonalGptActivity extends AppCompatActivity {
     Chat_MessageAdapter messageAdapter;
 
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
-    private static final String MY_SECRET_KEY = "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";
+    private static final String MY_SECRET_KEY = "api_key";
 
     OkHttpClient client;
     @Override
