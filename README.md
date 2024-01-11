@@ -32,7 +32,7 @@
 ## 주요 기능 흐름도 및 개발환경
 ##### 1. 본 프로젝트 아키텍처
    
-  ![image](https://github.com/byesun/anyang_setup/assets/85074113/e0869abb-c427-4d32-9848-befea359c64a)
+  ![image](https://github.com/byesun/anyang_setup/assets/85074113/84938549-7895-4bf7-a615-4d0bedb936df)
 
 ##### 2. 개발 언어 및 환경
 - 개발 언어 : Java, Python, PHP
