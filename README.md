@@ -29,7 +29,7 @@
 - 어플리케이션을 통해 작성한 자기소개서와 스펙에 데이터를 선택하여 이력서를 제작
 - 자신의 안양대학교 포털 사이트의 졸업 자가진단의정보는 자동 작성 (이름, 학교, 학과 등)
 
-![스크린샷 2024-01-13 173158](https://github.com/byesun/anyang_setup/assets/85074113/fdba989f-2652-4ee0-98db-7074c184abb6)  ![스크린샷 2024-01-13 173301](https://github.com/byesun/anyang_setup/assets/85074113/9345fa07-161e-40bb-ad15-c68609cb014e)  ![스크린샷 2024-01-13 173435](https://github.com/byesun/anyang_setup/assets/85074113/4e13ad1c-6caa-4242-97fc-fe9ff3ebe231)
+![스크린샷 2024-01-13 173158](https://github.com/byesun/anyang_setup/assets/85074113/20e1fa55-44ac-4d5c-a29a-4642aeaf2357)  ![스크린샷 2024-01-13 173301](https://github.com/byesun/anyang_setup/assets/85074113/6f3d5306-4445-4490-919e-9f8d0a8ccfcf)  ![스크린샷 2024-01-13 173435](https://github.com/byesun/anyang_setup/assets/85074113/017f15a9-7e1e-48b5-8393-97d8b6355633)
 
 ## 주요 기능 흐름도 및 개발환경
 ##### 1. 본 프로젝트 아키텍처
