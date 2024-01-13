@@ -1,4 +1,4 @@
-![스크린샷 2024-01-13 173301](https://github.com/byesun/anyang_setup/assets/85074113/70937dbf-ece6-4757-9d74-fbf90f6200fc)# AY_SETUP
+# AY_SETUP
 ##### java와 python을 사용하여 제작한 안양대학교 어플리케이션입니다.
 
 ## 프로젝트 소개
@@ -29,7 +29,7 @@
 - 어플리케이션을 통해 작성한 자기소개서와 스펙에 데이터를 선택하여 이력서를 제작
 - 자신의 안양대학교 포털 사이트의 졸업 자가진단의정보는 자동 작성 (이름, 학교, 학과 등)
 
-![스크린샷 2024-01-13 173158](https://github.com/byesun/anyang_setup/assets/85074113/20e1fa55-44ac-4d5c-a29a-4642aeaf2357)  ![스크린샷 2024-01-13 173301](https://github.com/byesun/anyang_setup/assets/85074113/6f3d5306-4445-4490-919e-9f8d0a8ccfcf)  ![스크린샷 2024-01-13 173435](https://github.com/byesun/anyang_setup/assets/85074113/017f15a9-7e1e-48b5-8393-97d8b6355633)
+![스크린샷 2024-01-13 173158](https://github.com/byesun/anyang_setup/assets/85074113/0afbba5e-6f7b-4c85-adcf-f4c84aaf863b)  ![스크린샷 2024-01-13 173301](https://github.com/byesun/anyang_setup/assets/85074113/6f3d5306-4445-4490-919e-9f8d0a8ccfcf)  ![스크린샷 2024-01-13 173435](https://github.com/byesun/anyang_setup/assets/85074113/017f15a9-7e1e-48b5-8393-97d8b6355633)
 
 ## 주요 기능 흐름도 및 개발환경
 ##### 1. 본 프로젝트 아키텍처
